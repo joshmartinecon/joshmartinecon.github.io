@@ -8,6 +8,8 @@ links:
     url: "https://github.com/joshmartinecon/joshmartinecon.github.io/tree/main/research"
   - label: Teaching
     url: "https://github.com/joshmartinecon/joshmartinecon.github.io/tree/main/syllabi"
+  - label: Public Goods
+    url: "https://github.com/joshmartinecon?tab=repositories"
   - label: Email
     url: "mailto:joshua.martin@vanderbilt.edu"
 output:

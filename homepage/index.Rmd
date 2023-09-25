@@ -1,0 +1,29 @@
+---
+title: "Joshua C. Martin"
+image: "Martin-IMG_1657.JPG"
+links:
+  - label: CV
+    url: "https://github.com/joshmartinecon/joshmartinecon.github.io/blob/main/cv/joshmartinecon_cv.pdf"
+  - label: GitHub
+    url: "https://github.com/joshmartinecon/joshmartinecon.github.io"
+  - label: Email
+    url: "mailto:joshua.martin@vanderbilt.edu"
+output:
+  postcards::trestles
+---
+ 
+## Bio
+
+Applied microeconomist with interests in Health, Urban, Public, Sports and Household Economics. Postdoctoral Researcher at Vanderbilt. 
+
+## Employment
+
+* **Vanderbilt University** (Postdoc; 2023-)
+
+* **Berry College** (VAP while ABD; 2022-2023)
+
+## Education
+
+* **West Virginia University** (PhD; 2018-2023)
+
+* **Oklahoma State University** (BS; 2013-2017)

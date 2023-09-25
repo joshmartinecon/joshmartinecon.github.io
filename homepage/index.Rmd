@@ -3,9 +3,11 @@ title: "Joshua C. Martin"
 image: "Martin-IMG_1657.JPG"
 links:
   - label: CV
-    url: "https://github.com/joshmartinecon/joshmartinecon.github.io/blob/main/cv/joshmartinecon_cv.pdf"
-  - label: GitHub
-    url: "https://github.com/joshmartinecon/joshmartinecon.github.io"
+    url: "https://github.com/joshmartinecon/joshmartinecon.github.io/blob/main/cv/joshmartin_cv.pdf"
+  - label: Working Papers
+    url: "https://github.com/joshmartinecon/joshmartinecon.github.io/tree/main/working%20papers"
+  - label: Teaching
+    url: "https://github.com/joshmartinecon/joshmartinecon.github.io/tree/main/syllabi"
   - label: Email
     url: "mailto:joshua.martin@vanderbilt.edu"
 output:
@@ -14,7 +16,9 @@ output:
  
 ## Bio
 
-Applied microeconomist with interests in Health, Urban, Public, Sports and Household Economics. Postdoctoral Researcher at Vanderbilt. 
+Applied microeconomist with interests in Health, Urban, Public and Household Economics.
+
+Postdoctoral Researcher at Vanderbilt University. Housed in the Department of Economics, Center for Research on Inequality & Health and the LGBTQ+ Policy Lab.
 
 ## Employment
 
@@ -24,6 +28,8 @@ Applied microeconomist with interests in Health, Urban, Public, Sports and House
 
 ## Education
 
-* **West Virginia University** (PhD; 2018-2023)
+* **West Virginia University** (2018-2023)
+    * PhD: Economics
 
-* **Oklahoma State University** (BS; 2013-2017)
+* **Oklahoma State University** (2013-2017)
+    * BS: Economics; *Minor*: Math, French

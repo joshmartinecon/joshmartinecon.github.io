@@ -4,8 +4,8 @@ image: "Martin-IMG_1657.JPG"
 links:
   - label: CV
     url: "https://github.com/joshmartinecon/joshmartinecon.github.io/blob/main/cv/joshmartin_cv.pdf"
-  - label: Working Papers
-    url: "https://github.com/joshmartinecon/joshmartinecon.github.io/tree/main/working%20papers"
+  - label: Research
+    url: "https://github.com/joshmartinecon/joshmartinecon.github.io/tree/main/research"
   - label: Teaching
     url: "https://github.com/joshmartinecon/joshmartinecon.github.io/tree/main/syllabi"
   - label: Email

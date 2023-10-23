@@ -3,7 +3,7 @@ title: "Joshua C. Martin"
 image: "Martin-IMG_1657.JPG"
 links:
   - label: CV
-    url: "https://github.com/joshmartinecon/joshmartinecon.github.io/blob/main/cv/joshmartin_cv.pdf"
+    url: "https://github.com/joshmartinecon/quarto-cv/blob/main/joshmartin_cv.pdf"
   - label: Research
     url: "https://github.com/joshmartinecon/joshmartinecon.github.io/tree/main/research"
   - label: Teaching

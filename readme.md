@@ -1,4 +1,4 @@
-# CV Template
+# Website
 
 A [Quarto](https://quarto.org/) template for creating an academic website. Created using the Sean Kross' [postcards package](https://github.com/seankross/postcards).
 

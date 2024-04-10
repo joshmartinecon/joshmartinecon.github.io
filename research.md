@@ -27,10 +27,47 @@ $(document).ready(function(){
 .accordion-btn.open::before {
   content: "- ";
 }
+
+.column-container {
+  display: flex;
+}
+
+.column {
+  flex: 1;
+}
+
+.column img {
+  height: auto;
+  max-width: 100%;
+}
+
+.image-column {
+  flex: 0 0 25%; /* 25% width */
+}
+
+.text-column {
+  flex: 0 0 70%; /* 70% width */
+}
+
+.column-buffer {
+  flex: 0 0 5%; /* 5% width */
+}
+
+.spacer {
+     margin-bottom: 1cm;
+  }
 </style>
 
 ### <ins>**Publications**<ins>
 
+<!--- Publication 1 --->
+
+<div class="column-container">
+  <div class="image-column column">
+  <img src="images/johnson_announcement.jpg" alt="Johnson Announcement">
+  </div>
+  <div class="column-buffer"></div>
+  <div class="text-column column">
 <p style="margin:0;">
 	<p> <a style="margin:0; font-size:125%; font-weight:bold"
 			href="https://doi.org/10.1002/hec.4712">
@@ -42,9 +79,20 @@ $(document).ready(function(){
   </div>
 </div>
 </p>
+  </div>
+</div>
+
+<p class="spacer">
+</p>
 
 <!--- Publication 2 --->
 
+<div class="column-container">
+  <div class="image-column column">
+  <img src="images/tea.jpg" alt="TEA">
+  </div>
+  <div class="column-buffer"></div>
+  <div class="text-column column">
 <p style="margin:0;">
 	<p> <a style="margin:0; font-size:125%; font-weight:bold"
 			href="https://doi.org/10.1080/15582159.2022.2132589">
@@ -56,9 +104,19 @@ $(document).ready(function(){
   </div>
 </div>
 </p>
+  </div>
+</div>
+
+<p class="spacer">
+</p>
 
 <!--- Publication 3 --->
-
+<div class="column-container">
+  <div class="image-column column">
+  <img src="images/nyc marathon.jpg" alt="NYC Marathon">
+  </div>
+  <div class="column-buffer"></div>
+  <div class="text-column column">
 <p style="margin:0;">
 	<p> <a style="margin:0; font-size:125%; font-weight:bold"
 			href="https://doi.org/10.3390/economies8040089">
@@ -70,11 +128,22 @@ $(document).ready(function(){
   </div>
 </div>
 </p>
+  </div>
+</div>
+
+<p class="spacer">
+</p>
 
 ### <ins>**Working Papers**<ins>
 
 <!--- Working Paper 1 --->
 
+<div class="column-container">
+  <div class="image-column column">
+  <img src="images/adopting_family.png" alt="Adoption">
+  </div>
+  <div class="column-buffer"></div>
+  <div class="text-column column">
 <p style="margin:0;">
 	<p> <a style="margin:0; font-size:125%; font-weight:bold"
 			href="https://github.com/joshmartinecon/joshmartinecon.github.io/blob/main/research/working%20papers/ssm%20adoptions.pdf">
@@ -86,9 +155,20 @@ $(document).ready(function(){
   </div>
 </div>
 </p>
+  </div>
+</div>
+
+<p class="spacer">
+</p>
 
 <!--- Working Paper 2 --->
 
+<div class="column-container">
+  <div class="image-column column">
+  <img src="images/gay_wage_gap.png" alt="Gay Wage Gap">
+  </div>
+  <div class="column-buffer"></div>
+  <div class="text-column column">
 <p style="margin:0;">
     <p style="margin:0; font-size:125%; font-weight:bold; color:#6E7AB7">
         Sexual Orientation, Sexual Attraction, and Income
@@ -100,9 +180,20 @@ $(document).ready(function(){
   </div>
 </div>
 </p>
+  </div>
+</div>
+
+<p class="spacer">
+</p>
 
 <!--- Working Paper 3 --->
 
+<div class="column-container">
+  <div class="image-column column">
+  <img src="images/f1_wedding.jpg" alt="F1 Wedding">
+  </div>
+  <div class="column-buffer"></div>
+  <div class="text-column column">
 <p style="margin:0;">
     <p style="margin:0; font-size:125%; font-weight:bold; color:#6E7AB7">
         Does Love Kill Speed? The Effect of Marriage on Formula One Driver Performance
@@ -114,9 +205,23 @@ $(document).ready(function(){
   </div>
 </div>
 </p>
+  </div>
+</div>
 
-<!--- Working Paper 4 --->
+<p class="spacer">
+</p>
 
+
+### <ins>**Works in Progress**<ins> 
+
+<!--- Working Paper 1 --->
+
+<div class="column-container">
+  <div class="image-column column">
+  <img src="images/reopening.jpeg" alt="Reopening">
+  </div>
+  <div class="column-buffer"></div>
+  <div class="text-column column">
 <p style="margin:0;">
 	<p> <a style="margin:0; font-size:125%; font-weight:bold"
 			href="https://github.com/joshmartinecon/joshmartinecon.github.io/blob/main/research/working%20papers/school%20reopenings.pdf">
@@ -128,12 +233,20 @@ $(document).ready(function(){
   </div>
 </div>
 </p>
+  </div>
+</div>
 
+<p class="spacer">
+</p>
 
-### <ins>**Works in Progress**<ins> 
+<!--- Working Paper 2 --->
 
-<!--- Working Paper 1 --->
-
+<div class="column-container">
+  <div class="image-column column">
+  <img src="images/concussion.jpg" alt="Concussion">
+  </div>
+  <div class="column-buffer"></div>
+  <div class="text-column column">
 <p style="margin:0;">
     <p style="margin:0; font-size:125%; font-weight:bold; color:#6E7AB7">
         Peer Health Shocks, Opportunity Costs, and Compensating Differentials: Evidence from of Professional Athletes
@@ -145,7 +258,20 @@ $(document).ready(function(){
   </div>
 </div>
 </p>
+  </div>
+</div>
 
+<p class="spacer">
+</p>
+
+<!--- Working Paper 3 --->
+
+<div class="column-container">
+  <div class="image-column column">
+  <img src="images/childcare_cost.jpg" alt="Childcare Cost">
+  </div>
+  <div class="column-buffer"></div>
+  <div class="text-column column">
 <p style="margin:0;">
     <p style="margin:0; font-size:125%; font-weight:bold; color:#6E7AB7">
         Do Childcare Costs Reduce Fertility? Evidence from Same-Sex Marriage
@@ -155,10 +281,23 @@ $(document).ready(function(){
   </div>
 </div>
 </p>
+  </div>
+</div>
 
+<p class="spacer">
+</p>
+
+<!--- Working Paper 4 --->
+
+<div class="column-container">
+  <div class="image-column column">
+  <img src="images/gayborhood.png" alt="Gayborhood">
+  </div>
+  <div class="column-buffer"></div>
+  <div class="text-column column">
 <p style="margin:0;">
     <p style="margin:0; font-size:125%; font-weight:bold; color:#6E7AB7">
-        Chasing Rainbows: Social Acceptance \& Housing-Price Premia in Gayborhoods
+        Chasing Rainbows: Same-Sex Marriage, Migration, and Housing Prices in American Gayborhoods
     </p>
     with [João Tampellini](https://www.joaotampellini.com/)
 			<div class="accordion">
@@ -167,3 +306,5 @@ $(document).ready(function(){
   </div>
 </div>
 </p>
+  </div>
+</div>

@@ -7,7 +7,7 @@ links:
   - label: Research
     url: "https://joshmartinecon.github.io/research.html"
   - label: Teaching
-    url: "https://github.com/joshmartinecon/joshmartinecon.github.io/tree/main/teaching"
+    url: "https://joshmartinecon.github.io/teaching.html"
   - label: GitHub
     url: "https://github.com/joshmartinecon?tab=repositories"
   - label: Email

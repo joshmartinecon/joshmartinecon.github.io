@@ -3,7 +3,7 @@ title: "**Research**"
 layout: post
 ---
 
-[Home](https://joshmartinecon.github.io/) | [CV](https://github.com/joshmartinecon/quarto-cv/blob/main/joshmartin_cv.pdf) | [Research](https://joshmartinecon.github.io/research.html) | [Teaching](https://github.com/joshmartinecon/joshmartinecon.github.io/tree/main/teaching/) | [GitHub](https://github.com/joshmartinecon?tab=repositories)
+[Home](https://joshmartinecon.github.io/) | [CV](https://github.com/joshmartinecon/quarto-cv/blob/main/joshmartin_cv.pdf) | [Research](https://joshmartinecon.github.io/research.html) | [Teaching](https://joshmartinecon.github.io/teaching.html) | [GitHub](https://github.com/joshmartinecon?tab=repositories)
 
 ---
 

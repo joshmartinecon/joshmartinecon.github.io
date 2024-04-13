@@ -3,15 +3,13 @@ title: "Joshua C. Martin"
 image: "Martin-IMG_1657.JPG"
 links:
   - label: CV
-    url: "https://github.com/joshmartinecon/quarto-cv/blob/main/joshmartin_cv.pdf"
+    url: "https://nbviewer.org/github/joshmartinecon/quarto-cv/blob/main/joshmartin_cv.pdf"
   - label: Research
     url: "https://joshmartinecon.github.io/research.html"
   - label: Teaching
     url: "https://joshmartinecon.github.io/teaching.html"
-  - label: GitHub
-    url: "https://github.com/joshmartinecon?tab=repositories"
-  - label: Email
-    url: "mailto:joshua.martin@vanderbilt.edu"
+  - label: LinkTree
+    url: "https://linktr.ee/joshmartinecon"
 output:
   postcards::trestles
 ---
@@ -21,6 +19,10 @@ output:
 Applied microeconomist with interests in Labor, Household and Urban Economics.
 
 Postdoctoral Researcher at Vanderbilt University. Housed in the Department of Economics, Center for Research on Inequality & Health and the LGBTQ+ Policy Lab.
+
+<p>
+  Email: <a href="#" onclick="copyToClipboard('joshua.martin@vanderbilt.edu')">joshua.martin@vanderbilt.edu</a>
+</p>
 
 ## Employment
 
@@ -35,3 +37,27 @@ Postdoctoral Researcher at Vanderbilt University. Housed in the Department of Ec
 
 * **Oklahoma State University** (2013-2017)
     * BS: Economics; *Minor*: Math, French
+    
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  var links = document.querySelectorAll('a');
+  for (var i = 0; i < links.length; i++) {
+    if (!links[i].href.startsWith('mailto:')) {
+      links[i].target = '_blank';
+      links[i].rel = 'noopener noreferrer';
+    }
+  }
+});
+</script>
+
+<script>
+function copyToClipboard(text) {
+  const elem = document.createElement('textarea');
+  elem.value = text;
+  document.body.appendChild(elem);
+  elem.select();
+  document.execCommand('copy');
+  document.body.removeChild(elem);
+  alert('Email address copied to clipboard'); // Optional: Alert the user
+}
+</script>

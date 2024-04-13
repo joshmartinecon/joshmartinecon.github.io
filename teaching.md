@@ -3,7 +3,10 @@ title: "**Teaching**"
 layout: post
 ---
 
-[Home](https://joshmartinecon.github.io/) | [CV](https://github.com/joshmartinecon/quarto-cv/blob/main/joshmartin_cv.pdf) | [Research](https://joshmartinecon.github.io/research.html) | [Teaching](https://joshmartinecon.github.io/teaching.html) | [GitHub](https://github.com/joshmartinecon?tab=repositories)
+<a href="https://joshmartinecon.github.io/" target="_blank" rel="noopener noreferrer">Home</a> | 
+<a href="https://github.com/joshmartinecon/quarto-cv/blob/main/joshmartin_cv.pdf" target="_blank" rel="noopener noreferrer">CV</a> | 
+<a href="https://joshmartinecon.github.io/research.html" target="_blank" rel="noopener noreferrer">Research</a> | 
+<a href="https://joshmartinecon.github.io/teaching.html" target="_blank" rel="noopener noreferrer">Teaching</a> 
 
 ---
 
@@ -63,7 +66,7 @@ function toggleAccordion(element) {
 <div style="flex: 0 0 5%;"></div>
 <div style="flex: 0 0 70%;">
 <p style="font-size: 125%; font-weight: bold;">Urban & Regional Economics</p>
-<p style="font-size: 100%;">Syllabus: <a href="https://github.com/joshmartinecon/joshmartinecon.github.io/blob/main/teaching/syllabi/2022Spring_ECO490_syllabus.pdf">Spring 2022</a></p>
+<p style="font-size: 100%;">Syllabus: <a href="https://github.com/joshmartinecon/joshmartinecon.github.io/blob/main/teaching/syllabi/2022Spring_ECO490_syllabus.pdf" target="_blank" rel="noopener noreferrer">Spring 2022</a></p>
 <button class="accordion-button" onclick="toggleAccordion(this)">Course Description</button>
 <div style="display: none; background-color: #f9f9f9; padding: 10px;">Urban & Regional Economics utilizes economic theory and real-world examples to examine major contemporary issues confronting urban and rural areas. At the most basic level, U&R Economics introduces space into economic models and studies the location of economic activity. The course will introduce theories of why cities exist, city location, city size, and the causes of city growth and decline. The course will also explore possible economic solutions to problems associated with housing, transportation, education, employment, pollution, and crime.</div>
 </div>
@@ -78,7 +81,7 @@ function toggleAccordion(element) {
 <p style="margin:0;">
 <span style="font-size:125%; font-weight:bold;">Applied Economic Research (ECON 482)</span><br>
 Syllabus: 
-<a href="https://github.com/joshmartinecon/joshmartinecon.github.io/blob/main/teaching/syllabi/2021Fall_ECON482_syllabus.pdf">Fall 2021</a>
+<a href="https://github.com/joshmartinecon/joshmartinecon.github.io/blob/main/teaching/syllabi/2021Fall_ECON482_syllabus.pdf" target="_blank" rel="noopener noreferrer">Fall 2021</a>
 </p>
 <button class="accordion-button" onclick="toggleAccordion(this)">Course Description</button>
 <div style="display: none; background-color: #f9f9f9; padding: 10px;">
@@ -97,7 +100,7 @@ This course is designed to introduce West Virginia University Economics students
 <p style="margin:0;">
 <span style="font-size:125%; font-weight:bold;">Intermediate Microeconomic Theory (ECON 301)</span><br>
 Syllabus: 
-<a href="https://github.com/joshmartinecon/joshmartinecon.github.io/blob/main/teaching/syllabi/2021Fall_ECON301_syllabus.pdf">Fall 2021</a>
+<a href="https://github.com/joshmartinecon/joshmartinecon.github.io/blob/main/teaching/syllabi/2021Fall_ECON301_syllabus.pdf" target="_blank" rel="noopener noreferrer">Fall 2021</a>
 </p>
 <button class="accordion-button" onclick="toggleAccordion(this)">Course Description</button>
 <div style="display: none; background-color: #f9f9f9; padding: 10px;">
@@ -117,8 +120,8 @@ The course begins with basic concepts of the market: supply, demand, and market 
 <p style="margin:0;">
 <span style="font-size:125%; font-weight:bold;">Principles of Microeconomics (ECON 201)</span><br>
 Syllabi: 
-<a href="https://github.com/joshmartinecon/joshmartinecon.github.io/blob/main/teaching/syllabi/2021Spring_ECON201_syllabus.pdf">Spring 2021</a>, 
-<a href="https://github.com/joshmartinecon/joshmartinecon.github.io/blob/main/teaching/syllabi/2020Summer_ECON201_syllabus.pdf">Summer 2020</a>
+<a href="https://github.com/joshmartinecon/joshmartinecon.github.io/blob/main/teaching/syllabi/2021Spring_ECON201_syllabus.pdf" target="_blank" rel="noopener noreferrer">Spring 2021</a>, 
+<a href="https://github.com/joshmartinecon/joshmartinecon.github.io/blob/main/teaching/syllabi/2020Summer_ECON201_syllabus.pdf" target="_blank" rel="noopener noreferrer">Summer 2020</a>
 </p>
 <button class="accordion-button" onclick="toggleAccordion(this)">Course Description</button>
 <div style="display: none; background-color: #f9f9f9; padding: 10px;">
@@ -136,9 +139,9 @@ This course is designed to introduce WVU students to the principles of microecon
 <p style="margin:0;">
 <span style="font-size:125%; font-weight:bold;">Markets & Society (ECO 110)</span><br>
 Syllabi: 
-<a href="https://github.com/joshmartinecon/joshmartinecon.github.io/blob/main/teaching/syllabi/2023Spring_ECO110_syllabus.pdf">Spring 2023</a>, 
-<a href="https://github.com/joshmartinecon/joshmartinecon.github.io/blob/main/teaching/syllabi/2022Fall_ECO110_syllabus.pdf">Fall 2022</a>,
-<a href="https://github.com/joshmartinecon/joshmartinecon.github.io/blob/main/teaching/syllabi/2022Spring_ECO110_syllabus.pdf">Spring 2022</a>
+<a href="https://github.com/joshmartinecon/joshmartinecon.github.io/blob/main/teaching/syllabi/2023Spring_ECO110_syllabus.pdf" target="_blank" rel="noopener noreferrer">Spring 2023</a>, 
+<a href="https://github.com/joshmartinecon/joshmartinecon.github.io/blob/main/teaching/syllabi/2022Fall_ECO110_syllabus.pdf" target="_blank" rel="noopener noreferrer">Fall 2022</a>,
+<a href="https://github.com/joshmartinecon/joshmartinecon.github.io/blob/main/teaching/syllabi/2022Spring_ECO110_syllabus.pdf" target="_blank" rel="noopener noreferrer">Spring 2022</a>
 </p>
 <button class="accordion-button" onclick="toggleAccordion(this)">Course Description</button>
 <div style="display: none; background-color: #f9f9f9; padding: 10px;">
@@ -157,15 +160,14 @@ A principles level economics course analyzing how markets determine prices and t
 <div class="text-column" style="flex: 0 0 70%;">
 <p style="margin:0;">
 <span style="font-size:125%; font-weight:bold;">Advanced Economic Theory I & II</span>
+<p style="margin-top:5px;">
+Spring 2021 with Prof. <a href="https://sites.google.com/site/kolereddig" target="_blank" rel="noopener noreferrer">Kole Reddig</a>
 </p>
 <p style="margin-top:5px;">
-Spring 2021 with Prof. <a href="https://sites.google.com/site/kolereddig">Kole Reddig</a>
+Fall 2021 with Prof. <a href="https://sites.google.com/site/bryancmccannon/" target="_blank" rel="noopener noreferrer">Bryan McCannon</a>
 </p>
 <p style="margin-top:5px;">
-Fall 2021 with Prof. <a href="https://sites.google.com/site/bryancmccannon/">Bryan McCannon</a>
-</p>
-<p style="margin-top:5px;">
-Spring 2020 with Prof. <a href="https://community.wvu.edu/~shnishioka/">Shuichiro Nishioka</a>
+Spring 2020 with Prof. <a href="https://community.wvu.edu/~shnishioka/" target="_blank" rel="noopener noreferrer">Shuichiro Nishioka</a>
 </p>
 </div>
 </div>
@@ -180,7 +182,7 @@ Spring 2020 with Prof. <a href="https://community.wvu.edu/~shnishioka/">Shuichir
 <span style="font-size:125%; font-weight:bold;">Intermediate Microeconomic Theory</span>
 </p>
 <p style="margin-top:5px;">
-Fall 2019 with Prof. <a href="https://sites.google.com/view/danielgrossman/home">Dan Grossman</a>
+Fall 2019 with Prof. <a href="https://sites.google.com/view/danielgrossman/home" target="_blank" rel="noopener noreferrer">Dan Grossman</a>
 </p>
 </div>
 </div>
@@ -195,7 +197,7 @@ Fall 2019 with Prof. <a href="https://sites.google.com/view/danielgrossman/home"
 <span style="font-size:125%; font-weight:bold;">Principles of Macroeconomics</span>
 </p>
 <p style="margin-top:5px;">
-Spring 2019 with Prof. <a href="https://sites.google.com/view/margaretbock">Margret Bock</a>
+Spring 2019 with Prof. <a href="https://sites.google.com/view/margaretbock" target="_blank" rel="noopener noreferrer">Margret Bock</a>
 </p>
 </div>
 </div>
@@ -208,9 +210,8 @@ Spring 2019 with Prof. <a href="https://sites.google.com/view/margaretbock">Marg
 <div class="text-column" style="flex: 0 0 70%;">
 <p style="margin:0;">
 <span style="font-size:125%; font-weight:bold;">Principles of Microeconomics</span>
-</p>
 <p style="margin-top:5px;">
-Fall 2018 with Prof. <a href="https://sites.google.com/site/collinhodges/home">Collin Hodges</a>
+Fall 2018 with Prof. <a href="https://sites.google.com/site/collinhodges/home" target="_blank" rel="noopener noreferrer">Collin Hodges</a>
 </p>
 </div>
 </div>
@@ -220,10 +221,9 @@ Fall 2018 with Prof. <a href="https://sites.google.com/site/collinhodges/home">C
 #### *2024*
 
 <p style="margin-top:5px;">
-Vanderbilt University: <a href="https://github.com/joshmartinecon/joshmartinecon.github.io/tree/main/teaching/lectures/Vanderbilt/PPS%203250%20Guest%20Lecture%202.21.24">Advanced Quantitative Methods for Public Policy</a>
+Vanderbilt University: <a href="https://github.com/joshmartinecon/joshmartinecon.github.io/tree/main/teaching/lectures/Vanderbilt/PPS%203250%20Guest%20Lecture%202.21.24" target="_blank" rel="noopener noreferrer">Advanced Quantitative Methods for Public Policy</a>
 </p>
 
 <p style="margin-top:5px;">
-Vanderbilt University: <a href="https://github.com/joshmartinecon/joshmartinecon.github.io/tree/main/teaching/lectures/Vanderbilt/GSS%201160%20Guest%20Lecture%203.4.24">Sex and Society</a>
+Vanderbilt University: <a href="https://github.com/joshmartinecon/joshmartinecon.github.io/tree/main/teaching/lectures/Vanderbilt/GSS%201160%20Guest%20Lecture%203.4.24" target="_blank" rel="noopener noreferrer">Sex and Society</a>
 </p>
-

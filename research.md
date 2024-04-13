@@ -3,7 +3,10 @@ title: "**Research**"
 layout: post
 ---
 
-[Home](https://joshmartinecon.github.io/) | [CV](https://github.com/joshmartinecon/quarto-cv/blob/main/joshmartin_cv.pdf) | [Research](https://joshmartinecon.github.io/research.html) | [Teaching](https://joshmartinecon.github.io/teaching.html) | [GitHub](https://github.com/joshmartinecon?tab=repositories)
+<a href="https://joshmartinecon.github.io/" target="_blank" rel="noopener noreferrer">Home</a> | 
+<a href="https://github.com/joshmartinecon/quarto-cv/blob/main/joshmartin_cv.pdf" target="_blank" rel="noopener noreferrer">CV</a> | 
+<a href="https://joshmartinecon.github.io/research.html" target="_blank" rel="noopener noreferrer">Research</a> | 
+<a href="https://joshmartinecon.github.io/teaching.html" target="_blank" rel="noopener noreferrer">Teaching</a> 
 
 ---
 
@@ -65,10 +68,10 @@ function toggleAccordion(element) {
 <div class="column-container" style="display: flex; width: 100%; margin-bottom: 20px;">
 <div class="text-column" style="flex: 1 0 100%;">
 <p style="margin:0;">
-<a style="font-size:125%; font-weight:bold" href="https://doi.org/10.1002/hec.4712">
+<a style="font-size:125%; font-weight:bold" href="https://doi.org/10.1002/hec.4712" target="_blank" rel="noopener noreferrer">
 Information Shocks and Celebrity Exposure: The Effect of “Magic” Johnson on AIDS Diagnoses and Mortality in the U.S.
 </a> <br>
-with <a href="https://alexcardazzi.github.io/">Alexander Cardazzi</a> and <a href="https://sites.google.com/view/zacharyrodriguez/home">Zachary Rodriguez</a>; *Health Economics* (2023)
+with <a href="https://alexcardazzi.github.io/" target="_blank" rel="noopener noreferrer">Alexander Cardazzi</a> and <a href="https://sites.google.com/view/zacharyrodriguez/home" target="_blank" rel="noopener noreferrer">Zachary Rodriguez</a>; *Health Economics* (2023)
 </p>
 <button class="accordion-button" onclick="toggleAccordion(this)">Abstract</button>
 <div style="display: none; background-color: #f9f9f9; padding: 10px;">
@@ -80,9 +83,9 @@ We present evidence that Earvin “Magic” Johnson's announcement that he contr
 <div class="column-container" style="display: flex; width: 100%; margin-bottom: 20px;">
 <div class="text-column" style="flex: 1;">
 <p style="margin:0;">
-<a style="font-size:125%; font-weight:bold" href="https://doi.org/10.1080/15582159.2022.2132589">
+<a style="font-size:125%; font-weight:bold" href="https://doi.org/10.1080/15582159.2022.2132589" target="_blank" rel="noopener noreferrer">
 Determinants of Voting on Education Savings Accounts: Evidence from Tennessee
-</a> <br> with Ben Luikart and <a href="https://sites.google.com/site/joshuachall/">Joshua C. Hall</a>; *Journal of School Choice* (2022)
+</a> <br> with Ben Luikart and <a href="https://sites.google.com/site/joshuachall/" target="_blank" rel="noopener noreferrer">Joshua C. Hall</a>; *Journal of School Choice* (2022)
 </p>
 <button class="accordion-button" onclick="toggleAccordion(this)">Abstract</button>
 <div style="display: none; background-color: #f9f9f9; padding: 10px;">
@@ -94,9 +97,9 @@ Tennessee passed voucher-style Education Savings Account (ESA) legislation in 20
 <div class="column-container" style="display: flex; width: 100%; margin-bottom: 20px;">
 <div class="text-column" style="flex: 1;">
 <p style="margin:0;">
-<a style="font-size:125%; font-weight:bold" href="https://doi.org/10.3390/economies8040089">
+<a style="font-size:125%; font-weight:bold" href="https://doi.org/10.3390/economies8040089" target="_blank" rel="noopener noreferrer">
 The Impact of the New York City Marathon on Hotel Demand
-</a> <br> with <a href="https://sites.google.com/site/joshuachall/">Joshua C. Hall</a>; *Economies* (2020)
+</a> <br> with <a href="https://sites.google.com/site/joshuachall/" target="_blank" rel="noopener noreferrer">Joshua C. Hall</a>; *Economies* (2020)
 </p>
 <button class="accordion-button" onclick="toggleAccordion(this)">Abstract</button>
 <div style="display: none; background-color: #f9f9f9; padding: 10px;">
@@ -113,9 +116,9 @@ Daily hotel data are employed, along with information on prices, revenue, demand
 <div class="column-container" style="display: flex; width: 100%; margin-bottom: 20px;">
 <div class="text-column" style="flex: 1;">
 <p style="margin:0;">
-<a style="font-size:125%; font-weight:bold" href="https://github.com/joshmartinecon/joshmartinecon.github.io/blob/main/research/working%20papers/ssm%20adoptions.pdf">
+<a style="font-size:125%; font-weight:bold" href="https://github.com/joshmartinecon/joshmartinecon.github.io/blob/main/research/working%20papers/ssm%20adoptions.pdf" target="_blank" rel="noopener noreferrer">
 The Effect of Same-Sex Marriage Legalization on Adoptions and Family Formation
-</a> <br> with <a href="https://sites.google.com/view/zacharyrodriguez/home">Zachary Rodriguez</a>; *Under Review*
+</a> <br> with <a href="https://sites.google.com/view/zacharyrodriguez/home" target="_blank" rel="noopener noreferrer">Zachary Rodriguez</a>; *Under Review*
 </p>
 <button class="accordion-button" onclick="toggleAccordion(this)">Abstract</button>
 <div style="display: none; background-color: #f9f9f9; padding: 10px;">
@@ -129,7 +132,7 @@ The stability and availability of legal rights are known to be crucial factors i
 <p style="font-size:125%; font-weight:bold;">
 Sexual Orientation, Sexual Attraction, and Income
 </p>
-with <a href="https://sites.google.com/site/kittcarpenter/">Christopher S. Carpenter</a> and <a href="https://www.hasanshahidecon.com/">Hasan Shahid</a>; *Under Review*
+with <a href="https://sites.google.com/site/kittcarpenter/" target="_blank" rel="noopener noreferrer">Christopher S. Carpenter</a> and <a href="https://www.hasanshahidecon.com/" target="_blank" rel="noopener noreferrer">Hasan Shahid</a>; *Under Review*
 <button class="accordion-button" onclick="toggleAccordion(this)">Abstract</button>
 <div style="display: none; background-color: #f9f9f9; padding: 10px;">
 We provide new evidence on sexual orientation, sexual attraction, and income using data from the 2015-21 National Survey on Drug Use and Health (NSDUH). These data ask individuals about both orientation and attraction, allowing us to describe a sexual minority group that has been hidden in prior research: people who identify as heterosexual but who concurrently report some same-sex attraction. We show that this population is much larger than the sample of self-identified gay, lesbian, or bisexual people, and we show that relative to heterosexual people who report exclusively different-sex attraction, heterosexual people who report some same-sex attraction are younger, less likely to be married, and much more highly educated. We document that, controlling for observables, heterosexual men who report same-sex attraction experience robust and statistically significant employment and income penalties relative to heterosexual men who are exclusively different-sex attracted. These penalties are larger for non-Hispanic White men than for non-Hispanic Black men. We find no similar penalty for heterosexual women who report some same-sex attraction. Our results indicate that prior research has overlooked one of the largest groups of sexual minorities – heterosexual people who report some same-sex attraction – who experience systematically different economic outcomes than heterosexual individuals who are exclusively different-sex attracted.
@@ -142,7 +145,7 @@ We provide new evidence on sexual orientation, sexual attraction, and income usi
 <p style="font-size:125%; font-weight:bold">
 Does Love Kill Speed? The Effect of Marriage on Formula One Driver Performance
 </p>
-with <a href="https://www.claygcollins.com/">Clay Collins</a>; *Under Review*
+with <a href="https://www.claygcollins.com/" target="_blank" rel="noopener noreferrer">Clay Collins</a>; *Under Review*
 <button class="accordion-button" onclick="toggleAccordion(this)">Abstract</button>
 <div style="display: none; background-color: #f9f9f9; padding: 10px;">
 This paper provides an empirical test of how life events, in this case, marriage, can affect player performance in a high-risk environment. Using hand-collected data on the marital status of Formula One drivers, we test whether married drivers take fewer risks and drive more conservatively during qualifying periods. Using a variety of estimation methods to test short- and long-term effects of changes in marital status, we find no evidence that "love is the enemy of speed". Married drivers see no changes in performance after their wedding dates, nor are they discriminated against and exit the sport earlier.
@@ -160,7 +163,7 @@ This paper provides an empirical test of how life events, in this case, marriage
 <p style="font-size:125%; font-weight:bold">
 Spatial Endogeneity & School Reopenings during the COVID-19 Pandemic
 </p>
-<a href="https://github.com/joshmartinecon/joshmartinecon.github.io/blob/main/research/working%20papers/school%20reopenings.pdf">(Previous Version)</a>
+<a href="https://github.com/joshmartinecon/joshmartinecon.github.io/blob/main/research/working%20papers/school%20reopenings.pdf" target="_blank" rel="noopener noreferrer">(Previous Version)</a>
 </p>
 <button class="accordion-button" onclick="toggleAccordion(this)">Abstract</button>
 <div style="display: none; background-color: #f9f9f9; padding: 10px;">
@@ -174,7 +177,7 @@ This paper explores the role that teacher union strength played in the reopening
 <p style="font-size:125%; font-weight:bold">
 Peer Health Shocks, Opportunity Costs, and Compensating Differentials: Evidence from Professional Athletes
 </p>
-<a href="https://github.com/joshmartinecon/joshmartinecon.github.io/blob/main/research/working%20papers/cte%20and%20retirement.pdf">(Previous Version)</a>
+<a href="https://github.com/joshmartinecon/joshmartinecon.github.io/blob/main/research/working%20papers/cte%20and%20retirement.pdf" target="_blank" rel="noopener noreferrer">(Previous Version)</a>
 <button class="accordion-button" onclick="toggleAccordion(this)">Abstract</button>
 <div style="display: none; background-color: #f9f9f9; padding: 10px;">
 Extensive research has documented an inverse relationship between workers’ wages and the overall desirability of their workplace. This paper extends this framework to examine how workers respond to peer health shocks related to continued workplace participation under conditions of monopsony power. By leveraging exogenous assignment of workers to different firms within the National Football and Hockey Leagues, I analyze differences in the employment outcomes of characteristically similar athletes who differ only in their exposure to a coworker who died of chronic traumatic encephalopathy. I demonstrate that football players negotiate shorter contracts following this exposure but are not immediately less likely to retire whereas treated hockey players see sharp increases in retirement. The differences in these labor supply responses are driven by athletes’ opportunity costs such as expected foregone earnings and college degree completion. Neither the length of time as coworkers, specialization similarities, nor the number of prior workplace injuries provide additional explanatory power.
@@ -200,7 +203,7 @@ A growing body of research has documented the growing gap between individuals' i
 <p style="font-size:125%; font-weight:bold">
 Chasing Rainbows: Same-Sex Marriage, Migration, and Housing Prices in American Gayborhoods
 </p>
-with <a href="https://www.joaotampellini.com/">João Tampellini</a>
+with <a href="https://www.joaotampellini.com/" target="_blank" rel="noopener noreferrer">João Tampellini</a>
 <button class="accordion-button" onclick="toggleAccordion(this)">Abstract</button>
 <div style="display: none; background-color: #f9f9f9; padding: 10px;">
 Social scientists have long studied the residential enclaves of minoritized groups. This paper examines changes in estimated amenity values within American gayborhoods using geographically localized data over 60 years. We use a difference-in-differences design comparing gayborhoods to adjacent neighborhoods within the same city and document that the rent-to-income ratio for these neighborhoods is v-shaped over time – declining largely during the peak of the AIDS crisis in the 1990s before sharply rebounding in the 2010s. To better understand the factors impacting this increase, we exploit the staggered treatment timing of same-sex marriage laws across states. We find that marriage equality laws increase both the number and share of different-sex households residing within the gayborhood which drives up the price of housing. This increase in the price of housing displaces renters in cities with inelastic housing supply.

@@ -21,7 +21,7 @@ Applied microeconomist with interests in Labor, Household and Urban Economics.
 Postdoctoral Researcher at Vanderbilt University. Housed in the Department of Economics, Center for Research on Inequality & Health and the LGBTQ+ Policy Lab.
 
 <p>
-  Email: <a href="#" onclick="copyToClipboard('joshua.martin@vanderbilt.edu')">joshua.martin@vanderbilt.edu</a>
+  Email: <a href="#" onclick="event.preventDefault(); copyToClipboard('joshua.martin@vanderbilt.edu')">joshua.martin@vanderbilt.edu</a>
 </p>
 
 ## Employment
@@ -37,18 +37,6 @@ Postdoctoral Researcher at Vanderbilt University. Housed in the Department of Ec
 
 * **Oklahoma State University** (2013-2017)
     * BS: Economics; *Minor*: Math, French
-    
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-  var links = document.querySelectorAll('a');
-  for (var i = 0; i < links.length; i++) {
-    if (!links[i].href.startsWith('mailto:')) {
-      links[i].target = '_blank';
-      links[i].rel = 'noopener noreferrer';
-    }
-  }
-});
-</script>
 
 <script>
 function copyToClipboard(text) {
@@ -60,4 +48,17 @@ function copyToClipboard(text) {
   document.body.removeChild(elem);
   alert('Email address copied to clipboard'); // Optional: Alert the user
 }
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  var links = document.querySelectorAll('a');
+  for (var i = 0; i < links.length; i++) {
+    // Check if the href attribute is not just "#", which is used for the copy email function
+    if (links[i].href !== "#" && !links[i].href.startsWith('mailto:')) {
+      links[i].target = '_blank';
+      links[i].rel = 'noopener noreferrer';
+    }
+  }
+});
 </script>

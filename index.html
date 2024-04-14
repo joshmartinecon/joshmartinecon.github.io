@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', function(e) {
             Inequality &amp; Health and the LGBTQ+ Policy Lab.</p>
             <p>
             Email:
-            <a href="#" onclick="copyToClipboard(&#39;joshua.martin@vanderbilt.edu&#39;)">joshua.martin@vanderbilt.edu</a>
+            <a href="#" onclick="event.preventDefault(); copyToClipboard(&#39;joshua.martin@vanderbilt.edu&#39;)">joshua.martin@vanderbilt.edu</a>
             </p>
             </div>
             <div id="employment" class="section level2">
@@ -125,17 +125,6 @@ document.addEventListener('DOMContentLoaded', function(e) {
             </ul></li>
             </ul>
             <script>
-            document.addEventListener("DOMContentLoaded", function() {
-              var links = document.querySelectorAll('a');
-              for (var i = 0; i < links.length; i++) {
-                if (!links[i].href.startsWith('mailto:')) {
-                  links[i].target = '_blank';
-                  links[i].rel = 'noopener noreferrer';
-                }
-              }
-            });
-            </script>
-            <script>
             function copyToClipboard(text) {
               const elem = document.createElement('textarea');
               elem.value = text;
@@ -145,6 +134,18 @@ document.addEventListener('DOMContentLoaded', function(e) {
               document.body.removeChild(elem);
               alert('Email address copied to clipboard'); // Optional: Alert the user
             }
+            </script>
+            <script>
+            document.addEventListener("DOMContentLoaded", function() {
+              var links = document.querySelectorAll('a');
+              for (var i = 0; i < links.length; i++) {
+                // Check if the href attribute is not just "#", which is used for the copy email function
+                if (links[i].href !== "#" && !links[i].href.startsWith('mailto:')) {
+                  links[i].target = '_blank';
+                  links[i].rel = 'noopener noreferrer';
+                }
+              }
+            });
             </script>
             </div>
           </div>
@@ -200,7 +201,7 @@ document.addEventListener('DOMContentLoaded', function(e) {
               on Inequality &amp; Health and the LGBTQ+ Policy Lab.</p>
               <p>
               Email:
-              <a href="#" onclick="copyToClipboard(&#39;joshua.martin@vanderbilt.edu&#39;)">joshua.martin@vanderbilt.edu</a>
+              <a href="#" onclick="event.preventDefault(); copyToClipboard(&#39;joshua.martin@vanderbilt.edu&#39;)">joshua.martin@vanderbilt.edu</a>
               </p>
               </div>
               <div id="employment" class="section level2">
@@ -225,17 +226,6 @@ document.addEventListener('DOMContentLoaded', function(e) {
               </ul></li>
               </ul>
               <script>
-              document.addEventListener("DOMContentLoaded", function() {
-                var links = document.querySelectorAll('a');
-                for (var i = 0; i < links.length; i++) {
-                  if (!links[i].href.startsWith('mailto:')) {
-                    links[i].target = '_blank';
-                    links[i].rel = 'noopener noreferrer';
-                  }
-                }
-              });
-              </script>
-              <script>
               function copyToClipboard(text) {
                 const elem = document.createElement('textarea');
                 elem.value = text;
@@ -245,6 +235,18 @@ document.addEventListener('DOMContentLoaded', function(e) {
                 document.body.removeChild(elem);
                 alert('Email address copied to clipboard'); // Optional: Alert the user
               }
+              </script>
+              <script>
+              document.addEventListener("DOMContentLoaded", function() {
+                var links = document.querySelectorAll('a');
+                for (var i = 0; i < links.length; i++) {
+                  // Check if the href attribute is not just "#", which is used for the copy email function
+                  if (links[i].href !== "#" && !links[i].href.startsWith('mailto:')) {
+                    links[i].target = '_blank';
+                    links[i].rel = 'noopener noreferrer';
+                  }
+                }
+              });
               </script>
               </div>
             </div>

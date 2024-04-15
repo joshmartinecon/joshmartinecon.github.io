@@ -18,7 +18,7 @@ output:
 
 Applied microeconomist with interests in Labor, Household and Urban Economics.
 
-Postdoctoral Researcher at Vanderbilt University. Housed in the Department of Economics, Center for Research on Inequality & Health and the LGBTQ+ Policy Lab.
+Postdoctoral Researcher at Vanderbilt University. Housed in the [Department of Economics](https://as.vanderbilt.edu/economics/), [Center for Research on Inequality & Health](https://www.vanderbilt.edu/research-inequality-health/) and the [LGBTQ+ Policy Lab](https://www.vanderbilt.edu/lgbtq-policy-lab/).
 
 <p>
   Email: <a href="#" onclick="event.preventDefault(); copyToClipboard('joshua.martin@vanderbilt.edu')">joshua.martin@vanderbilt.edu</a>

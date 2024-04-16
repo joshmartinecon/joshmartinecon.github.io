@@ -221,9 +221,13 @@ Fall 2018 with Prof. <a href="https://sites.google.com/site/collinhodges/home" t
 #### *2024*
 
 <p style="margin-top:5px;">
-Vanderbilt University: <a href="https://github.com/joshmartinecon/joshmartinecon.github.io/tree/main/teaching/lectures/Vanderbilt/PPS%203250%20Guest%20Lecture%202.21.24" target="_blank" rel="noopener noreferrer">Advanced Quantitative Methods for Public Policy</a>
+Public Policy Studies: <a href="https://github.com/joshmartinecon/joshmartinecon.github.io/tree/main/teaching/lectures/Vanderbilt/PPS%203250%20Guest%20Lecture%202.21.24" target="_blank" rel="noopener noreferrer">Advanced Quantitative Methods for Public Policy</a>
 </p>
 
 <p style="margin-top:5px;">
-Vanderbilt University: <a href="https://github.com/joshmartinecon/joshmartinecon.github.io/tree/main/teaching/lectures/Vanderbilt/GSS%201160%20Guest%20Lecture%203.4.24" target="_blank" rel="noopener noreferrer">Sex and Society</a>
+Contemporary Social Issues: Sex & Sexuality in Society
+</p>
+
+<p style="margin-top:5px;">
+Gender & Sexuality Studies: <a href="https://github.com/joshmartinecon/joshmartinecon.github.io/tree/main/teaching/lectures/Vanderbilt/GSS%201160%20Guest%20Lecture%203.4.24" target="_blank" rel="noopener noreferrer">Sex & Society</a>
 </p>

@@ -391,6 +391,21 @@ button.accordion-button.active:before {
 content: "- ";
 }
 </style>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  var links = document.querySelectorAll('a');
+  for (var i = 0; i < links.length; i++) {
+    // Check if the href attribute is not just "#", which is used for the copy email function
+    if (links[i].href !== "#" && !links[i].href.startsWith('mailto:') &&
+        links[i].href !== "https://joshmartinecon.github.io" &&
+        links[i].href !== "https://joshmartinecon.github.io/research.html" &&
+        links[i].href !== "https://joshmartinecon.github.io/teaching.html") {
+      links[i].target = '_blank';
+      links[i].rel = 'noopener noreferrer';
+    }
+  }
+});
+</script>
 <div id="instructor-of-record" class="section level3">
 <h3><ins><strong>Instructor of Record</strong><ins></h3>
 <script>

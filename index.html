@@ -93,13 +93,14 @@ document.addEventListener('DOMContentLoaded', function(e) {
           <div class="my-5" id="content">
             <div id="bio" class="section level2">
             <h2>Bio</h2>
-            <p>Applied microeconomist with interests in Labor, Household
-            and Urban Economics.</p>
-            <p>Postdoctoral Researcher at Vanderbilt University. Housed
-            in the <a href="https://as.vanderbilt.edu/economics/">Department of
-            Economics</a>, <a href="https://www.vanderbilt.edu/research-inequality-health/">Center
+            <p>I am a postdoctoral researcher in the <a href="https://as.vanderbilt.edu/economics/">Department of
+            Economics</a> at Vanderbilt University where I serve as a
+            research affiliate with the <a href="https://www.vanderbilt.edu/research-inequality-health/">Center
             for Research on Inequality &amp; Health</a> and the <a href="https://www.vanderbilt.edu/lgbtq-policy-lab/">LGBTQ+
-            Policy Lab</a>.</p>
+            Policy Lab</a>. My work utilizes quasi-experimental methods
+            to examine how discrimination, information, and policy
+            affect individuals’ labor market outcomes and household
+            investment decisions.</p>
             <p>
             Email:
             <a href="#" onclick="event.preventDefault(); copyToClipboard(&#39;joshua.martin@vanderbilt.edu&#39;)">joshua.martin@vanderbilt.edu</a>
@@ -142,7 +143,9 @@ document.addEventListener('DOMContentLoaded', function(e) {
               var links = document.querySelectorAll('a');
               for (var i = 0; i < links.length; i++) {
                 // Check if the href attribute is not just "#", which is used for the copy email function
-                if (links[i].href !== "#" && !links[i].href.startsWith('mailto:')) {
+                if (links[i].href !== "#" && !links[i].href.startsWith('mailto:') &&
+                    links[i].href !== "https://joshmartinecon.github.io/research.html" && 
+                    links[i].href !== "https://joshmartinecon.github.io/teaching.html") {
                   links[i].target = '_blank';
                   links[i].rel = 'noopener noreferrer';
                 }
@@ -196,13 +199,14 @@ document.addEventListener('DOMContentLoaded', function(e) {
             <div class="p pt-4 px-5">
               <div id="bio" class="section level2">
               <h2>Bio</h2>
-              <p>Applied microeconomist with interests in Labor,
-              Household and Urban Economics.</p>
-              <p>Postdoctoral Researcher at Vanderbilt University.
-              Housed in the <a href="https://as.vanderbilt.edu/economics/">Department of
-              Economics</a>, <a href="https://www.vanderbilt.edu/research-inequality-health/">Center
+              <p>I am a postdoctoral researcher in the <a href="https://as.vanderbilt.edu/economics/">Department of
+              Economics</a> at Vanderbilt University where I serve as a
+              research affiliate with the <a href="https://www.vanderbilt.edu/research-inequality-health/">Center
               for Research on Inequality &amp; Health</a> and the <a href="https://www.vanderbilt.edu/lgbtq-policy-lab/">LGBTQ+
-              Policy Lab</a>.</p>
+              Policy Lab</a>. My work utilizes quasi-experimental
+              methods to examine how discrimination, information, and
+              policy affect individuals’ labor market outcomes and
+              household investment decisions.</p>
               <p>
               Email:
               <a href="#" onclick="event.preventDefault(); copyToClipboard(&#39;joshua.martin@vanderbilt.edu&#39;)">joshua.martin@vanderbilt.edu</a>
@@ -245,7 +249,9 @@ document.addEventListener('DOMContentLoaded', function(e) {
                 var links = document.querySelectorAll('a');
                 for (var i = 0; i < links.length; i++) {
                   // Check if the href attribute is not just "#", which is used for the copy email function
-                  if (links[i].href !== "#" && !links[i].href.startsWith('mailto:')) {
+                  if (links[i].href !== "#" && !links[i].href.startsWith('mailto:') &&
+                      links[i].href !== "https://joshmartinecon.github.io/research.html" && 
+                      links[i].href !== "https://joshmartinecon.github.io/teaching.html") {
                     links[i].target = '_blank';
                     links[i].rel = 'noopener noreferrer';
                   }

@@ -16,9 +16,7 @@ output:
  
 ## Bio
 
-Applied microeconomist with interests in Labor, Household and Urban Economics.
-
-Postdoctoral Researcher at Vanderbilt University. Housed in the [Department of Economics](https://as.vanderbilt.edu/economics/), [Center for Research on Inequality & Health](https://www.vanderbilt.edu/research-inequality-health/) and the [LGBTQ+ Policy Lab](https://www.vanderbilt.edu/lgbtq-policy-lab/).
+I am a postdoctoral researcher in the [Department of Economics](https://as.vanderbilt.edu/economics/) at Vanderbilt University where I serve as a research affiliate with the [Center for Research on Inequality & Health](https://www.vanderbilt.edu/research-inequality-health/) and the [LGBTQ+ Policy Lab](https://www.vanderbilt.edu/lgbtq-policy-lab/). My work utilizes quasi-experimental methods to examine how discrimination, information, and policy affect individuals’ labor market outcomes and household investment decisions.
 
 <p>
   Email: <a href="#" onclick="event.preventDefault(); copyToClipboard('joshua.martin@vanderbilt.edu')">joshua.martin@vanderbilt.edu</a>
@@ -55,7 +53,9 @@ document.addEventListener("DOMContentLoaded", function() {
   var links = document.querySelectorAll('a');
   for (var i = 0; i < links.length; i++) {
     // Check if the href attribute is not just "#", which is used for the copy email function
-    if (links[i].href !== "#" && !links[i].href.startsWith('mailto:')) {
+    if (links[i].href !== "#" && !links[i].href.startsWith('mailto:') &&
+        links[i].href !== "https://joshmartinecon.github.io/research.html" && 
+        links[i].href !== "https://joshmartinecon.github.io/teaching.html") {
       links[i].target = '_blank';
       links[i].rel = 'noopener noreferrer';
     }

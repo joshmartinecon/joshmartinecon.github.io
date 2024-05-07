@@ -3,10 +3,10 @@ title: "**Teaching**"
 layout: post
 ---
 
-<a href="https://joshmartinecon.github.io/" target="_blank" rel="noopener noreferrer">Home</a> | 
-<a href="https://github.com/joshmartinecon/quarto-cv/blob/main/joshmartin_cv.pdf" target="_blank" rel="noopener noreferrer">CV</a> | 
-<a href="https://joshmartinecon.github.io/research.html" target="_blank" rel="noopener noreferrer">Research</a> | 
-<a href="https://joshmartinecon.github.io/teaching.html" target="_blank" rel="noopener noreferrer">Teaching</a> 
+<a href="https://joshmartinecon.github.io/">Home</a> | 
+<a href="https://nbviewer.org/github/joshmartinecon/quarto-cv/blob/main/joshmartin_cv.pdf" target="_blank" rel="noopener noreferrer">CV</a> | 
+<a href="https://joshmartinecon.github.io/research.html">Research</a> | 
+<a href="https://joshmartinecon.github.io/teaching.html">Teaching</a> 
 
 ---
 
@@ -43,22 +43,6 @@ button.accordion-button.active:before {
   content: "- ";
 }
 </style>
-
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-  var links = document.querySelectorAll('a');
-  for (var i = 0; i < links.length; i++) {
-    // Check if the href attribute is not just "#", which is used for the copy email function
-    if (links[i].href !== "#" && !links[i].href.startsWith('mailto:') &&
-        links[i].href !== "https://joshmartinecon.github.io" &&
-        links[i].href !== "https://joshmartinecon.github.io/research.html" &&
-        links[i].href !== "https://joshmartinecon.github.io/teaching.html") {
-      links[i].target = '_blank';
-      links[i].rel = 'noopener noreferrer';
-    }
-  }
-});
-</script>
 
 ### <ins>**Instructor of Record**<ins>
 

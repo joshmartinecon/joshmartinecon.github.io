@@ -22,6 +22,11 @@ I am a postdoctoral researcher in the [Department of Economics](https://as.vande
   Email: <a href="#" onclick="event.preventDefault(); copyToClipboard('joshua.martin@vanderbilt.edu')">joshua.martin@vanderbilt.edu</a>
 </p>
 
+## Fields
+
+* Applied Microeconomics
+    * Labor, Household, Urban, Health
+
 ## Employment
 
 * **Vanderbilt University** (Postdoc; 2023-)

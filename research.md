@@ -65,6 +65,19 @@ function toggleAccordion(element) {
 
 ### <ins>**Publications**<ins>
 
+<div class="column-container" style="width: 100%; margin-bottom: 20px;">
+<div class="text-column" style="flex: 1;">
+<p style="font-size:125%; font-weight:bold;">
+Sexual Orientation, Sexual Attraction, and Income
+</p>
+with <a href="https://sites.google.com/site/kittcarpenter/" target="_blank" rel="noopener noreferrer">Christopher S. Carpenter</a> and <a href="https://www.hasanshahidecon.com/" target="_blank" rel="noopener noreferrer">Hasan Shahid</a>; forthcoming in the *Journal of Economics, Race & Policy* (2024)
+<button class="accordion-button" onclick="toggleAccordion(this)">Abstract</button>
+<div style="display: none; background-color: #f9f9f9; padding: 10px;">
+We provide new evidence on sexual orientation, sexual attraction, and income using data from the 2015-21 National Survey on Drug Use and Health (NSDUH). These data ask individuals about both orientation and attraction, allowing us to describe a sexual minority group that has been hidden in prior research: people who identify as heterosexual but who concurrently report some same-sex attraction. We show that this population is much larger than the sample of self-identified gay, lesbian, or bisexual people, and we show that relative to heterosexual people who report exclusively different-sex attraction, heterosexual people who report some same-sex attraction are younger, less likely to be married, and much more highly educated. We document that, controlling for observables, heterosexual men who report same-sex attraction experience robust and statistically significant employment and income penalties relative to heterosexual men who are exclusively different-sex attracted. These penalties are larger for non-Hispanic White men than for non-Hispanic Black men. We find no similar penalty for heterosexual women who report some same-sex attraction. Our results indicate that prior research has overlooked one of the largest groups of sexual minorities – heterosexual people who report some same-sex attraction – who experience systematically different economic outcomes than heterosexual individuals who are exclusively different-sex attracted.
+</div>
+</div>
+</div>
+
 <div class="column-container" style="display: flex; width: 100%; margin-bottom: 20px;">
 <div class="text-column" style="flex: 1 0 100%;">
 <p style="margin:0;">
@@ -116,9 +129,9 @@ Daily hotel data are employed, along with information on prices, revenue, demand
 <div class="column-container" style="display: flex; width: 100%; margin-bottom: 20px;">
 <div class="text-column" style="flex: 1;">
 <p style="margin:0;">
-<a style="font-size:125%; font-weight:bold" href="https://github.com/joshmartinecon/joshmartinecon.github.io/blob/main/research/working%20papers/ssm%20adoptions.pdf" target="_blank" rel="noopener noreferrer">
+<a style="font-size:125%; font-weight:bold" href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4307175" target="_blank" rel="noopener noreferrer">
 The Effect of Same-Sex Marriage Legalization on Adoptions and Family Formation
-</a> <br> with <a href="https://sites.google.com/view/zacharyrodriguez/home" target="_blank" rel="noopener noreferrer">Zachary Rodriguez</a>; *Under Review*
+</a> <br> with <a href="https://sites.google.com/view/zacharyrodriguez/home" target="_blank" rel="noopener noreferrer">Zachary Rodriguez</a>
 </p>
 <button class="accordion-button" onclick="toggleAccordion(this)">Abstract</button>
 <div style="display: none; background-color: #f9f9f9; padding: 10px;">
@@ -129,23 +142,10 @@ The stability and availability of legal rights are known to be crucial factors i
 
 <div class="column-container" style="width: 100%; margin-bottom: 20px;">
 <div class="text-column" style="flex: 1;">
-<p style="font-size:125%; font-weight:bold;">
-Sexual Orientation, Sexual Attraction, and Income
-</p>
-with <a href="https://sites.google.com/site/kittcarpenter/" target="_blank" rel="noopener noreferrer">Christopher S. Carpenter</a> and <a href="https://www.hasanshahidecon.com/" target="_blank" rel="noopener noreferrer">Hasan Shahid</a>; *Under Review*
-<button class="accordion-button" onclick="toggleAccordion(this)">Abstract</button>
-<div style="display: none; background-color: #f9f9f9; padding: 10px;">
-We provide new evidence on sexual orientation, sexual attraction, and income using data from the 2015-21 National Survey on Drug Use and Health (NSDUH). These data ask individuals about both orientation and attraction, allowing us to describe a sexual minority group that has been hidden in prior research: people who identify as heterosexual but who concurrently report some same-sex attraction. We show that this population is much larger than the sample of self-identified gay, lesbian, or bisexual people, and we show that relative to heterosexual people who report exclusively different-sex attraction, heterosexual people who report some same-sex attraction are younger, less likely to be married, and much more highly educated. We document that, controlling for observables, heterosexual men who report same-sex attraction experience robust and statistically significant employment and income penalties relative to heterosexual men who are exclusively different-sex attracted. These penalties are larger for non-Hispanic White men than for non-Hispanic Black men. We find no similar penalty for heterosexual women who report some same-sex attraction. Our results indicate that prior research has overlooked one of the largest groups of sexual minorities – heterosexual people who report some same-sex attraction – who experience systematically different economic outcomes than heterosexual individuals who are exclusively different-sex attracted.
-</div>
-</div>
-</div>
-
-<div class="column-container" style="width: 100%; margin-bottom: 20px;">
-<div class="text-column" style="flex: 1;">
 <p style="font-size:125%; font-weight:bold">
 Does Love Kill Speed? The Effect of Marriage on Formula One Driver Performance
 </p>
-with <a href="https://www.claygcollins.com/" target="_blank" rel="noopener noreferrer">Clay Collins</a>; *Under Review*
+with <a href="https://www.claygcollins.com/" target="_blank" rel="noopener noreferrer">Clay Collins</a>
 <button class="accordion-button" onclick="toggleAccordion(this)">Abstract</button>
 <div style="display: none; background-color: #f9f9f9; padding: 10px;">
 This paper provides an empirical test of how life events, in this case, marriage, can affect player performance in a high-risk environment. Using hand-collected data on the marital status of Formula One drivers, we test whether married drivers take fewer risks and drive more conservatively during qualifying periods. Using a variety of estimation methods to test short- and long-term effects of changes in marital status, we find no evidence that "love is the enemy of speed". Married drivers see no changes in performance after their wedding dates, nor are they discriminated against and exit the sport earlier.
@@ -161,13 +161,11 @@ This paper provides an empirical test of how life events, in this case, marriage
 <div class="column-container" style="width: 100%; margin-bottom: 20px;">
 <div class="text-column" style="flex: 1;">
 <p style="font-size:125%; font-weight:bold">
-Spatial Endogeneity & School Reopenings during the COVID-19 Pandemic
-</p>
-<a href="https://github.com/joshmartinecon/joshmartinecon.github.io/blob/main/research/working%20papers/school%20reopenings.pdf" target="_blank" rel="noopener noreferrer">(Previous Version)</a>
+The Impact of Impacts: Peer Health Shocks and Labor Supply
 </p>
 <button class="accordion-button" onclick="toggleAccordion(this)">Abstract</button>
 <div style="display: none; background-color: #f9f9f9; padding: 10px;">
-This paper explores the role that teacher union strength played in the reopening decisions of public schools in Connecticut throughout the '20-'21 academic school year. To do so, I construct a measure of union strength that combines the number of pages in a union's collective bargaining agreement with a text analysis that measures the expansiveness of their contract's leave policies. I find that school districts with strong unions were less likely to offer in-person classes throughout the 2020-2021 academic year. However, this effect becomes insignificant when accounting for the local incidence of COVID-19. Instead, I find that differences in the vote share of the democratic presidential nominee of 2020 and the number of COVID-19 cases were stronger predictors of reopening decisions. The results contradict the consensus within the literature that unions and political attitudes prevented schools from reopening. These results suggest that using more geographically granular data and a longer time horizon to define reopening decisions describes the differences in results.
+Extensive research has documented an inverse relationship between workers’ wages and job-related amenities. This paper extends this framework to examine how workers respond to peer health shocks within high-risk occupations. By leveraging the quasi-random assignment of athletes to different teams within the National Football League, I analyze differences in labor supply between characteristically similar athletes who differ only in their exposure to a colleague who died of chronic traumatic encephalopathy (CTE) -- a neurological disease that is causally linked to continued workplace exposure. Employing a staggered difference-in- differences design, I demonstrate that the CTE death of a former teammate increases the probability of (early) retirement by 50\% (80\%). Workers who would forego less salary upon retiring are more responsive to this shock. Remaining treated workers display a heightened sensitivity to health risks by exchanging salary for larger signing bonuses in their subsequent employment contracts. Paradoxically, decreasing the team's marginal cost of employing these workers increases the number of injuries they sustain by extending the length of their careers. I fail to detect labor supply responses in placebo analyses of comparable incidents unrelated to workplace safety (such as cancer and rare genetic diseases), highlighting that the updated salience of health risk plays an important factor in these decisions. These findings replicate when analyzing the National Hockey League.
 </div>
 </div>
 </div>
@@ -175,16 +173,15 @@ This paper explores the role that teacher union strength played in the reopening
 <div class="column-container" style="width: 100%; margin-bottom: 20px;">
 <div class="text-column" style="flex: 1;">
 <p style="font-size:125%; font-weight:bold">
-Peer Health Shocks, Opportunity Costs, and Compensating Differentials: Evidence from Professional Athletes
+Spatial Endogeneity & School Reopenings during the COVID-19 Pandemic
 </p>
-<a href="https://github.com/joshmartinecon/joshmartinecon.github.io/blob/main/research/working%20papers/cte%20and%20retirement.pdf" target="_blank" rel="noopener noreferrer">(Previous Version)</a>
+</p>
 <button class="accordion-button" onclick="toggleAccordion(this)">Abstract</button>
 <div style="display: none; background-color: #f9f9f9; padding: 10px;">
-Extensive research has documented an inverse relationship between workers’ wages and the overall desirability of their workplace. This paper extends this framework to examine how workers respond to peer health shocks related to continued workplace participation under conditions of monopsony power. By leveraging exogenous assignment of workers to different firms within the National Football and Hockey Leagues, I analyze differences in the employment outcomes of characteristically similar athletes who differ only in their exposure to a coworker who died of chronic traumatic encephalopathy. I demonstrate that football players negotiate shorter contracts following this exposure but are not immediately less likely to retire whereas treated hockey players see sharp increases in retirement. The differences in these labor supply responses are driven by athletes’ opportunity costs such as expected foregone earnings and college degree completion. Neither the length of time as coworkers, specialization similarities, nor the number of prior workplace injuries provide additional explanatory power.
+This paper explores the role that teacher union strength played in the reopening decisions of public schools in Connecticut throughout the '20-'21 academic school year. To do so, I construct a measure of union strength that combines the number of pages in a union's collective bargaining agreement with a text analysis that measures the expansiveness of their contract's leave policies. I find that school districts with strong unions were less likely to offer in-person classes throughout the 2020-2021 academic year. However, this effect becomes insignificant when accounting for the local incidence of COVID-19. Instead, I find that differences in the vote share of the democratic presidential nominee of 2020 and the number of COVID-19 cases were stronger predictors of reopening decisions. The results contradict the consensus within the literature that unions and political attitudes prevented schools from reopening. These results suggest that using more geographically granular data and a longer time horizon to define reopening decisions describes the differences in results.
 </div>
 </div>
 </div>
-
 
 <div class="column-container" style="width: 100%; margin-bottom: 20px;">
 <div class="text-column" style="flex: 1;">

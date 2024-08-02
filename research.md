@@ -63,14 +63,30 @@ function toggleAccordion(element) {
   }
 </style>
 
+### <ins>**Job Market Paper**<ins>
+
+<div class="column-container" style="width: 100%; margin-bottom: 20px;">
+<div class="text-column" style="flex: 1;">
+<p style="font-size:125%; font-weight:bold">
+Peer Health Shocks and Labor Supply [Draft Coming Soon!]
+</p>
+<button class="accordion-button" onclick="toggleAccordion(this)">Abstract</button>
+<div style="display: none; background-color: #f9f9f9; padding: 10px;">
+I provide novel evidence on how workers respond to peer health shocks within high-risk occupations by leveraging two nested natural experiments within professional hockey and gridiron football. First, I compare differences in labor supply between characteristically similar athletes who differ only in their exposure to a colleague who died of chronic traumatic encephalopathy (CTE) -- a deadly neurological disease causally linked to continued workplace participation. Though the information about these deaths is widely publicized, I find that their occurrence differentially increases the probability for former teammates to retire. This effect is greater for those with longer periods spent as teammates and diminishes with time since they were last on the same team. Age differences cannot explain these results. Second, I leverage quasi-random differences in the monetary compensation workers would forgo upon retiring at the time of this peer health shock. I show these retirements are highly response to opportunity costs -- estimating that teams would have to increase workers’ annual salaries by 50\% (\$500,000) to prevent their exit. Remaining treated workers display a heightened sensitivity to health risks by signing shorter contracts with larger signing bonuses in their subsequent employment contracts. The finding that labor supply decisions are highly responsive to the health status of peers suggests that workers substantially underestimate utility loss from work-related health damages even in environments where such risks are highly publicized.
+</div>
+</div>
+</div>
+
+<p class="spacer">
+</p>
+
 ### <ins>**Publications**<ins>
 
 <div class="column-container" style="width: 100%; margin-bottom: 20px;">
 <div class="text-column" style="flex: 1;">
-<p style="font-size:125%; font-weight:bold;">
+<a style="font-size:125%; font-weight:bold" href="https://doi.org/10.1007/s41996-024-00149-z" target="_blank" rel="noopener noreferrer"> </p>
 Sexual Orientation, Sexual Attraction, and Income
-</p>
-with <a href="https://sites.google.com/site/kittcarpenter/" target="_blank" rel="noopener noreferrer">Christopher S. Carpenter</a> and <a href="https://www.hasanshahidecon.com/" target="_blank" rel="noopener noreferrer">Hasan Shahid</a>; forthcoming in the *Journal of Economics, Race & Policy* (2024)
+with <a href="https://sites.google.com/site/kittcarpenter/" target="_blank" rel="noopener noreferrer">Christopher S. Carpenter</a> and <a href="https://www.hasanshahidecon.com/" target="_blank" rel="noopener noreferrer">Hasan Shahid</a>; *Journal of Economics, Race & Policy* (2024)
 <button class="accordion-button" onclick="toggleAccordion(this)">Abstract</button>
 <div style="display: none; background-color: #f9f9f9; padding: 10px;">
 We provide new evidence on sexual orientation, sexual attraction, and income using data from the 2015-21 National Survey on Drug Use and Health (NSDUH). These data ask individuals about both orientation and attraction, allowing us to describe a sexual minority group that has been hidden in prior research: people who identify as heterosexual but who concurrently report some same-sex attraction. We show that this population is much larger than the sample of self-identified gay, lesbian, or bisexual people, and we show that relative to heterosexual people who report exclusively different-sex attraction, heterosexual people who report some same-sex attraction are younger, less likely to be married, and much more highly educated. We document that, controlling for observables, heterosexual men who report same-sex attraction experience robust and statistically significant employment and income penalties relative to heterosexual men who are exclusively different-sex attracted. These penalties are larger for non-Hispanic White men than for non-Hispanic Black men. We find no similar penalty for heterosexual women who report some same-sex attraction. Our results indicate that prior research has overlooked one of the largest groups of sexual minorities – heterosexual people who report some same-sex attraction – who experience systematically different economic outcomes than heterosexual individuals who are exclusively different-sex attracted.
@@ -135,7 +151,7 @@ The Effect of Same-Sex Marriage Legalization on Adoptions and Family Formation
 </p>
 <button class="accordion-button" onclick="toggleAccordion(this)">Abstract</button>
 <div style="display: none; background-color: #f9f9f9; padding: 10px;">
-The stability and availability of legal rights are known to be crucial factors influencing investment decisions. In this paper, we extend this framework to the family by estimating the impact of same-sex marriage (SSM) legalization on the demand for households’ most significant investment – children. To do so, we employ a stacked difference-in-differences estimator, which leverages the differential timing of these laws across states. Using highly detailed, case-level data of nearly 20 million children in the foster care system from 1995-2019, we demonstrate that SSM led to substantial increases in the annual number of adoptions. Same-sex households drive this effect. Secondary analyses highlight the role of uncertainty reductions as an important mechanism – particularly through these laws’ granting of presumptive joint parental rights.
+The stability and availability of legal rights are crucial factors influencing investment decisions. This paper extends this framework to the family, estimating the impact of same-sex marriage (SSM) legalization on the demand for households' most significant investment -- children. Using an array of difference-in-differences estimators with detailed data on nearly 20 million children within the foster care system from 1995-2019, we document that SSM increased adoptions by 9%-18%. This effect reduced the number of children remaining in foster care. Furthermore, we document that SSM caused an 11% (55%) increase in the probability of same-sex couples having any (adopted) child within the household.
 </div>
 </div>
 </div>
@@ -161,36 +177,12 @@ This paper provides an empirical test of how life events, in this case, marriage
 <div class="column-container" style="width: 100%; margin-bottom: 20px;">
 <div class="text-column" style="flex: 1;">
 <p style="font-size:125%; font-weight:bold">
-The Impact of Impacts: Peer Health Shocks and Labor Supply
-</p>
-<button class="accordion-button" onclick="toggleAccordion(this)">Abstract</button>
-<div style="display: none; background-color: #f9f9f9; padding: 10px;">
-Extensive research has documented an inverse relationship between workers’ wages and job-related amenities. This paper extends this framework to examine how workers respond to peer health shocks within high-risk occupations. By leveraging the quasi-random assignment of athletes to different teams within the National Football League, I analyze differences in labor supply between characteristically similar athletes who differ only in their exposure to a colleague who died of chronic traumatic encephalopathy (CTE) -- a neurological disease that is causally linked to continued workplace exposure. Employing a staggered difference-in- differences design, I demonstrate that the CTE death of a former teammate increases the probability of (early) retirement by 50\% (80\%). Workers who would forego less salary upon retiring are more responsive to this shock. Remaining treated workers display a heightened sensitivity to health risks by exchanging salary for larger signing bonuses in their subsequent employment contracts. Paradoxically, decreasing the team's marginal cost of employing these workers increases the number of injuries they sustain by extending the length of their careers. I fail to detect labor supply responses in placebo analyses of comparable incidents unrelated to workplace safety (such as cancer and rare genetic diseases), highlighting that the updated salience of health risk plays an important factor in these decisions. These findings replicate when analyzing the National Hockey League.
-</div>
-</div>
-</div>
-
-<div class="column-container" style="width: 100%; margin-bottom: 20px;">
-<div class="text-column" style="flex: 1;">
-<p style="font-size:125%; font-weight:bold">
-Spatial Endogeneity & School Reopenings during the COVID-19 Pandemic
+Spatial Endogenity and Learning Modalities during the COVID-19 Pandemic
 </p>
 </p>
 <button class="accordion-button" onclick="toggleAccordion(this)">Abstract</button>
 <div style="display: none; background-color: #f9f9f9; padding: 10px;">
-This paper explores the role that teacher union strength played in the reopening decisions of public schools in Connecticut throughout the '20-'21 academic school year. To do so, I construct a measure of union strength that combines the number of pages in a union's collective bargaining agreement with a text analysis that measures the expansiveness of their contract's leave policies. I find that school districts with strong unions were less likely to offer in-person classes throughout the 2020-2021 academic year. However, this effect becomes insignificant when accounting for the local incidence of COVID-19. Instead, I find that differences in the vote share of the democratic presidential nominee of 2020 and the number of COVID-19 cases were stronger predictors of reopening decisions. The results contradict the consensus within the literature that unions and political attitudes prevented schools from reopening. These results suggest that using more geographically granular data and a longer time horizon to define reopening decisions describes the differences in results.
-</div>
-</div>
-</div>
-
-<div class="column-container" style="width: 100%; margin-bottom: 20px;">
-<div class="text-column" style="flex: 1;">
-<p style="font-size:125%; font-weight:bold">
-Do Childcare Costs Reduce Fertility? Evidence from Same-Sex Marriage
-</p>
-<button class="accordion-button" onclick="toggleAccordion(this)">Abstract</button>
-<div style="display: none; padding: 10px;">
-A growing body of research has documented the growing gap between individuals' idealized and realized fertility outcomes in high-income countries. This paper contributes to this literature by analyzing how childcare costs constrain fertility in the United States. To do so, I combine a novel measure of local childcare cost burden with county-level estimates from a triple difference model, which measures changes in the number of children within the household due to same-sex marriage legalization (SSM). The results demonstrate that childcare costs significantly reduce the number of children within the household. Extensive margin changes drive this effect, revealing that the cost of raising children is significantly more binding for the fertility decisions for subsequent children than for first-borns.
+Prior work has found that powerful teacher unions slowed the return to in-person instruction during the COVID-19 pandemic. With the benefit of far more geographically granular data than was available to researchers at the time, I reexamine this relationship. To do so, I match high-frequency measures of local COVID-19 incidence to weekly school district learning modalities. I combine this weekly data with cross-sectional measures of the expansiveness of entitlements in teacher unions' collective bargaining agreements (CBAs). I demonstrate that the relationship between union strength and in-person instruction disappears when using more geographically granular measures of COVID-19 or when accounting for the modality of neighboring districts. Leveraging differential timing in the expiration unions' CBAs as a source of exogenous variation in their ability to respond to the pandemic, I find no change in the probability that renegotiating unions offer in-person classes regardless of strength.
 </div>
 </div>
 </div>
@@ -203,7 +195,19 @@ Chasing Rainbows: Same-Sex Marriage, Migration, and Housing Prices in American G
 with <a href="https://www.joaotampellini.com/" target="_blank" rel="noopener noreferrer">João Tampellini</a>
 <button class="accordion-button" onclick="toggleAccordion(this)">Abstract</button>
 <div style="display: none; background-color: #f9f9f9; padding: 10px;">
-Social scientists have long studied the residential enclaves of minoritized groups. This paper examines changes in estimated amenity values within American gayborhoods using geographically localized data over 60 years. We use a difference-in-differences design comparing gayborhoods to adjacent neighborhoods within the same city and document that the rent-to-income ratio for these neighborhoods is v-shaped over time – declining largely during the peak of the AIDS crisis in the 1990s before sharply rebounding in the 2010s. To better understand the factors impacting this increase, we exploit the staggered treatment timing of same-sex marriage laws across states. We find that marriage equality laws increase both the number and share of different-sex households residing within the gayborhood which drives up the price of housing. This increase in the price of housing displaces renters in cities with inelastic housing supply.
+This paper examines changes in estimated amenity values within American gayborhoods using geographically localized data over 60 years. We use a difference-in-differences design comparing gayborhoods to adjacent neighborhoods within the same city and document that the rent-to-income ratio for these neighborhoods is v-shaped over time – declining largely during the peak of the AIDS crisis in the 1990s before sharply rebounding in the 2010s. To better understand the factors impacting this increase, we exploit the staggered treatment timing of same-sex marriage laws across states. We find that marriage equality laws increase both the number and share of different-sex households residing within the gayborhood which drives up the price of housing. This increase in the price of housing displaces renters in cities with inelastic housing supply.
+</div>
+</div>
+</div>
+
+<div class="column-container" style="width: 100%; margin-bottom: 20px;">
+<div class="text-column" style="flex: 1;">
+<p style="font-size:125%; font-weight:bold">
+Do Childcare Costs Reduce Adoptions? Evidence from Marriage Equality
+</p>
+<button class="accordion-button" onclick="toggleAccordion(this)">Abstract</button>
+<div style="display: none; padding: 10px;">
+Empirical work has demonstrated that fertility is sensitive to the cost of childcare. In this paper, I contribute to our understanding of this relationship by demonstrating that childcare costs reduce adoptions at the extensive margin but not the intensive margin. Employing data from the American Community Survey, I combine county-level estimates on changes in the number of adopted children within same-sex households due to marriage equality laws with local measures of the share of income that goes towards childcare. The results indicate that childcare costs reduce the number of adopted children, not households' decision to adopt. This finding suggests that the cost of raising children is significantly more binding for the fertility decisions for subsequent children than for first-borns.
 </div>
 </div>
 </div>

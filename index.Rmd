@@ -18,7 +18,7 @@ output:
 
 I am a postdoctoral researcher in the [Department of Economics](https://as.vanderbilt.edu/economics/) at Vanderbilt University where I serve as a research affiliate with the [Center for Research on Inequality & Health](https://www.vanderbilt.edu/research-inequality-health/) and the [LGBTQ+ Policy Lab](https://www.vanderbilt.edu/lgbtq-policy-lab/). My work utilizes quasi-experimental methods to examine how discrimination, information, and policy affect individuals’ labor market outcomes, health and household investment decisions.
 
-I am on the 2024-2025 job market! You can find a draft of my job market paper online or download it directly from my Github page.
+I am on the 2024-2025 job market! You can find a draft of my job market paper [online](https://nbviewer.org/github/joshmartinecon/joshmartinecon.github.io/blob/main/Peer%20Health%20Shocks%20and%20Labor%20Supply.pdf) or download it directly from my [Github page](https://github.com/joshmartinecon/joshmartinecon.github.io/blob/main/Peer%20Health%20Shocks%20and%20Labor%20Supply.pdf).
 
 <p>
   Email: <a href="#" onclick="event.preventDefault(); copyToClipboard('joshua.martin@vanderbilt.edu')">joshua.martin@vanderbilt.edu</a>
@@ -39,6 +39,9 @@ I am on the 2024-2025 job market! You can find a draft of my job market paper on
 
 * **West Virginia University** (2018-2023)
     * PhD: Economics
+    
+* **University of Houston** (2017-2018)
+    * Postbac: Economics; Math
 
 * **Oklahoma State University** (2013-2017)
     * BS: Economics; *Minor*: Math, French

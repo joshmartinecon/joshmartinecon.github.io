@@ -65,7 +65,7 @@ function toggleAccordion(element) {
 </div>
 <div style="flex: 0 0 5%;"></div>
 <div style="flex: 0 0 70%;">
-<p style="font-size: 125%; font-weight: bold;">Urban & Regional Economics</p>
+<p style="font-size: 125%; font-weight: bold;">Urban & Regional Economics (ECO 490)</p>
 <p style="font-size: 100%;">Syllabus: <a href="https://github.com/joshmartinecon/joshmartinecon.github.io/blob/main/teaching/syllabi/2022Spring_ECO490_syllabus.pdf" target="_blank" rel="noopener noreferrer">Spring 2022</a></p>
 <button class="accordion-button" onclick="toggleAccordion(this)">Course Description</button>
 <div style="display: none; background-color: #f9f9f9; padding: 10px;">Urban & Regional Economics utilizes economic theory and real-world examples to examine major contemporary issues confronting urban and rural areas. At the most basic level, U&R Economics introduces space into economic models and studies the location of economic activity. The course will introduce theories of why cities exist, city location, city size, and the causes of city growth and decline. The course will also explore possible economic solutions to problems associated with housing, transportation, education, employment, pollution, and crime.</div>
@@ -219,6 +219,10 @@ Fall 2018 with Prof. <a href="https://sites.google.com/site/collinhodges/home" t
 ### <ins>**Guest Lectures**<ins>
 
 #### *2024*
+
+<p style="margin-top:5px;">
+Economics: <a href="https://github.com/joshmartinecon/joshmartinecon.github.io/tree/main/teaching/lectures/Vanderbilt/ECON%203100%Guest%20Lecture%2010.25.24" target="_blank" rel="noopener noreferrer">Wages, Employment, and Labor Markets</a>
+</p>
 
 <p style="margin-top:5px;">
 Public Policy Studies: <a href="https://github.com/joshmartinecon/joshmartinecon.github.io/tree/main/teaching/lectures/Vanderbilt/PPS%203250%20Guest%20Lecture%202.21.24" target="_blank" rel="noopener noreferrer">Advanced Quantitative Methods for Public Policy</a>

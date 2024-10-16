@@ -16,7 +16,9 @@ output:
  
 ## Bio
 
-I am a postdoctoral researcher in the [Department of Economics](https://as.vanderbilt.edu/economics/) at Vanderbilt University where I serve as a research affiliate with the [Center for Research on Inequality & Health](https://www.vanderbilt.edu/research-inequality-health/) and the [LGBTQ+ Policy Lab](https://www.vanderbilt.edu/lgbtq-policy-lab/). My work utilizes quasi-experimental methods to examine how discrimination, information, and policy affect individuals’ labor market outcomes and household investment decisions.
+I am a postdoctoral researcher in the [Department of Economics](https://as.vanderbilt.edu/economics/) at Vanderbilt University where I serve as a research affiliate with the [Center for Research on Inequality & Health](https://www.vanderbilt.edu/research-inequality-health/) and the [LGBTQ+ Policy Lab](https://www.vanderbilt.edu/lgbtq-policy-lab/). My work utilizes quasi-experimental methods to examine how discrimination, information, and policy affect individuals’ labor market outcomes, health and household investment decisions.
+
+I am on the 2024-2025 job market! You can find a draft of my job market paper online or download it directly from my Github page.
 
 <p>
   Email: <a href="#" onclick="event.preventDefault(); copyToClipboard('joshua.martin@vanderbilt.edu')">joshua.martin@vanderbilt.edu</a>
@@ -25,7 +27,7 @@ I am a postdoctoral researcher in the [Department of Economics](https://as.vande
 ## Fields
 
 * Applied Microeconomics
-    * Labor, Household, Urban, Health
+    * Labor, Health, Urban
 
 ## Employment
 

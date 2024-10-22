@@ -150,6 +150,30 @@ A principles level economics course analyzing how markets determine prices and t
 </div>
 </div>
 
+### <ins>**Guest Lectures**<ins>
+
+#### *2024*
+
+<p style="margin-top:5px;">
+Economics: <a href="https://github.com/joshmartinecon/joshmartinecon.github.io/tree/main/teaching/lectures/Vanderbilt/ECON%203100%20Guest%20Lecture%2010.15.24" target="_blank" rel="noopener noreferrer">Wages, Employment, and Labor Markets</a>
+</p>
+
+<p style="margin-top:5px;">
+Medicine, Health and Society: <a href="https://github.com/joshmartinecon/joshmartinecon.github.io/tree/main/teaching/lectures/Vanderbilt/MHS%203075%20Guest%20Lecture%2010.22.24" target="_blank" rel="noopener noreferrer">Mental Health Policy</a>
+</p>
+
+<p style="margin-top:5px;">
+Public Policy Studies: <a href="https://github.com/joshmartinecon/joshmartinecon.github.io/tree/main/teaching/lectures/Vanderbilt/PPS%203250%20Guest%20Lecture%202.21.24" target="_blank" rel="noopener noreferrer">Advanced Quantitative Methods for Public Policy</a>
+</p>
+
+<p style="margin-top:5px;">
+Contemporary Social Issues: Sex & Sexuality in Society
+</p>
+
+<p style="margin-top:5px;">
+Gender & Sexuality Studies: <a href="https://github.com/joshmartinecon/joshmartinecon.github.io/tree/main/teaching/lectures/Vanderbilt/GSS%201160%20Guest%20Lecture%203.4.24" target="_blank" rel="noopener noreferrer">Sex & Society</a>
+</p>
+
 ### <ins>**Teaching Assistant**<ins>
 
 <div class="column-container" style="display: flex; width: 100%; margin-bottom: 20px;">
@@ -215,23 +239,3 @@ Fall 2018 with Prof. <a href="https://sites.google.com/site/collinhodges/home" t
 </p>
 </div>
 </div>
-
-### <ins>**Guest Lectures**<ins>
-
-#### *2024*
-
-<p style="margin-top:5px;">
-Economics: <a href="https://github.com/joshmartinecon/joshmartinecon.github.io/tree/main/teaching/lectures/Vanderbilt/ECON%203100%Guest%20Lecture%2010.25.24" target="_blank" rel="noopener noreferrer">Wages, Employment, and Labor Markets</a>
-</p>
-
-<p style="margin-top:5px;">
-Public Policy Studies: <a href="https://github.com/joshmartinecon/joshmartinecon.github.io/tree/main/teaching/lectures/Vanderbilt/PPS%203250%20Guest%20Lecture%202.21.24" target="_blank" rel="noopener noreferrer">Advanced Quantitative Methods for Public Policy</a>
-</p>
-
-<p style="margin-top:5px;">
-Contemporary Social Issues: Sex & Sexuality in Society
-</p>
-
-<p style="margin-top:5px;">
-Gender & Sexuality Studies: <a href="https://github.com/joshmartinecon/joshmartinecon.github.io/tree/main/teaching/lectures/Vanderbilt/GSS%201160%20Guest%20Lecture%203.4.24" target="_blank" rel="noopener noreferrer">Sex & Society</a>
-</p>

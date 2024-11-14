@@ -177,7 +177,7 @@ This paper provides an empirical test of how life events, in this case, marriage
 <div class="column-container" style="width: 100%; margin-bottom: 20px;">
 <div class="text-column" style="flex: 1;">
 <p style="font-size:125%; font-weight:bold">
-Spatial Endogenity and Learning Modalities during the COVID-19 Pandemic
+Spatial Endogeneity and Learning Modalities during the COVID-19 Pandemic
 </p>
 </p>
 <button class="accordion-button" onclick="toggleAccordion(this)">Abstract</button>

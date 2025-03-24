@@ -63,23 +63,6 @@ function toggleAccordion(element) {
   }
 </style>
 
-### <ins>**Job Market Paper**<ins>
-
-<div class="column-container" style="width: 100%; margin-bottom: 20px;">
-<div class="text-column" style="flex: 1;">
-<a style="font-size:125%; font-weight:bold" href="https://nbviewer.org/github/joshmartinecon/joshmartinecon.github.io/blob/main/Peer%20Health%20Shocks%20and%20Labor%20Supply.pdf" target="_blank" rel="noopener noreferrer">
-Peer Health Shocks and Labor Supply
-</a>
-<button class="accordion-button" onclick="toggleAccordion(this)">Abstract</button>
-<div style="display: none; background-color: #f9f9f9; padding: 10px;">
-I provide novel evidence on how workers respond to peer health shocks within high-risk occupations by leveraging two nested natural experiments within professional hockey and American football. First, I compare differences in labor supply between characteristically similar athletes who differ only in their exposure to a colleague who died of chronic traumatic encephalopathy (CTE)– a deadly neurological disease causally linked to continued workplace participation. Though the information about these deaths is widely publicized, I find that their occurrence differentially increases the probability for former teammates to retire. This effect is greater for those with longer periods spent as teammates and diminishes with time since they were last on the same team. Second, I leverage quasi-random differences in the monetary compensation that workers would forgo upon retiring at the time of this peer health shock. I show these retirements are highly responsive to opportunity costs– estimating that teams would have to increase worker compensation \$6 million to prevent their exit. Remaining treated workers display a heightened sensitivity to health risks by exchanging salary for larger signing bonuses and shorter contracts in their subsequent employment negotiations. The finding that labor supply decisions are highly responsive to the health status of peers suggests that workers substantially underestimate utility loss from work-related health damages even in environments where such risks are highly publicized.
-</div>
-</div>
-</div>
-
-<p class="spacer">
-</p>
-
 ### <ins>**Publications**<ins>
 
 <div class="column-container" style="width: 100%; margin-bottom: 20px;">
@@ -142,6 +125,18 @@ Daily hotel data are employed, along with information on prices, revenue, demand
 
 ### <ins>**Working Papers**<ins>
 
+<div class="column-container" style="width: 100%; margin-bottom: 20px;">
+<div class="text-column" style="flex: 1;">
+<a style="font-size:125%; font-weight:bold" href="https://nbviewer.org/github/joshmartinecon/joshmartinecon.github.io/blob/main/Peer%20Health%20Shocks%20and%20Labor%20Supply.pdf" target="_blank" rel="noopener noreferrer">
+Peer Health Shocks and Labor Supply
+</a>
+<button class="accordion-button" onclick="toggleAccordion(this)">Abstract</button>
+<div style="display: none; background-color: #f9f9f9; padding: 10px;">
+I provide novel evidence on how workers respond to peer health shocks within high-risk occupations by leveraging two nested natural experiments within professional hockey and American football. First, I compare differences in labor supply between characteristically similar athletes who differ only in their exposure to a colleague who died of chronic traumatic encephalopathy (CTE)– a deadly neurological disease causally linked to continued workplace participation. Though the information about these deaths is widely publicized, I find that their occurrence differentially increases the probability for former teammates to retire. This effect is greater for those with longer periods spent as teammates and diminishes with time since they were last on the same team. Second, I leverage quasi-random differences in the monetary compensation that workers would forgo upon retiring at the time of this peer health shock. I show these retirements are highly responsive to opportunity costs– estimating that teams would have to increase worker compensation \$6 million to prevent their exit. Remaining treated workers display a heightened sensitivity to health risks by exchanging salary for larger signing bonuses and shorter contracts in their subsequent employment negotiations. The finding that labor supply decisions are highly responsive to the health status of peers suggests that workers substantially underestimate utility loss from work-related health damages even in environments where such risks are highly publicized.
+</div>
+</div>
+</div>
+
 <div class="column-container" style="display: flex; width: 100%; margin-bottom: 20px;">
 <div class="text-column" style="flex: 1;">
 <p style="margin:0;">
@@ -173,6 +168,20 @@ This paper provides an empirical test of how life events, in this case, marriage
 </p>
 
 ### <ins>**Works in Progress**<ins> 
+
+<div class="column-container" style="display: flex; width: 100%; margin-bottom: 20px;">
+<div class="text-column" style="flex: 1;">
+<p style="margin:0;">
+<p style="font-size:125%; font-weight:bold">
+Same-Sex Partnership Protections, Prohibitions and Child Adoptions: Examining Intermediate Steps Toward Marriage Equality
+</p> with <a href="https://sites.google.com/view/zacharyrodriguez/home" target="_blank" rel="noopener noreferrer">Zachary Rodriguez</a>
+</p>
+<button class="accordion-button" onclick="toggleAccordion(this)">Abstract</button>
+<div style="display: none; background-color: #f9f9f9; padding: 10px;">
+A growing body of literature has documented the positive social and economic impacts of legal same-sex marriage, identifying various contributing mechanisms. We add to this understanding by examining the intermediate steps toward marriage equality -- specifically, how same-sex partnership protections and prohibitions affected child adoptions in the United States. Our analysis finds that domestic partnerships and civil unions substantially increased adoptions, while constitutional bans on same-sex marriage had no detectable effect. Heterogeneity analyses highlight two channels of impact: early-reform states with larger same-sex populations experienced greater policy effects, while later-reform states benefited from the relaxation of more restrictive legal constraints.
+</div>
+</div>
+</div>
 
 <div class="column-container" style="width: 100%; margin-bottom: 20px;">
 <div class="text-column" style="flex: 1;">

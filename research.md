@@ -169,7 +169,7 @@ This paper provides an empirical test of how life events, in this case, marriage
 
 ### <ins>**Works in Progress**<ins> 
 
-<div class="column-container" style="display: flex; width: 100%; margin-bottom: 20px;">
+<!-- <div class="column-container" style="display: flex; width: 100%; margin-bottom: 20px;">
 <div class="text-column" style="flex: 1;">
 <p style="margin:0;">
 <p style="font-size:125%; font-weight:bold">
@@ -178,10 +178,10 @@ Same-Sex Partnership Protections, Prohibitions and Child Adoptions: Examining In
 </p>
 <button class="accordion-button" onclick="toggleAccordion(this)">Abstract</button>
 <div style="display: none; background-color: #f9f9f9; padding: 10px;">
-A growing body of literature has documented the positive social and economic impacts of legal same-sex marriage, identifying various contributing mechanisms. We add to this understanding by examining the intermediate steps toward marriage equality -- specifically, how same-sex partnership protections and prohibitions affected child adoptions in the United States. Our analysis finds that domestic partnerships and civil unions substantially increased adoptions, while constitutional bans on same-sex marriage had no detectable effect. Heterogeneity analyses highlight two channels of impact: early-reform states with larger same-sex populations experienced greater policy effects, while later-reform states benefited from the relaxation of more restrictive legal constraints.
+Recent research has documented the positive social and economic consequences of legalizing same-sex marriage. We extend this literature by analyzing how intermediate legal steps -- namely, the introduction of domestic partnerships and civil unions, and the enactment of state constitutional bans -- shaped child adoption rates across U.S. states. Leveraging administrative adoption data and a difference-in-differences design that exploits staggered policy roll-outs, we find that domestic partnerships and civil unions substantially increased adoption rates, whereas constitutional bans had no detectable short-term effect. Adoption rates rose further once same-sex marriage was legalized, with gains significantly larger in states that had previously adopted partnership protections. We reconcile these patterns by showing that earlier partnership protections (bans) increased (decreased) same-sex household formation and in-migration, thereby amplifying (dampening) the benefits of marriage equality.
 </div>
 </div>
-</div>
+</div> -->
 
 <div class="column-container" style="width: 100%; margin-bottom: 20px;">
 <div class="text-column" style="flex: 1;">

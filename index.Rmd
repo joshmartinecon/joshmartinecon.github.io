@@ -18,9 +18,9 @@ output:
 
 I am a postdoctoral researcher in the [Department of Economics](https://as.vanderbilt.edu/economics/) at Vanderbilt University where I serve as a research affiliate with the [Center for Research on Inequality & Health](https://www.vanderbilt.edu/research-inequality-health/) and the [LGBTQ+ Policy Lab](https://www.vanderbilt.edu/lgbtq-policy-lab/). My research leverages quasi-experimental methods to study how discrimination, information, and public policy shape labor market outcomes, health, and household investment decisions.
 
-Check out my newly updated [searchable web app of economics journal rankings](https://joshua-c-martin.shinyapps.io/EconJournalRankings/)! The methods and code are available on [my gitbub](https://github.com/joshmartinecon/econ-journal-rankings).
+I am excited to join the University of West Georgia as an Assistant Professor of Economics in Fall 2025!
 
-<!-- In Fall 2025, I will join the University of West Georgia as an Assistant Professor of Economics! -->
+Check out my newly updated [searchable web app of economics journal rankings](https://joshua-c-martin.shinyapps.io/EconJournalRankings/)! The methods and code are available on [my gitbub](https://github.com/joshmartinecon/econ-journal-rankings).
 
 <p>
   Email: <a href="#" onclick="event.preventDefault(); copyToClipboard('joshua.martin@vanderbilt.edu')">joshua.martin@vanderbilt.edu</a>

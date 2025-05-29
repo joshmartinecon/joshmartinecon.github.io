@@ -178,12 +178,12 @@ Same-Sex Partnership Protections, Prohibitions and Child Adoptions: Examining In
 </p>
 <button class="accordion-button" onclick="toggleAccordion(this)">Abstract</button>
 <div style="display: none; background-color: #f9f9f9; padding: 10px;">
-Recent research has documented the positive social and economic consequences of legalizing same-sex marriage. We extend this literature by analyzing how intermediate legal steps -- namely, the introduction of domestic partnerships and civil unions, and the enactment of state constitutional bans -- shaped child adoption rates across U.S. states. Leveraging administrative adoption data and a difference-in-differences design that exploits staggered policy roll-outs, we find that domestic partnerships and civil unions substantially increased adoption rates, whereas constitutional bans had no detectable short-term effect. Adoption rates rose further once same-sex marriage was legalized, with gains significantly larger in states that had previously adopted partnership protections. We reconcile these patterns by showing that earlier partnership protections (bans) increased (decreased) same-sex household formation and in-migration, thereby amplifying (dampening) the benefits of marriage equality.
+Recent research has documented the positive social and economic consequences of legalizing same-sex marriage. We extend this literature by analyzing how intermediate legal steps -- namely, the introduction of domestic partnerships and civil unions, and the enactment of state constitutional bans -- shaped child adoption rates across U.S. states. Leveraging administrative adoption data and a difference-in-differences design that exploits staggered policy roll-outs, we find that domestic partnerships and civil unions substantially increased adoptions, whereas constitutional bans had no detectable short-term effect. Adoptions rose further once same-sex marriage was legalized, with gains significantly larger in states that had previously implemented partnership protections. We reconcile these patterns by showing that earlier partnership protections (bans) increased (decreased) same-sex household formation and in-migration, thereby amplifying (dampening) the benefits of marriage equality.
 </div>
 </div>
 </div> -->
 
-<div class="column-container" style="width: 100%; margin-bottom: 20px;">
+<!-- <div class="column-container" style="width: 100%; margin-bottom: 20px;">
 <div class="text-column" style="flex: 1;">
 <p style="font-size:125%; font-weight:bold">
 Spatial Endogeneity and Learning Modalities during the COVID-19 Pandemic
@@ -194,7 +194,7 @@ Spatial Endogeneity and Learning Modalities during the COVID-19 Pandemic
 Prior work has found that powerful teacher unions slowed the return to in-person instruction during the COVID-19 pandemic. With the benefit of far more geographically granular data than was available to researchers at the time, I reexamine this relationship. To do so, I match high-frequency measures of local COVID-19 incidence to weekly school district learning modalities. I combine this weekly data with cross-sectional measures of the expansiveness of entitlements in teacher unions' collective bargaining agreements (CBAs). I demonstrate that the relationship between union strength and in-person instruction disappears when using more geographically granular measures of COVID-19 or when accounting for the modality of neighboring districts. Leveraging differential timing in the expiration unions' CBAs as a source of exogenous variation in their ability to respond to the pandemic, I find no change in the probability that renegotiating unions offer in-person classes regardless of strength.
 </div>
 </div>
-</div>
+</div> -->
 
 <div class="column-container" style="width: 100%; margin-bottom: 20px;">
 <div class="text-column" style="flex: 1;">

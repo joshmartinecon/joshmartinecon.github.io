@@ -8,31 +8,30 @@ links:
     url: "https://joshmartinecon.github.io/research.html"
   - label: Teaching
     url: "https://joshmartinecon.github.io/teaching.html"
-  - label: LinkTree
-    url: "https://linktr.ee/joshmartinecon"
+  - label: Github
+    url: "https://github.com/joshmartinecon?tab=repositories"
+    
 output:
   postcards::trestles
 ---
  
 ## Bio
 
-I am a postdoctoral researcher in the [Department of Economics](https://as.vanderbilt.edu/economics/) at Vanderbilt University where I serve as a research affiliate with the [Center for Research on Inequality & Health](https://www.vanderbilt.edu/research-inequality-health/) and the [LGBTQ+ Policy Lab](https://www.vanderbilt.edu/lgbtq-policy-lab/). My research leverages quasi-experimental methods to study how discrimination, information, and public policy shape labor market outcomes, health, and household investment decisions.
-
-I am excited to join the University of West Georgia as an Assistant Professor of Economics in Fall 2025!
+I am an Assistant Professor of Economics at the [University of West Georgia](https://www.westga.edu/academics/business/economics/index.php). My research leverages quasi-experimental methods to study how discrimination, information, and public policy shape labor market outcomes, health, and household investment decisions.
 
 Check out my newly updated [searchable web app of economics journal rankings](https://joshua-c-martin.shinyapps.io/EconJournalRankings/)! The methods and code are available on [my gitbub](https://github.com/joshmartinecon/econ-journal-rankings).
 
 <p>
-  Email: <a href="#" onclick="event.preventDefault(); copyToClipboard('joshua.martin@vanderbilt.edu')">joshua.martin@vanderbilt.edu</a>
+  Email: <a href="#" onclick="event.preventDefault(); copyToClipboard('joshua@westga.edu')">joshua@westga.edu</a>
 </p>
 
 ## Fields
 
 * Applied Microeconomics
-    * *Primary*: Labor, Health, Household
-    * *Secondary*: Urban, Sports
+    * *Primary*: Labor, Health
+    * *Secondary*: Urban, Household, Sports
 
-## Employment
+## Previous Employment
 
 * **Vanderbilt University** (Postdoc; 2023-2025)
 

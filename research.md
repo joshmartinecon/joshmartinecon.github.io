@@ -81,7 +81,7 @@ We provide new evidence on sexual orientation, sexual attraction, and income usi
 <div class="text-column" style="flex: 1 0 100%;">
 <p style="margin:0;">
 <a style="font-size:125%; font-weight:bold" href="https://doi.org/10.1002/hec.4712" target="_blank" rel="noopener noreferrer">
-Information Shocks and Celebrity Exposure: The Effect of ???Magic??? Johnson on AIDS Diagnoses and Mortality in the U.S.
+Information Shocks and Celebrity Exposure: The Effect of "Magic" Johnson on AIDS Diagnoses and Mortality in the U.S.
 </a> <br>
 with <a href="https://alexcardazzi.github.io/" target="_blank" rel="noopener noreferrer">Alexander Cardazzi</a> and <a href="https://sites.google.com/view/zacharyrodriguez/home" target="_blank" rel="noopener noreferrer">Zachary Rodriguez</a>; *Health Economics* (2023)
 </p>

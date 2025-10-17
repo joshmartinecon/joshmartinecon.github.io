@@ -3,7 +3,7 @@ title: "Joshua C. Martin"
 image: "Martin-IMG_1657.JPG"
 links:
   - label: CV
-    url: "https://nbviewer.org/github/joshmartinecon/quarto-cv/blob/main/joshmartin_cv.pdf"
+    url: "https://raw.githubusercontent.com/joshmartinecon/quarto-cv/main/joshmartin_cv.pdf"
   - label: Research
     url: "https://joshmartinecon.github.io/research.html"
   - label: Teaching
@@ -19,7 +19,7 @@ output:
 
 I am an Assistant Professor of Economics at the [University of West Georgia](https://www.westga.edu/academics/business/economics/index.php). My research leverages quasi-experimental methods to study how discrimination, information, and public policy shape labor market outcomes, health, and household investment decisions.
 
-Check out my newly updated [searchable web app of economics journal rankings](https://joshua-c-martin.shinyapps.io/EconJournalRankings/)! The methods and code are available on [my github](https://github.com/joshmartinecon/econ-journal-rankings).
+Check out my updated [searchable web app of economics journal rankings](https://joshua-c-martin.shinyapps.io/EconJournalRankings/)! The methods and code are available on [my github](https://github.com/joshmartinecon/econ-journal-rankings).
 
 <p>
   Email: <a href="#" onclick="event.preventDefault(); copyToClipboard('joshua@westga.edu')">joshua@westga.edu</a>

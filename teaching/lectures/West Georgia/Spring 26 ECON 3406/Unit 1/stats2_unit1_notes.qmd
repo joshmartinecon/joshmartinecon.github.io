@@ -1,0 +1,20 @@
+
+## Introduction to Stats
+
+- A central question of statistics is determining "compared to what?"
+
+- Applied statistics uses data to evaluate **competing claims about reality**
+
+## Case Study: Stents and Stroke Risk
+
+- We'll add text here next class
+
+## Case Study: Visualizing the Data
+
+```{r}
+# step 1: Set working directory
+getwd()
+
+
+```
+

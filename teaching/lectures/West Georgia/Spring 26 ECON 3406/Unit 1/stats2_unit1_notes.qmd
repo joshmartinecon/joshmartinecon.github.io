@@ -1,20 +1,43 @@
+# Unit 1 Notes | Statistics for Business II | Spring 2026
 
-## Introduction to Stats
-
-- A central question of statistics is determining "compared to what?"
+## Intro to Statistics
 
 - Applied statistics uses data to evaluate **competing claims about reality**
+  - Focused on the question of "compared to what?"
 
-## Case Study: Stents and Stroke Risk
+## Variable Types & Distributions Review
 
-- We'll add text here next class
+- **Numerical**: measured or counted
+  - **Discrete**: countable (jumps)
+  - **Continuous**: measurable
 
-## Case Study: Visualizing the Data
+- **Categorical**: labels or groups
+  - **Nominal**: no order
+  - **Ordinal**: ordered
 
-```{r}
-# step 1: Set working directory
-getwd()
+- **Histogram**: binned counts of a numerical variable
+  - **Shape**:
+    - Right / left skewed
+    - Symmetric (“bell-shaped”)
+    - Uniform
+  - **Skewness**: direction of the long tail
+  - **Mode(s)**: Unimodal, bimodal, multimodal
+    
+![](figures/distributions.png)
 
+## Equations Review
 
-```
+- **Mean**: average value  
+  - “What is typical?”
 
+$$
+\bar{x} = \frac{1}{n}\sum_{i=1}^n x_i
+$$
+
+- **Variance**: spread around the mean  
+  - “How far is the data from average?”
+
+$$
+\sigma^2 = \frac{1}{n-1}\sum_{i=1}^n (x_i - \bar{x})^2
+$$
+- **Standard deviation**: $\sigma$

@@ -120,12 +120,52 @@ effect_30
 effect_365 <- y$event_365[2] - y$event_365[1]
 effect_365
 
-# difference between groups (pct.)
-pct_effect_30 <- effect_30 / mean(x$event_30)
-pct_effect_30
-pct_effect_365 <- effect_365 / mean(x$event_365)
-pct_effect_365
+# convert percentage point differences into percent differences
+pct_diff_30 <- effect_30 / mean(x$event_30)
+pct_diff_365 <- effect_365 / mean(x$event_365)
+pct_diff_30
+pct_diff_365
+
+# transpose; convert to matrix
+m <- t(y[,2:3])
+m <- as.matrix(m)
+colnames(m) <- y$group
+m
+
+# plot bar chart
+par(mar = c(2.5, 4.5, 1, 1))
+barplot(
+  m,
+  beside = TRUE,
+  ylab = "Hospitalization",
+  xlab = "",
+  cex.lab = 1.5, cex.axis = 1.25, cex.names = 1.25,
+  names.arg = c("0-30 Days", "0-365 Days"),
+  col = c("plum", "blue"),
+  legend.text = c("Control", "Treatment"),
+  args.legend = list(x = "topleft", bty = "n", cex = 1.25)
+)
 
 ```
+  
+## Random Chance or Real Effect?
+
+- Observed difference: Rates differ by **9 percentage points** between groups
+
+- Why this likely reflects a real effect:
+  - Larger samples reduce random fluctuation
+  - Larger differences are less likely due to chance
+
+- Context matters:
+  - 9 (7.8) p.p. difference vs. mean of 10.2% (16.2%)
+  - ≈ **88% (48%) increase** relative to the mean
+
+## Outliers
+
+- **Standardization (z-scores)**
+  - $z_i = \dfrac{x_i - \bar{x}}{sd(x)}$
+  - Common cutoff: $|z| \geq 2$
+  - Upside: Simple
+  - Downside: Sensitive to distribution shape
 
 

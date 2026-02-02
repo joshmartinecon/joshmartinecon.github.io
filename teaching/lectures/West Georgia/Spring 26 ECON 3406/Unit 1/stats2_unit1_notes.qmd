@@ -1,59 +1,60 @@
-# Unit 1 Notes \| Statistics for Business II \| Spring 2026
+# Unit 1 Notes | Statistics for Business II | Spring 2026
 
 ## Intro to Statistics
 
--   Applied statistics uses data to evaluate **competing claims about reality**
-    -   Focused on the question of "compared to what?"
+- Applied statistics uses data to evaluate **competing claims about reality**
+  - Focused on the question of "compared to what?"
 
 ## Variable Types & Distributions Review
 
--   **Numerical**: measured or counted
-    -   **Discrete**: countable (jumps)
-    -   **Continuous**: measurable
--   **Categorical**: labels or groups
-    -   **Nominal**: no order
-    -   **Ordinal**: ordered
--   **Histogram**: binned counts of a numerical variable
-    -   **Shape**:
-        -   Right / left skewed
-        -   Symmetric ("bell-shaped")
-        -   Uniform
-    -   **Skewness**: direction of the long tail
-    -   **Mode(s)**: Unimodal, bimodal, multimodal
+- **Numerical**: measured or counted
+  - **Discrete**: countable (jumps)
+  - **Continuous**: measurable
 
+- **Categorical**: labels or groups
+  - **Nominal**: no order
+  - **Ordinal**: ordered
+
+- **Histogram**: binned counts of a numerical variable
+  - **Shape**:
+    - Right / left skewed
+    - Symmetric (“bell-shaped”)
+    - Uniform
+  - **Skewness**: direction of the long tail
+  - **Mode(s)**: Unimodal, bimodal, multimodal
+    
 ![](figures/distributions.png)
 
 ## Equations Review
 
--   **Mean**: average value
-    -   "What is typical?"
+- **Mean**: average value  
+  - “What is typical?”
 
 $$
 \bar{x} = \frac{1}{n}\sum_{i=1}^n x_i
 $$
 
--   **Variance**: spread around the mean
-    -   "How far is the data from average?"
+- **Variance**: spread around the mean  
+  - “How far is the data from average?”
 
 $$
 \sigma^2 = \frac{1}{n-1}\sum_{i=1}^n (x_i - \bar{x})^2
-$$ 
-
+$$
 - **Standard deviation**: $\sigma$
 
 ## Case Study: Stents and Stroke Risk
 
 - Goal: Test whether **stents reduce stroke risk**
-  - **Stroke**: Brain cell death caused by reduced blood flow
-  - **Stent**: Small mesh tube used to keep arteries open
-  
-- Study design: **Randomized control trial (RCT)**
+  - **Stroke**: Brain cell death caused by reduced blood flow  
+  - **Stent**: Small mesh tube used to keep arteries open  
+
+- Study design: **Randomized Controlled Trial (RCT)**
   - Random assignment -> comparable groups
+  - **Treatment**: Stents + medical management (MM)
   - **Control**: Medical management only
-  - **Treatment**: Stents + MM
-  - MM = medication + risk factor factor control + lifestyle changes
-  
-## Case Study: Visalizing the Data
+      - MM = medication + risk-factor control + lifestyle changes
+
+## Case Study: Visualizing the Data
 
 ```{r}
 #| echo: true
@@ -61,36 +62,29 @@ $$
 # read in data
 df30 <- read.csv("data/stent30.csv")
 df365 <- read.csv("data/stent365.csv")
-
 ```
 
 ## Descriptive Statistics
 
 - **Descriptive statistics** summarize data at a glance
-  - In R:
-    - Tabulate: 'table()'
-    - Summarize: 'summary()'
-    - Aggregation: 'aggregate()'
+  - In R: `table()`, `summary()`
+
+- A **summary statistic**: A single number that captures key features of the data
 
 ```{r}
-#| echo: true
 
-# create summary stats
+# create summary statistics
 table(df30)
 table(df365)
 
 # merge data frames into one
-## notation: 'df[row,column]'
-## notation: call data frame 'df$group'
-
 x <- data.frame(
-  patient_id = 1:451,
-  treated = ifelse(df30$group == "treatment", 1, 0),
-  event_30 = ifelse(df30$outcome == "stroke", 1, 0),
-  event_365 = ifelse(df365$outcome == "stroke", 1, 0)
+  patient = 1:nrow(df30),
+  group = df30$group,
+  event_30 = ifelse(df30$outcome == "no event", 0, 1),
+  event_365 = ifelse(df365$outcome == "no event", 0, 1)
 )
-
-# summarize data
+head(x)
 summary(x)
 
 # mean
@@ -99,25 +93,25 @@ mean(x$event_30)
 
 # variance
 deviation <- x$event_30 - mean(x$event_30)
-deviation_sq <- deviation^2
-sum_dev_sq <- sum(deviation_sq)
-variance <- sum_dev_sq / (nrow(x) - 1)
+variance <- sum(deviation^2) / (nrow(x)-1)
 variance
 var(x$event_30)
 
-# std. dev.
+# standard deviation
 std_dev <- sqrt(variance)
 std_dev
 sd(x$event_30)
 
-# aggregation
-y <- aggregate(cbind(event_30, event_365) ~ treated, data = x, mean)
+# aggregate data
+y <- aggregate(event_30 ~ group, x, mean)
+z <- aggregate(event_365 ~ group, x, mean)
+y$event_365 <- z$event_365
 y
 
-# difference between groups (pct. points)
+# difference between treatment and control
 effect_30 <- y$event_30[2] - y$event_30[1]
-effect_30
 effect_365 <- y$event_365[2] - y$event_365[1]
+effect_30
 effect_365
 
 # convert percentage point differences into percent differences
@@ -137,12 +131,12 @@ par(mar = c(2.5, 4.5, 1, 1))
 barplot(
   m,
   beside = TRUE,
-  ylab = "Hospitalization",
+  ylab = "Experienced a Stroke",
   xlab = "",
   cex.lab = 1.5, cex.axis = 1.25, cex.names = 1.25,
-  names.arg = c("0-30 Days", "0-365 Days"),
+  names.arg = c("Control", "Treatment"),
   col = c("plum", "blue"),
-  legend.text = c("Control", "Treatment"),
+  legend.text = c("0-30 Days", "0-365 Days"),
   args.legend = list(x = "topleft", bty = "n", cex = 1.25)
 )
 
@@ -163,9 +157,138 @@ barplot(
 ## Outliers
 
 - **Standardization (z-scores)**
-  - $z_i = \dfrac{x_i - \bar{x}}{sd(x)}$
+  - $z_i = \frac{x_i - \bar{x}}{sd(x)}$
   - Common cutoff: $|z| \geq 2$
   - Upside: Simple
   - Downside: Sensitive to distribution shape
+  
+```{r}
 
+# generate data
+set.seed(1)
+z <- rnorm(n = 1000000, mean = 0, sd = 1)
 
+# percent of observations greater than 1.96
+mean(ifelse(abs(z) >= 1.96, 1, 0))
+
+# density
+dz <- density(z)
+
+# plot
+par(mar = c(4.5, 4.5, 1, 1))
+plot(dz$x, dz$y, type = "l", lwd = 4,
+     xlab = "Z", ylab = "Density",
+      cex.lab = 1.5, cex.axis = 1.25,
+     xlim = c(-4, 4))
+
+# draw vertical lines
+abline(v = c(-1.96, 1.96), lwd = 2, lty = 2)
+
+# indices for the shaded regions
+iL <- dz$x <= -1.96
+iR <- dz$x >=  1.96
+
+# left tail polygon
+polygon(
+  x = c(dz$x[iL], rev(dz$x[iL])),
+  y = c(dz$y[iL], rep(0, sum(iL))),
+  border = NA, col = "blue"
+)
+
+# right tail polygon
+polygon(
+  x = c(dz$x[iR], rev(dz$x[iR])),
+  y = c(dz$y[iR], rep(0, sum(iR))),
+  border = NA, col = "blue"
+)
+
+# legend
+legend("topleft",
+       legend = c("5%"),
+       col = "blue", lwd = 4,
+       cex = 1.25, bty = "n")
+
+```
+    
+- **Interquartile Range (IQR)**
+  - $Q_1$: 25th percentile, $Q_3$: 75th percentile  
+  - $IQR = Q_3 - Q_1$
+  - Outliers:
+    - $< Q_1 - 1.5 \times IQR$
+    - $> Q_3 + 1.5 \times IQR$
+  - Upside: Robust to skewness
+  - Downside: More complex
+    
+```{r}
+
+# read in data
+nfl <- read.csv("data/2024 NFL Attendance Data.csv")
+
+# clean data to average weekly attendance
+n <- data.frame(
+  team = nfl$Tm,
+  attend = rowMeans(nfl[,5:22], na.rm = T) / 1000
+)
+
+# plot distribution
+par(mar = c(4.5, 4.5, 1, 1))
+hist(n$attend, breaks = 12,
+     main = "", xlab = "Attendance (per 1k)",
+     cex.axis = 1.25, cex.lab = 1.5)
+
+# standardize and plot
+n$z <- (n$attend - mean(n$attend)) / sd(n$attend)
+hist(n$z, breaks = 12,
+     main = "", xlab = "Z-Score of Attendance",
+     cex.axis = 1.25, cex.lab = 1.5)
+
+# sort by largest attendance
+n <- n[order(-n$attend),]
+n$rank <- 1:nrow(n)
+n$pctl <- n$rank / nrow(n)
+n$pctl <- rev(n$pctl)
+
+## IQR
+q1 <- n$attend[n$pctl == 0.25]
+q3 <- n$attend[n$pctl == 0.75]
+iqr <- q3 - q1
+out_l <- q1 - 1.5 * iqr
+out_r <- q3 + 1.5 * iqr
+
+n$outlier <- ifelse(n$attend <= out_l, 1, 0)
+n$outlier <- ifelse(n$attend >= out_r, 1, n$outlier)
+
+plot(n$attend, n$pctl, pch = 19, cex = 1.25,
+     cex.axis = 1.25, cex.lab = 1.5,
+     xlab = "Attendance (per 1k)", ylab = "Percentile")
+abline(v = c(q1, q3), lty = 2, lwd = 2)
+abline(v = c(out_l, out_r), lty = 2, lwd = 2)
+
+i <- 0.25
+cols <- c(adjustcolor("darkred", alpha.f = 0.5),
+          adjustcolor("red", alpha.f = 0.25),
+          adjustcolor("blue", alpha.f = 0.25))
+rect(out_r, 0-i, max(n$attend)+10, 1+i, col = cols[1])
+rect(q3, 0-i, out_r, 1+i, col = cols[2])
+rect(out_l-i, 0-i, q1, 1+i, col = cols[3])
+
+legend("bottomright",
+       legend = c("Outlier", "≥ 75th pctl.", "≤ 25th pctl."),
+       fill = cols, border = NA, inset = 0.02, bg = "white")
+
+```
+
+## Simulation Analysis
+
+- **Simulation analysis**:
+  - Uses repeated random sampling to approximate results
+  - Useful when analytic solutions are impractical
+
+- Key idea:
+  - Randomness helps us understand variability and uncertainty
+
+- Data Generating Process (DGP):
+  - Example: flipping a fair coin
+  - Random fluctuation is inherent
+  - The true DGP is unobservable
+  - Samples are random draws from the underlying process

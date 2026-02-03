@@ -1,6 +1,6 @@
 ---
 title: "Joshua C. Martin"
-image: "Martin-IMG_1657.JPG"
+image: "images/Martin-IMG_1657.JPG"
 links:
   - label: CV
     url: "https://raw.githubusercontent.com/joshmartinecon/quarto-cv/main/joshmartin_cv.pdf"

@@ -292,3 +292,65 @@ legend("bottomright",
   - Random fluctuation is inherent
   - The true DGP is unobservable
   - Samples are random draws from the underlying process
+  
+## Simulation Analysis: Case Study
+
+```{r}
+
+table(x$group)
+n_ctrl <- 227
+n_trtd <- 224
+
+loops <- 1000
+
+## 30 days
+sims <- list()
+for(i in 1:loops){
+  
+  set.seed(i)
+  sim_30_ctrl <- rbinom(n_ctrl, size = 1, prob = mean(x$event_30))
+  
+  set.seed(i+loops)
+  sim_30_trtd <- rbinom(n_trtd, size = 1, prob = mean(x$event_30))
+  
+  sims[[length(sims)+1]] <- mean(sim_30_trtd) - mean(sim_30_ctrl)
+  
+}
+sims <- unlist(sims)
+
+mean(ifelse(sims >= effect_30, 1, 0))
+
+par(mar = c(4.5, 4.5, 1, 1))
+hist(sims, 
+     main = "", xlab = "Simulated Effects (30 Days)",
+     cex.lab = 1.5, cex.axis = 1.25)
+abline(v = effect_30, lty = 2, lwd = 2)
+legend("topleft", legend = "Est. Effect",
+       lwd = 2, lty = 2, bty = "n", cex = 1.25)
+
+## 365 days
+sims_365 <- list()
+for(i in 1:loops){
+  
+  set.seed(i)
+  sim_365_ctrl <- rbinom(n_ctrl, size = 1, prob = mean(x$event_365))
+  
+  set.seed(i+loops)
+  sim_365_trtd <- rbinom(n_trtd, size = 1, prob = mean(x$event_365))
+  
+  sims_365[[length(sims_365)+1]] <- mean(sim_365_trtd) - mean(sim_365_ctrl)
+  
+}
+sims_365 <- unlist(sims_365)
+
+mean(ifelse(sims_365 >= effect_365, 1, 0))
+
+par(mar = c(4.5, 4.5, 1, 1))
+hist(sims_365, 
+     main = "", xlab = "Simulated Effects (365 Days)",
+     cex.lab = 1.5, cex.axis = 1.25)
+abline(v = effect_365, lty = 2, lwd = 2)
+legend("topleft", legend = "Est. Effect",
+       lwd = 2, lty = 2, bty = "n", cex = 1.25)
+
+```

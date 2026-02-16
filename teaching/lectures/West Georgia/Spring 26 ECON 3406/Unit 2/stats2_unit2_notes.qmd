@@ -1,0 +1,30 @@
+# Unit 2 Notes | Statistics for Business II
+
+## Intro to Probability
+
+- The **probability** of an outcome is the proportion of times the outcome would occur if we observed the random process an infinite number of times.
+- Probability is a **long-run proportion**, so it always lies between 0 and 1.
+
+## Law of Large Numbers (LLN)
+
+- Example: rolling a fair die many times.
+  - Let $\hat{p}_n$ be the proportion of rolls that equal 1 after $n$ rolls.
+  - As $n$ increases, $\hat{p}_n \rightarrow p = \frac{1}{6}$.
+  
+- The **Law of Large Numbers** states that as the number of observations increases, the sample proportion $\hat{p}_n$ of an outcome converges to the true probability $p$.
+
+- In small samples, the sample proportion may appear to "defy" the Law of Large Numbers.
+  - These deviations are normal due to randomness.
+  - As the number of observations grows, the deviations become smaller and the proportion stabilizes around $p$.
+
+```{r}
+# Draw one value from 1 through 6
+# This simulates rolling a fair six-sided die once
+# 1:6 → possible outcomes (the faces of the die)
+# size = 1 → number of rolls
+# replace = TRUE → allows the same number to appear again in future rolls
+
+sample(1:6, size = 1, replace = TRUE)
+
+```
+

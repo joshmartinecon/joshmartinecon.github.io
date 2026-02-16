@@ -278,6 +278,25 @@ legend("bottomright",
 
 ```
 
+- **Log transformation**
+  - Upside: Tames outliers and skewness
+  - Downside: Undefined at zero
+
+```{r}
+
+ctys <- read.csv("data/county.csv")
+
+par(mar = c(4.5, 4.5, 1, 1))
+hist(ctys$pop2017, main = "",
+     xlab = "County Population",
+     cex.axis = 1.25, cex.lab = 1.5,)
+
+hist(log(ctys$pop2017), main = "",
+     xlab = "log(County Population)",
+     cex.axis = 1.25, cex.lab = 1.5,)
+
+```
+
 ## Simulation Analysis
 
 - **Simulation analysis**:
@@ -354,3 +373,89 @@ legend("topleft", legend = "Est. Effect",
        lwd = 2, lty = 2, bty = "n", cex = 1.25)
 
 ```
+
+## Why Experimental Design Matters
+
+- **RCTs = gold standard** for causal inference
+
+- Two key pillars:
+  - **Random assignment**
+    - Reduces selection bias and confounding  
+    - Improves internal validity
+  - **Comparison (control) group**
+    - Provides a baseline
+    - Separates treatment effects from outside trends
+
+- Example:
+  - If incomes are rising and income affects longevity:
+    - Randomization -> similar income changes across groups
+    - Control group -> nets out income effects
+    - Remaining difference = treatment effect
+
+- Key terms:
+  - **Internal validity**: credible cause-and-effect
+  - **External validity**: generalizability
+  - **Confounder**: affects both treatment *and* outcome
+
+## Sources of Bias
+
+- **Selection bias**: Groups differ for reasons *other than* treatment
+  - Caused by self-selection / contamination
+    - “People die in hospitals” ≠ hospitals cause death
+  - Example:
+    - Health-conscious patients are more likely to: receive a stent and change lifestyle habits
+    - Estimated effect mixes **treatment + lifestyle**, not treatment alone
+
+![](figures/conference_selection.png){width=50% fig-align="center"}
+
+- **Sampling bias**: Sample is not representative of the population
+  - Classic example (1936):
+    - *Literary Digest* surveyed 10M people (2.4M responses)
+    - Predicted **Landon landslide**
+    - Actual result: **FDR won decisively**
+    - Why it failed:
+      - Sampled wealthy groups (magazine readers, car & phone owners)
+      - Missed lower-income voters
+    - Key lesson: **More data cannot fix a biased sample**
+
+![](figures/sampling_bias.png){width=50% fig-align="center"}
+
+- **Survivorship bias**: Only observing units that “survive” to be measured
+  - When measurement depends on the outcome:
+    - Suppose stents increase mobility
+    - Treated patients are more likely to show up for follow-ups
+    - Control group is under-observed
+    - Estimated effect partly reflects **who is observed**, not just treatment
+  - Common fallacies:
+    - “People lived longer back then”
+    - “My uncle smokes three packs a day and he’s fine”
+
+![](figures/plane_survive.png){width=50% fig-align="center"}
+    
+## Blinding and Placebos
+
+- Goal: Reduce psychological effects
+
+- Key terms:
+  - **Blinding**: Patients don’t know their group
+  - **Placebo**: Fake treatment
+  - **Placebo effect**: Control group shows real changes
+
+{{< video https://www.youtube.com/watch?v=z03FQGlGgo0 >}}
+
+- Why it matters:
+  - Beliefs can affect outcomes
+  - Placebo effects contaminate comparisons
+  - Can reduce power → **Type II errors**
+
+## Statistical Errors
+
+- **Type I error**: False positive  
+  - Claim an effect that isn’t there  
+  - Reject a true null  
+  - Example: Conclude coin is biased when p = 0.5
+
+- **Type II error**: False negative  
+  - Miss a real effect  
+  - Fail to reject a false null  
+  - Example: Conclude coin is fair when p = 0.6

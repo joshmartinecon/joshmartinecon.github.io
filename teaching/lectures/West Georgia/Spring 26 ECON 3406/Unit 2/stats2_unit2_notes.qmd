@@ -26,5 +26,142 @@
 
 sample(1:6, size = 1, replace = TRUE)
 
+# True probability of rolling a 1 with a fair die
+p <- 1/6
+
+# Set seed once for reproducibility
+set.seed(123)
+
+# Create an empty list to store simulation results
+z <- list()
+
+# Repeat the experiment for n = 1 to 5000 rolls
+for(i in 1:5000){
+  
+  # Simulate i die rolls and store results in a data frame
+  # number of rolls (n)
+  # rolls = outcomes from rolling a fair die i times
+  z[[length(z)+1]] <- data.frame(
+    n = i,
+    rolls = sample(1:6, i, replace = TRUE)
+  )
+  
+}
+
+# Combine all stored data frames into one large data frame
+z <- as.data.frame(do.call(rbind, z))
+
+# Create indicator variable:
+# 1 if roll equals 1, 0 otherwise
+z$one <- ifelse(z$rolls == 1, 1, 0)
+
+# View first few rows
+head(z)
+
+# For each value of n, compute the proportion of 1s
+# This gives us the sample proportion p-hat_n
+y <- aggregate(one ~ n, data = z, mean)
+
+# View first few results
+head(y)
+
+# Plot sample proportion against number of rolls
+par(mar = c(5, 5, 1, 1))
+plot(y$n, y$one,
+     xlab = "number of rolls (n)", 
+     ylab = expression(hat(p)[n]),
+     cex.lab = 1.5, 
+     cex.axis = 1.25, 
+     ylim = c(0, 2*p), 
+     col = "darkblue", 
+     pch = 19)
+abline(h = p, lwd = 4, col = "plum")
+legend("topright", 
+       legend = c("True Value"),
+       lwd = 4, col = "plum", 
+       bty = "n", cex = 1.5)
+
 ```
 
+## Disjoint (Mutually Exclusive) Outcomes
+
+- Two outcomes are **disjoint** (or **mutually exclusive**) if they cannot occur at the same time.
+  - When rolling a die, the outcomes 1 and 2 are disjoint — only one number can appear.
+  - However, the outcomes 1 and “rolling an odd number” are **not** disjoint, since both occur when the roll is 1.
+
+- If outcomes are disjoint, we can calculate the probability of either occurring by **adding their probabilities**.
+
+$$
+P(1 \text{ or } 2) = \frac{1}{6} + \frac{1}{6} = \frac{2}{6} = \frac{1}{3}
+$$
+
+### Addition Rule for Disjoint Outcomes
+
+- If $A_1, A_2, \dots, A_k$ are disjoint events, then:
+
+$$
+P(A_1 \text{ or } A_2 \text{ or } \dots \text{ or } A_k)
+= P(A_1) + P(A_2) + \dots + P(A_k)
+$$
+### Thinking in Terms of Events
+
+- In practice, we often work with **events**, which are sets (collections) of outcomes.
+
+- Let:
+  - $A = \{1, 2\}$ (rolling a 1 or 2)
+  - $B = \{4, 6\}$ (rolling a 4 or 6)
+
+- Because $A$ and $B$ share no outcomes, they are **disjoint events**.
+
+$$
+P(A \text{ or } B) = P(A) + P(B)
+= \frac{2}{6} + \frac{2}{6}
+= \frac{4}{6}
+= \frac{2}{3}
+= 0.\bar{6}
+$$
+
+```{r}
+
+set.seed(123)
+z <- list()
+for(i in 1:10000){
+  z[[i]] <- sample(1:6, size = 1, replace = TRUE)
+}
+
+z <- unlist(z)
+A <- ifelse(z == 1 | z == 2, 1, 0)
+B <- ifelse(z == 4 | z == 6, 1, 0)
+
+mean(A) + mean(B)
+
+```
+
+## When Events Are *Not* Disjoint
+
+- Probability a randomly selected card is a diamond:
+
+$$
+P(\diamondsuit) = \frac{13}{52} = \frac{1}{4} = 0.25
+$$
+
+- Probability a randomly selected card is a face card:
+
+$$
+P(\text{face}) = \frac{12}{52} \approx 0.23
+$$
+
+- Probability a card is a **face card or a diamond**:
+
+These events overlap (there are 3 face cards that are diamonds), so we must subtract the overlap:
+
+$$
+P(\text{face or } \diamondsuit)
+= P(\text{face}) + P(\diamondsuit) - P(\text{face and } \diamondsuit)
+$$
+
+$$
+= \frac{12}{52} + \frac{13}{52} - \frac{3}{52}
+= \frac{22}{52}
+\approx 0.42
+$$

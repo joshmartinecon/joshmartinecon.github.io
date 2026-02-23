@@ -103,6 +103,7 @@ $$
 P(A_1 \text{ or } A_2 \text{ or } \dots \text{ or } A_k)
 = P(A_1) + P(A_2) + \dots + P(A_k)
 $$
+
 ### Thinking in Terms of Events
 
 - In practice, we often work with **events**, which are sets (collections) of outcomes.
@@ -165,3 +166,82 @@ $$
 = \frac{22}{52}
 \approx 0.42
 $$
+
+```{r}
+
+z <- data.frame(
+  number = rep(2:14, 4),
+  suit = rep(c("d", "c", "s", "h"), 13)
+)
+head(z)
+
+y <- list()
+for(i in 1:10000){
+  set.seed(i)
+  z$order <- rnorm(n = 52)
+  z <- z[order(z$order),]
+  
+  y[[length(y)+1]] <- data.frame(
+    loop = i,
+    true = ifelse(z[1,2] == "d" | z[1,1] %in% 11:13, 1, 0)
+  )
+}
+y <- as.data.frame(do.call(rbind, y))
+mean(y$true)
+
+
+```
+
+### General Addition Rule
+
+- For **any** two events $A$ and $B$ (disjoint or not):
+
+$$
+P(A \text{ or } B)
+= P(A) + P(B) - P(A \text{ and } B)
+$$
+
+- The term $P(A \text{ and } B)$ accounts for overlap.
+- If $A$ and $B$ are disjoint, then:
+
+$$
+P(A \text{ and } B) = 0
+$$
+
+and the rule simplifies to simple addition.
+
+## Probability Distribution
+
+- A **probability distribution** lists all possible disjoint outcomes and their associated probabilities.
+
+- For a valid probability distribution:
+  - Outcomes must be **disjoint**.
+  - Each probability must be between 0 and 1.
+  - The probabilities must sum to **1**.
+
+```{r}
+
+set.seed(124)
+
+x <- data.frame(
+  dice1 = sample(1:6, 10000, replace = TRUE),
+  dice2 = sample(1:6, 10000, replace = TRUE)
+)
+
+sum <- x$dice1 + x$dice2
+t <- as.data.frame(table(sum))
+head(t)
+
+y <- data.frame(
+  sum = t$sum,
+  prob = t$Freq / sum(t$Freq)
+)
+
+par(mar = c(5, 5, 1, 1))
+barplot(height = y$prob, names = y$sum,
+        ylim = c(0, 0.2),
+        xlab = "Dice Sum", ylab = "Probability",
+        cex.axis = 1.25, cex.lab = 1.5, cex.names = 1.25,
+        col = "darkblue")
+
+```

@@ -142,7 +142,7 @@ window.Quarto = {
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, <span class="at">size =</span> <span class="dv">1</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 4</code></pre>
+<pre><code>[1] 6</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># True probability of rolling a 1 with a fair die</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">6</span></span>
@@ -244,7 +244,10 @@ P(1 \text{ or } 2) = \frac{1}{6} + \frac{1}{6} = \frac{2}{6} = \frac{1}{3}
 <p><span class="math display">\[
 P(A_1 \text{ or } A_2 \text{ or } \dots \text{ or } A_k)
 = P(A_1) + P(A_2) + \dots + P(A_k)
-\]</span> ### Thinking in Terms of Events</p>
+\]</span></p>
+</section>
+<section id="thinking-in-terms-of-events" class="level3">
+<h3 class="anchored" data-anchor-id="thinking-in-terms-of-events">Thinking in Terms of Events</h3>
 <ul>
 <li><p>In practice, we often work with <strong>events</strong>, which are sets (collections) of outcomes.</p></li>
 <li><p>Let:</p>
@@ -306,6 +309,107 @@ P(\text{face or } \diamondsuit)
 = \frac{22}{52}
 \approx 0.42
 \]</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">number =</span> <span class="fu">rep</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">14</span>, <span class="dv">4</span>),</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">suit =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"d"</span>, <span class="st">"c"</span>, <span class="st">"s"</span>, <span class="st">"h"</span>), <span class="dv">13</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(z)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  number suit
+1      2    d
+2      3    c
+3      4    s
+4      5    h
+5      6    d
+6      7    c</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10000</span>){</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set.seed</span>(i)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  z<span class="sc">$</span>order <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">52</span>)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  z <span class="ot">&lt;-</span> z[<span class="fu">order</span>(z<span class="sc">$</span>order),]</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  y[[<span class="fu">length</span>(y)<span class="sc">+</span><span class="dv">1</span>]] <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">loop =</span> i,</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">true =</span> <span class="fu">ifelse</span>(z[<span class="dv">1</span>,<span class="dv">2</span>] <span class="sc">==</span> <span class="st">"d"</span> <span class="sc">|</span> z[<span class="dv">1</span>,<span class="dv">1</span>] <span class="sc">%in%</span> <span class="dv">11</span><span class="sc">:</span><span class="dv">13</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">do.call</span>(rbind, y))</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(y<span class="sc">$</span>true)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.4159</code></pre>
+</div>
+</div>
+<section id="general-addition-rule" class="level3">
+<h3 class="anchored" data-anchor-id="general-addition-rule">General Addition Rule</h3>
+<ul>
+<li>For <strong>any</strong> two events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> (disjoint or not):</li>
+</ul>
+<p><span class="math display">\[
+P(A \text{ or } B)
+= P(A) + P(B) - P(A \text{ and } B)
+\]</span></p>
+<ul>
+<li>The term <span class="math inline">\(P(A \text{ and } B)\)</span> accounts for overlap.</li>
+<li>If <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are disjoint, then:</li>
+</ul>
+<p><span class="math display">\[
+P(A \text{ and } B) = 0
+\]</span></p>
+<p>and the rule simplifies to simple addition.</p>
+</section>
+</section>
+<section id="probability-distribution" class="level2">
+<h2 class="anchored" data-anchor-id="probability-distribution">Probability Distribution</h2>
+<ul>
+<li><p>A <strong>probability distribution</strong> lists all possible disjoint outcomes and their associated probabilities.</p></li>
+<li><p>For a valid probability distribution:</p>
+<ul>
+<li>Outcomes must be <strong>disjoint</strong>.</li>
+<li>Each probability must be between 0 and 1.</li>
+<li>The probabilities must sum to <strong>1</strong>.</li>
+</ul></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">124</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">dice1 =</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, <span class="dv">10000</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">dice2 =</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, <span class="dv">10000</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>sum <span class="ot">&lt;-</span> x<span class="sc">$</span>dice1 <span class="sc">+</span> x<span class="sc">$</span>dice2</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">table</span>(sum))</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(t)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  sum Freq
+1   2  275
+2   3  541
+3   4  857
+4   5 1133
+5   6 1318
+6   7 1646</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">sum =</span> t<span class="sc">$</span>sum,</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">prob =</span> t<span class="sc">$</span>Freq <span class="sc">/</span> <span class="fu">sum</span>(t<span class="sc">$</span>Freq)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(<span class="at">height =</span> y<span class="sc">$</span>prob, <span class="at">names =</span> y<span class="sc">$</span>sum,</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.2</span>),</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab =</span> <span class="st">"Dice Sum"</span>, <span class="at">ylab =</span> <span class="st">"Probability"</span>,</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">cex.axis =</span> <span class="fl">1.25</span>, <span class="at">cex.lab =</span> <span class="fl">1.5</span>, <span class="at">cex.names =</span> <span class="fl">1.25</span>,</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">col =</span> <span class="st">"darkblue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="stats2_unit2_notes_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
 </section>
 

@@ -142,7 +142,7 @@ window.Quarto = {
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, <span class="at">size =</span> <span class="dv">1</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 6</code></pre>
+<pre><code>[1] 1</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># True probability of rolling a 1 with a fair die</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">6</span></span>
@@ -410,6 +410,51 @@ P(A \text{ and } B) = 0
 </div>
 </div>
 </div>
+</section>
+<section id="independence" class="level2">
+<h2 class="anchored" data-anchor-id="independence">Independence</h2>
+<ul>
+<li>Two processes (or events) are <strong>independent</strong> if knowing the outcome of one provides no information about the outcome of the other.
+<ul>
+<li>Example: Flipping a coin and rolling a die are independent — knowing the coin landed heads tells us nothing about the die roll.</li>
+<li>In contrast, stock prices often move together, so their movements are typically <strong>not</strong> independent.</li>
+</ul></li>
+</ul>
+<section id="multiplication-rule-for-independent-events" class="level3">
+<h3 class="anchored" data-anchor-id="multiplication-rule-for-independent-events">Multiplication Rule for Independent Events</h3>
+<ul>
+<li>If <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are independent events, then the probability that <strong>both</strong> occur is:</li>
+</ul>
+<p><span class="math display">\[
+P(A \text{ and } B) = P(A) \times P(B)
+\]</span></p>
+<ul>
+<li>More generally, if <span class="math inline">\(A_1, A_2, \dots, A_k\)</span> are independent events, then:</li>
+</ul>
+<p><span class="math display">\[
+P(A_1 \text{ and } A_2 \text{ and } \dots \text{ and } A_k)
+= P(A_1) \times P(A_2) \times \dots \times P(A_k)
+\]</span></p>
+</section>
+<section id="example-rolling-two-dice" class="level3">
+<h3 class="anchored" data-anchor-id="example-rolling-two-dice">Example: Rolling Two Dice</h3>
+<ul>
+<li>What is the probability of rolling two 1s?</li>
+</ul>
+<p><span class="math display">\[
+P(1 \text{ and } 1)
+= \frac{1}{6} \times \frac{1}{6}
+= \frac{1}{36}
+= 0.02\bar{7}
+\]</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>x<span class="sc">$</span>ones <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(x<span class="sc">$</span>dice1 <span class="sc">==</span> <span class="dv">1</span> <span class="sc">&amp;</span> x<span class="sc">$</span>dice2 <span class="sc">==</span> <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(x<span class="sc">$</span>ones)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.0275</code></pre>
+</div>
+</div>
+</section>
 </section>
 </section>
 

@@ -245,3 +245,42 @@ barplot(height = y$prob, names = y$sum,
         col = "darkblue")
 
 ```
+
+## Independence
+
+- Two processes (or events) are **independent** if knowing the outcome of one provides no information about the outcome of the other.
+  - Example: Flipping a coin and rolling a die are independent — knowing the coin landed heads tells us nothing about the die roll.
+  - In contrast, stock prices often move together, so their movements are typically **not** independent.
+
+### Multiplication Rule for Independent Events
+
+- If $A$ and $B$ are independent events, then the probability that **both** occur is:
+
+$$
+P(A \text{ and } B) = P(A) \times P(B)
+$$
+
+- More generally, if $A_1, A_2, \dots, A_k$ are independent events, then:
+
+$$
+P(A_1 \text{ and } A_2 \text{ and } \dots \text{ and } A_k)
+= P(A_1) \times P(A_2) \times \dots \times P(A_k)
+$$
+
+### Example: Rolling Two Dice
+
+- What is the probability of rolling two 1s?
+
+$$
+P(1 \text{ and } 1)
+= \frac{1}{6} \times \frac{1}{6}
+= \frac{1}{36}
+= 0.02\bar{7}
+$$
+
+```{r}
+
+x$ones <- ifelse(x$dice1 == 1 & x$dice2 == 1, 1, 0)
+mean(x$ones)
+
+```

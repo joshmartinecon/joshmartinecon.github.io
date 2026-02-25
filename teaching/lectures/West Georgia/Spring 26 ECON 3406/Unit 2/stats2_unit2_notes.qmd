@@ -103,7 +103,6 @@ $$
 P(A_1 \text{ or } A_2 \text{ or } \dots \text{ or } A_k)
 = P(A_1) + P(A_2) + \dots + P(A_k)
 $$
-
 ### Thinking in Terms of Events
 
 - In practice, we often work with **events**, which are sets (collections) of outcomes.
@@ -282,5 +281,211 @@ $$
 
 x$ones <- ifelse(x$dice1 == 1 & x$dice2 == 1, 1, 0)
 mean(x$ones)
+
+```
+
+## Marginal and Joint Probabilities
+
+- **Marginal probabilities** are the probabilities based on a single variable without regard to any other variables
+
+- A probability of outcomes for two or more variables or processes is called a **joint probability**
+
+### Example: Photo Classification
+
+- Data scientists are developing a classifier to determine whether a photo is related to fashion.
+  - The `photo_classify` dataset contains 1,822 photos from a photo-sharing website
+
+- Each photo receives **two classifications**:
+  - `mach_learn`: the binary prediction from a machine learning model
+  - `truth`: a binary human-reviewed classification
+
+- We treat the human classification (`truth`) as the **ground truth** when evaluating model performance.
+
+```{r}
+
+x <- read.csv("data/photo_classify.csv")
+
+table(x$mach_learn)
+table(x$truth)
+
+z <- as.data.frame.matrix(table(predicted = x$mach_learn, actual = x$truth))
+z$total <- rowSums(z)
+z <- rbind(z, total = colSums(z))
+z
+
+```
+
+- What is the probability that the machine algorithm will classify a picture as being about fashion?
+  - $\dfrac{219}{1822} \approx 12\%$
+  
+```{r}
+
+mean(ifelse(x$mach_learn == "pred_fashion", 1, 0))
+
+```
+
+- What is the probability that:
+  - the machine algorithm will classify a picture as being about fashion *and* 
+  - what is the probability that picture is about fashion?
+    - $P(\hat{Fashion} \text{ and } Fashion) = \dfrac{197}{1822} \approx 10.8\%$
+    
+```{r}
+
+mean(ifelse(x$mach_learn == "pred_fashion" & x$truth == "fashion", 1, 0))
+
+```
+
+## Conditional Probability
+
+- **Conditional probability** measures the probability that an event occurs **given that** another event is known to have occurred.
+
+- A conditional probability has two parts:
+  - The event of interest ($A$)
+  - The condition ($B$)
+
+- Think of the condition as information we already know to be true.
+
+- Notation:
+
+$$
+P(A \mid B)
+$$
+
+- Read as: "the probability that $A$ occurs given that $B$ has occurred."
+
+### Example: Photo Classification
+
+- Conditional upon the machine learning prediction that the picture is about fashion, what is the probability that the picture is truly about fashion?
+  - $P(Fashion|\hat{Fashion}) = \dfrac{197}{219} \approx 90\%$
+  
+```{r}
+
+x_predf <- x[x$mach_learn == "pred_fashion",]
+mean(ifelse(x_predf$truth == "fashion", 1, 0))
+
+```
+
+- Conditional upon the picture is truly being about fashion, what is the probability that the machine learning estimation predicted that the picture is about fashion?
+  - $P(\hat{Fashion}|Fashion) = \dfrac{197}{309} \approx 63.8\%$
+  
+ Takeaways: this measures **model precision**
+  - When the algorithm predicts that a picture is about fashion, it is correct about 90% of the time
+  - In practice, this means that the model’s positive predictions are usually trustworthy
+  - False positives are relatively rare
+  
+```{r}
+
+x_f <- x[x$truth == "fashion",]
+mean(ifelse(x_f$mach_learn == "pred_fashion", 1, 0))
+
+```
+
+- Takeaways: this measures **model sensitivity**
+  - Out of all the pictures that are truly about fashion, the model successfully identifies about 64% of them
+  - In practice, this means the model misses a fair number of true fashion images
+  - False negatives are fairly common
+  
+- The model is **conservative**: when it predicts "fashion," it is usually correct (high precision).
+
+- However, it is **incomplete**: it fails to identify a substantial share of true fashion images (moderate sensitivity).
+
+- In short, the algorithm is strong at being right when it predicts fashion, but weaker at capturing all fashion-related content.
+
+### Equations: Conditional Probability
+
+$$
+P(A|B) = \dfrac{P(A \text{ and } B)}{P(B)}
+$$
+
+- Note that we can rewrite this equation using algebra:
+
+$$
+P(A \text{ and } B) = P(A|B) \times P(B)
+$$  
+
+$$
+P(Fashion|\hat{Fashion}) = \dfrac{P(Fashion \text{ and } \hat{Fashion})}{P(\hat{Fashion})} = \dfrac{0.108}{0.120} \approx 90\%
+$$
+
+### Example: Smallpox Vaccine
+
+- The smallpox data set provides a sample of 6,224 individuals from the year 1721 who were exposed to smallpox in Boston
+  - Doctors hypothesized that exposing a person to the disease in a controlled form could reduce the likelihood of death
+
+
+```{r}
+
+x <- read.csv("data/smallpox.csv")
+
+z <- as.data.frame.matrix(table(vaccinated = x$inoculated, lived = x$result))
+z$total <- rowSums(z)
+z <- rbind(z, total = colSums(z))
+z
+
+# percentages
+round(z / z[3,3] * 100, 1)
+
+```
+
+- What is the the probability that a randomly selected person who was (not) inoculated died from smallpox?
+  - $P(Died|Vaccinated) = \dfrac{0.001}{0.039} \approx 2.5\%$
+  - $P(Died|Not) = \dfrac{0.136}{0.961} \approx 14.1\%$
+
+```{r}
+
+x_vax <- x[x$inoculated == "yes",]
+mean(ifelse(x_vax$result == "died", 1, 0))
+
+x_n_vax <- x[x$inoculated == "no",]
+mean(ifelse(x_n_vax$result == "died", 1, 0))
+
+```
+
+- What is probability that a resident was not inoculated and lived?
+  - $P(\text{Lived and Not}) = P(Lived|Not) \times P(Not) = \dfrac{5136}{5980} \times \dfrac{5980}{6224} \approx 82.5\%$
+  
+```{r}
+
+mean(ifelse(x_n_vax$result == "lived", 1, 0))
+
+```
+
+- What is probability that a resident was not inoculated and lived?
+  - $P(\text{Lived and Not}) = P(Lived|Not) \times P(Not) = \dfrac{5136}{5980} \times \dfrac{5980}{6224} \approx 82.5\%$
+  - $P(\text{Lived and Not}) = P(Not|Lived) \times P(Lived) = \dfrac{5136}{5374} \times \dfrac{5374}{6224} \approx 82.5\%$
+  
+```{r}
+
+mean(ifelse(x$result == "lived" & x$inoculated == "no", 1, 0))
+
+```
+
+### Barchart: Smallpox Vaccine
+
+```{r}
+
+x$lived <- ifelse(x$result == "lived", 1, 0)
+x$vaxxed <- ifelse(x$inoculated == "yes", 1, 0)
+
+y <- aggregate(lived ~ vaxxed, x, function(x) c(mean = mean(x),
+                                                sd = sd(x),
+                                                n = length(x)))
+y <- as.data.frame(do.call(cbind, y))
+y$min <- y$mean - 1.96 * y$sd / sqrt(y$n)
+y$max <- y$mean + 1.96 * y$sd / sqrt(y$n)
+
+par(mar = c(5, 5, 1, 1))
+bp <- barplot(
+  height = y$mean,
+  names.arg = c("No Vacc.", "Vaccinated"),
+  ylim = c(0, 1),
+  ylab = "Survival Rate | Vaccination Status",
+  xlab = "Vaccination Status",
+  cex.lab = 1.5, cex.axis = 1.25, cex.names = 1.25,
+  col = "darkblue"
+)
+arrows(x0 = bp, y0 = y$min, x1 = bp, y1 = y$max,
+       code = 3, angle = 90, length = 0.05, lwd = 4,
+       col = "darkgrey")
 
 ```

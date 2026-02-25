@@ -142,7 +142,7 @@ window.Quarto = {
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, <span class="at">size =</span> <span class="dv">1</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 1</code></pre>
+<pre><code>[1] 3</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># True probability of rolling a 1 with a fair die</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">6</span></span>
@@ -244,10 +244,7 @@ P(1 \text{ or } 2) = \frac{1}{6} + \frac{1}{6} = \frac{2}{6} = \frac{1}{3}
 <p><span class="math display">\[
 P(A_1 \text{ or } A_2 \text{ or } \dots \text{ or } A_k)
 = P(A_1) + P(A_2) + \dots + P(A_k)
-\]</span></p>
-</section>
-<section id="thinking-in-terms-of-events" class="level3">
-<h3 class="anchored" data-anchor-id="thinking-in-terms-of-events">Thinking in Terms of Events</h3>
+\]</span> ### Thinking in Terms of Events</p>
 <ul>
 <li><p>In practice, we often work with <strong>events</strong>, which are sets (collections) of outcomes.</p></li>
 <li><p>Let:</p>
@@ -452,6 +449,267 @@ P(1 \text{ and } 1)
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(x<span class="sc">$</span>ones)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.0275</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="marginal-and-joint-probabilities" class="level2">
+<h2 class="anchored" data-anchor-id="marginal-and-joint-probabilities">Marginal and Joint Probabilities</h2>
+<ul>
+<li><p><strong>Marginal probabilities</strong> are the probabilities based on a single variable without regard to any other variables</p></li>
+<li><p>A probability of outcomes for two or more variables or processes is called a <strong>joint probability</strong></p></li>
+</ul>
+<section id="example-photo-classification" class="level3">
+<h3 class="anchored" data-anchor-id="example-photo-classification">Example: Photo Classification</h3>
+<ul>
+<li>Data scientists are developing a classifier to determine whether a photo is related to fashion.
+<ul>
+<li>The <code>photo_classify</code> dataset contains 1,822 photos from a photo-sharing website</li>
+</ul></li>
+<li>Each photo receives <strong>two classifications</strong>:
+<ul>
+<li><code>mach_learn</code>: the binary prediction from a machine learning model</li>
+<li><code>truth</code>: a binary human-reviewed classification</li>
+</ul></li>
+<li>We treat the human classification (<code>truth</code>) as the <strong>ground truth</strong> when evaluating model performance.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/photo_classify.csv"</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(x<span class="sc">$</span>mach_learn)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+pred_fashion     pred_not 
+         219         1603 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(x<span class="sc">$</span>truth)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+fashion     not 
+    309    1513 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">as.data.frame.matrix</span>(<span class="fu">table</span>(<span class="at">predicted =</span> x<span class="sc">$</span>mach_learn, <span class="at">actual =</span> x<span class="sc">$</span>truth))</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>z<span class="sc">$</span>total <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(z)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">rbind</span>(z, <span class="at">total =</span> <span class="fu">colSums</span>(z))</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>z</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>             fashion  not total
+pred_fashion     197   22   219
+pred_not         112 1491  1603
+total            309 1513  1822</code></pre>
+</div>
+</div>
+<ul>
+<li>What is the probability that the machine algorithm will classify a picture as being about fashion?
+<ul>
+<li><span class="math inline">\(\dfrac{219}{1822} \approx 12\%\)</span></li>
+</ul></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">ifelse</span>(x<span class="sc">$</span>mach_learn <span class="sc">==</span> <span class="st">"pred_fashion"</span>, <span class="dv">1</span>, <span class="dv">0</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.1201976</code></pre>
+</div>
+</div>
+<ul>
+<li>What is the probability that:
+<ul>
+<li>the machine algorithm will classify a picture as being about fashion <em>and</em></li>
+<li>what is the probability that picture is about fashion?
+<ul>
+<li><span class="math inline">\(P(\hat{Fashion} \text{ and } Fashion) = \dfrac{197}{1822} \approx 10.8\%\)</span></li>
+</ul></li>
+</ul></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">ifelse</span>(x<span class="sc">$</span>mach_learn <span class="sc">==</span> <span class="st">"pred_fashion"</span> <span class="sc">&amp;</span> x<span class="sc">$</span>truth <span class="sc">==</span> <span class="st">"fashion"</span>, <span class="dv">1</span>, <span class="dv">0</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.1081229</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="conditional-probability" class="level2">
+<h2 class="anchored" data-anchor-id="conditional-probability">Conditional Probability</h2>
+<ul>
+<li><p><strong>Conditional probability</strong> measures the probability that an event occurs <strong>given that</strong> another event is known to have occurred.</p></li>
+<li><p>A conditional probability has two parts:</p>
+<ul>
+<li>The event of interest (<span class="math inline">\(A\)</span>)</li>
+<li>The condition (<span class="math inline">\(B\)</span>)</li>
+</ul></li>
+<li><p>Think of the condition as information we already know to be true.</p></li>
+<li><p>Notation:</p></li>
+</ul>
+<p><span class="math display">\[
+P(A \mid B)
+\]</span></p>
+<ul>
+<li>Read as: “the probability that <span class="math inline">\(A\)</span> occurs given that <span class="math inline">\(B\)</span> has occurred.”</li>
+</ul>
+<section id="example-photo-classification-1" class="level3">
+<h3 class="anchored" data-anchor-id="example-photo-classification-1">Example: Photo Classification</h3>
+<ul>
+<li>Conditional upon the machine learning prediction that the picture is about fashion, what is the probability that the picture is truly about fashion?
+<ul>
+<li><span class="math inline">\(P(Fashion|\hat{Fashion}) = \dfrac{197}{219} \approx 90\%\)</span></li>
+</ul></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>x_predf <span class="ot">&lt;-</span> x[x<span class="sc">$</span>mach_learn <span class="sc">==</span> <span class="st">"pred_fashion"</span>,]</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">ifelse</span>(x_predf<span class="sc">$</span>truth <span class="sc">==</span> <span class="st">"fashion"</span>, <span class="dv">1</span>, <span class="dv">0</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.8995434</code></pre>
+</div>
+</div>
+<ul>
+<li>Conditional upon the picture is truly being about fashion, what is the probability that the machine learning estimation predicted that the picture is about fashion?
+<ul>
+<li><span class="math inline">\(P(\hat{Fashion}|Fashion) = \dfrac{197}{309} \approx 63.8\%\)</span></li>
+</ul></li>
+</ul>
+<p>Takeaways: this measures <strong>model precision</strong> - When the algorithm predicts that a picture is about fashion, it is correct about 90% of the time - In practice, this means that the model’s positive predictions are usually trustworthy - False positives are relatively rare</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>x_f <span class="ot">&lt;-</span> x[x<span class="sc">$</span>truth <span class="sc">==</span> <span class="st">"fashion"</span>,]</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">ifelse</span>(x_f<span class="sc">$</span>mach_learn <span class="sc">==</span> <span class="st">"pred_fashion"</span>, <span class="dv">1</span>, <span class="dv">0</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.6375405</code></pre>
+</div>
+</div>
+<ul>
+<li><p>Takeaways: this measures <strong>model sensitivity</strong></p>
+<ul>
+<li>Out of all the pictures that are truly about fashion, the model successfully identifies about 64% of them</li>
+<li>In practice, this means the model misses a fair number of true fashion images</li>
+<li>False negatives are fairly common</li>
+</ul></li>
+<li><p>The model is <strong>conservative</strong>: when it predicts “fashion,” it is usually correct (high precision).</p></li>
+<li><p>However, it is <strong>incomplete</strong>: it fails to identify a substantial share of true fashion images (moderate sensitivity).</p></li>
+<li><p>In short, the algorithm is strong at being right when it predicts fashion, but weaker at capturing all fashion-related content.</p></li>
+</ul>
+</section>
+<section id="equations-conditional-probability" class="level3">
+<h3 class="anchored" data-anchor-id="equations-conditional-probability">Equations: Conditional Probability</h3>
+<p><span class="math display">\[
+P(A|B) = \dfrac{P(A \text{ and } B)}{P(B)}
+\]</span></p>
+<ul>
+<li>Note that we can rewrite this equation using algebra:</li>
+</ul>
+<p><span class="math display">\[
+P(A \text{ and } B) = P(A|B) \times P(B)
+\]</span></p>
+<p><span class="math display">\[
+P(Fashion|\hat{Fashion}) = \dfrac{P(Fashion \text{ and } \hat{Fashion})}{P(\hat{Fashion})} = \dfrac{0.108}{0.120} \approx 90\%
+\]</span></p>
+</section>
+<section id="example-smallpox-vaccine" class="level3">
+<h3 class="anchored" data-anchor-id="example-smallpox-vaccine">Example: Smallpox Vaccine</h3>
+<ul>
+<li>The smallpox data set provides a sample of 6,224 individuals from the year 1721 who were exposed to smallpox in Boston
+<ul>
+<li>Doctors hypothesized that exposing a person to the disease in a controlled form could reduce the likelihood of death</li>
+</ul></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/smallpox.csv"</span>)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">as.data.frame.matrix</span>(<span class="fu">table</span>(<span class="at">vaccinated =</span> x<span class="sc">$</span>inoculated, <span class="at">lived =</span> x<span class="sc">$</span>result))</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>z<span class="sc">$</span>total <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(z)</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">rbind</span>(z, <span class="at">total =</span> <span class="fu">colSums</span>(z))</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>z</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      died lived total
+no     844  5136  5980
+yes      6   238   244
+total  850  5374  6224</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># percentages</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(z <span class="sc">/</span> z[<span class="dv">3</span>,<span class="dv">3</span>] <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      died lived total
+no    13.6  82.5  96.1
+yes    0.1   3.8   3.9
+total 13.7  86.3 100.0</code></pre>
+</div>
+</div>
+<ul>
+<li>What is the the probability that a randomly selected person who was (not) inoculated died from smallpox?
+<ul>
+<li><span class="math inline">\(P(Died|Vaccinated) = \dfrac{0.001}{0.039} \approx 2.5\%\)</span></li>
+<li><span class="math inline">\(P(Died|Not) = \dfrac{0.136}{0.961} \approx 14.1\%\)</span></li>
+</ul></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>x_vax <span class="ot">&lt;-</span> x[x<span class="sc">$</span>inoculated <span class="sc">==</span> <span class="st">"yes"</span>,]</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">ifelse</span>(x_vax<span class="sc">$</span>result <span class="sc">==</span> <span class="st">"died"</span>, <span class="dv">1</span>, <span class="dv">0</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.02459016</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>x_n_vax <span class="ot">&lt;-</span> x[x<span class="sc">$</span>inoculated <span class="sc">==</span> <span class="st">"no"</span>,]</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">ifelse</span>(x_n_vax<span class="sc">$</span>result <span class="sc">==</span> <span class="st">"died"</span>, <span class="dv">1</span>, <span class="dv">0</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.1411371</code></pre>
+</div>
+</div>
+<ul>
+<li>What is probability that a resident was not inoculated and lived?
+<ul>
+<li><span class="math inline">\(P(\text{Lived and Not}) = P(Lived|Not) \times P(Not) = \dfrac{5136}{5980} \times \dfrac{5980}{6224} \approx 82.5\%\)</span></li>
+</ul></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">ifelse</span>(x_n_vax<span class="sc">$</span>result <span class="sc">==</span> <span class="st">"lived"</span>, <span class="dv">1</span>, <span class="dv">0</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.8588629</code></pre>
+</div>
+</div>
+<ul>
+<li>What is probability that a resident was not inoculated and lived?
+<ul>
+<li><span class="math inline">\(P(\text{Lived and Not}) = P(Lived|Not) \times P(Not) = \dfrac{5136}{5980} \times \dfrac{5980}{6224} \approx 82.5\%\)</span></li>
+<li><span class="math inline">\(P(\text{Lived and Not}) = P(Not|Lived) \times P(Lived) = \dfrac{5136}{5374} \times \dfrac{5374}{6224} \approx 82.5\%\)</span></li>
+</ul></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">ifelse</span>(x<span class="sc">$</span>result <span class="sc">==</span> <span class="st">"lived"</span> <span class="sc">&amp;</span> x<span class="sc">$</span>inoculated <span class="sc">==</span> <span class="st">"no"</span>, <span class="dv">1</span>, <span class="dv">0</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.8251928</code></pre>
+</div>
+</div>
+</section>
+<section id="barchart-smallpox-vaccine" class="level3">
+<h3 class="anchored" data-anchor-id="barchart-smallpox-vaccine">Barchart: Smallpox Vaccine</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>x<span class="sc">$</span>lived <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(x<span class="sc">$</span>result <span class="sc">==</span> <span class="st">"lived"</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>x<span class="sc">$</span>vaxxed <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(x<span class="sc">$</span>inoculated <span class="sc">==</span> <span class="st">"yes"</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(lived <span class="sc">~</span> vaxxed, x, <span class="cf">function</span>(x) <span class="fu">c</span>(<span class="at">mean =</span> <span class="fu">mean</span>(x),</span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>                                                <span class="at">sd =</span> <span class="fu">sd</span>(x),</span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>                                                <span class="at">n =</span> <span class="fu">length</span>(x)))</span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">do.call</span>(cbind, y))</span>
+<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a>y<span class="sc">$</span>min <span class="ot">&lt;-</span> y<span class="sc">$</span>mean <span class="sc">-</span> <span class="fl">1.96</span> <span class="sc">*</span> y<span class="sc">$</span>sd <span class="sc">/</span> <span class="fu">sqrt</span>(y<span class="sc">$</span>n)</span>
+<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a>y<span class="sc">$</span>max <span class="ot">&lt;-</span> y<span class="sc">$</span>mean <span class="sc">+</span> <span class="fl">1.96</span> <span class="sc">*</span> y<span class="sc">$</span>sd <span class="sc">/</span> <span class="fu">sqrt</span>(y<span class="sc">$</span>n)</span>
+<span id="cb45-10"><a href="#cb45-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-11"><a href="#cb45-11" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb45-12"><a href="#cb45-12" aria-hidden="true" tabindex="-1"></a>bp <span class="ot">&lt;-</span> <span class="fu">barplot</span>(</span>
+<span id="cb45-13"><a href="#cb45-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">height =</span> y<span class="sc">$</span>mean,</span>
+<span id="cb45-14"><a href="#cb45-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">names.arg =</span> <span class="fu">c</span>(<span class="st">"No Vacc."</span>, <span class="st">"Vaccinated"</span>),</span>
+<span id="cb45-15"><a href="#cb45-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),</span>
+<span id="cb45-16"><a href="#cb45-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"Survival Rate | Vaccination Status"</span>,</span>
+<span id="cb45-17"><a href="#cb45-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Vaccination Status"</span>,</span>
+<span id="cb45-18"><a href="#cb45-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">cex.lab =</span> <span class="fl">1.5</span>, <span class="at">cex.axis =</span> <span class="fl">1.25</span>, <span class="at">cex.names =</span> <span class="fl">1.25</span>,</span>
+<span id="cb45-19"><a href="#cb45-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">"darkblue"</span></span>
+<span id="cb45-20"><a href="#cb45-20" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb45-21"><a href="#cb45-21" aria-hidden="true" tabindex="-1"></a><span class="fu">arrows</span>(<span class="at">x0 =</span> bp, <span class="at">y0 =</span> y<span class="sc">$</span>min, <span class="at">x1 =</span> bp, <span class="at">y1 =</span> y<span class="sc">$</span>max,</span>
+<span id="cb45-22"><a href="#cb45-22" aria-hidden="true" tabindex="-1"></a>       <span class="at">code =</span> <span class="dv">3</span>, <span class="at">angle =</span> <span class="dv">90</span>, <span class="at">length =</span> <span class="fl">0.05</span>, <span class="at">lwd =</span> <span class="dv">4</span>,</span>
+<span id="cb45-23"><a href="#cb45-23" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="st">"darkgrey"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="stats2_unit2_notes_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>

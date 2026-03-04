@@ -142,7 +142,7 @@ window.Quarto = {
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, <span class="at">size =</span> <span class="dv">1</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 3</code></pre>
+<pre><code>[1] 6</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># True probability of rolling a 1 with a fair die</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">6</span></span>
@@ -244,7 +244,10 @@ P(1 \text{ or } 2) = \frac{1}{6} + \frac{1}{6} = \frac{2}{6} = \frac{1}{3}
 <p><span class="math display">\[
 P(A_1 \text{ or } A_2 \text{ or } \dots \text{ or } A_k)
 = P(A_1) + P(A_2) + \dots + P(A_k)
-\]</span> ### Thinking in Terms of Events</p>
+\]</span></p>
+</section>
+<section id="thinking-in-terms-of-events" class="level3">
+<h3 class="anchored" data-anchor-id="thinking-in-terms-of-events">Thinking in Terms of Events</h3>
 <ul>
 <li><p>In practice, we often work with <strong>events</strong>, which are sets (collections) of outcomes.</p></li>
 <li><p>Let:</p>
@@ -710,6 +713,262 @@ total 13.7  86.3 100.0</code></pre>
 <p><img src="stats2_unit2_notes_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
+</div>
+</div>
+</section>
+</section>
+<section id="point-estimates" class="level2">
+<h2 class="anchored" data-anchor-id="point-estimates">Point Estimates</h2>
+<ul>
+<li>Suppose a poll reports that the U.S. President’s approval rating is <strong>45%</strong>.
+<ul>
+<li>The 45% is a <strong>point estimate</strong> — our best single-number guess of the true population value.</li>
+<li>The true population proportion is called the <strong>parameter</strong>.</li>
+<li>When the parameter is a proportion, we denote it by <span class="math inline">\(p\)</span>.</li>
+<li>The sample proportion is denoted <span class="math inline">\(\hat{p}\)</span>.</li>
+</ul></li>
+<li>Unless we survey the entire population, <span class="math inline">\(p\)</span> is unknown.
+<ul>
+<li>We use <span class="math inline">\(\hat{p}\)</span> to estimate <span class="math inline">\(p\)</span>.</li>
+</ul></li>
+</ul>
+</section>
+<section id="statistical-error" class="level2">
+<h2 class="anchored" data-anchor-id="statistical-error">Statistical Error</h2>
+<ul>
+<li><p>The difference between a sample estimate and the true parameter is called <strong>error</strong>.</p></li>
+<li><p>Error has two components:</p>
+<ul>
+<li><strong>Sampling error</strong>: natural variation from one sample to another.</li>
+<li><strong>Bias</strong>: systematic over- or under-estimation of the true value.</li>
+</ul></li>
+<li><p>Sampling error depends heavily on the sample size <span class="math inline">\(n\)</span>.</p></li>
+<li><p>Bias reflects flaws in data collection or measurement.</p>
+<ul>
+<li>Example: a student poll about building a new stadium may overstate support relative to the full population.</li>
+</ul></li>
+</ul>
+</section>
+<section id="standard-deviation-vs.-standard-error" class="level2">
+<h2 class="anchored" data-anchor-id="standard-deviation-vs.-standard-error">Standard Deviation vs.&nbsp;Standard Error</h2>
+<section id="standard-deviation-sd" class="level3">
+<h3 class="anchored" data-anchor-id="standard-deviation-sd">Standard Deviation (SD)</h3>
+<ul>
+<li>Measures variability of individual observations around the mean.</li>
+<li>Describes how spread out the data are.</li>
+<li>Example: “Test scores vary by about ±10 points around the mean.”</li>
+</ul>
+</section>
+<section id="standard-error-se" class="level3">
+<h3 class="anchored" data-anchor-id="standard-error-se">Standard Error (SE)</h3>
+<ul>
+<li>Measures variability of a <strong>sample statistic</strong> across repeated samples.</li>
+<li>Indicates how precisely we have estimated a population parameter.</li>
+</ul>
+<p>For proportions:</p>
+<p><span class="math display">\[
+SE_{\hat{p}} = \sqrt{\frac{p(1-p)}{n}}
+\]</span></p>
+<ul>
+<li>As sample size increases, SE decreases (because of <span class="math inline">\(\sqrt{n}\)</span> in the denominator).</li>
+<li>Example: “If we repeatedly sampled students, the sample mean would vary by about ±2 points.”</li>
+</ul>
+</section>
+<section id="when-to-use-sd-vs.-se" class="level3">
+<h3 class="anchored" data-anchor-id="when-to-use-sd-vs.-se">When to Use SD vs.&nbsp;SE</h3>
+<ul>
+<li>Use <strong>SD</strong> when:
+<ul>
+<li>Describing the spread of raw data.</li>
+<li>Comparing variability across individuals.</li>
+</ul></li>
+<li>Use <strong>SE</strong> when:
+<ul>
+<li>Quantifying uncertainty in an estimate.</li>
+<li>Constructing confidence intervals.</li>
+<li>Conducting hypothesis tests.</li>
+</ul></li>
+<li><strong>Rule of thumb:</strong>
+<ul>
+<li>SD describes data.</li>
+<li>SE describes precision.</li>
+</ul></li>
+<li>Why standard errors?
+<ul>
+<li>In the real world, we don’t observe the DGP or all possible events!</li>
+<li>Thus, the standard deviation is not knowable</li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="confidence-intervals" class="level2">
+<h2 class="anchored" data-anchor-id="confidence-intervals">Confidence Intervals</h2>
+<ul>
+<li><p>A point estimate <span class="math inline">\(\hat{p}\)</span> gives one plausible value for <span class="math inline">\(p\)</span>.</p></li>
+<li><p>But because of sampling error, <span class="math inline">\(\hat{p}\)</span> will not equal <span class="math inline">\(p\)</span> exactly.</p></li>
+<li><p>Rather than reporting a single value, we report a <strong>range of plausible values</strong>.</p></li>
+<li><p>A <strong>confidence interval (CI)</strong> provides this range.</p>
+<ul>
+<li>It is centered at the point estimate.</li>
+<li>Its width depends on the standard error.</li>
+</ul></li>
+</ul>
+<section id="margin-of-error" class="level3">
+<h3 class="anchored" data-anchor-id="margin-of-error">Margin of Error</h3>
+<ul>
+<li><p>In a normal distribution, about 95% of values lie within <strong>1.96 standard deviations</strong> of the mean.</p></li>
+<li><p>Similarly, a 95% confidence interval is:</p></li>
+</ul>
+<p><span class="math display">\[
+\hat{p} \pm 1.96 \times SE
+\]</span></p>
+<ul>
+<li><strong>margin of error</strong>: <span class="math inline">\(1.96 \times SE\)</span>
+<ul>
+<li>More generally: <span class="math inline">\(\text{Margin of Error} = z \times SE\)</span></li>
+</ul></li>
+</ul>
+</section>
+<section id="example-variability-of-a-point-estimate" class="level3">
+<h3 class="anchored" data-anchor-id="example-variability-of-a-point-estimate">Example: Variability of a Point Estimate</h3>
+<ul>
+<li>Suppose the true proportion supporting solar energy is <span class="math inline">\(p = 0.88\)</span>.
+<ul>
+<li>If we survey 1,000 adults, our sample proportion <span class="math inline">\(\hat{p}\)</span> will not equal 0.88 exactly.</li>
+</ul></li>
+<li>Imagine 250 million slips of paper:
+<ul>
+<li>88% labeled “support”</li>
+<li>12% labeled “not”
+<ul>
+<li>Randomly draw 1,000 slips.</li>
+<li>Compute the proportion labeled “support.”</li>
+<li>If we repeated this process many times, the sample proportion would vary — but it would tend to cluster around 0.88.</li>
+</ul></li>
+</ul></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set population size and true proportion of support</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>pop <span class="ot">&lt;-</span> <span class="dv">25000</span>      <span class="co"># total population size</span></span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fl">0.88</span>           <span class="co"># true population proportion that support</span></span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>loops <span class="ot">&lt;-</span> <span class="dv">1000</span>       <span class="co"># number of simulations (how many times we "poll")</span></span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Create an empty list to store results</span></span>
+<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">25</span>, <span class="dv">250</span>, <span class="dv">2500</span>)            <span class="co"># sample size for each poll</span></span>
+<span id="cb46-9"><a href="#cb46-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-10"><a href="#cb46-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Run simulation "loops" times for each n</span></span>
+<span id="cb46-11"><a href="#cb46-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(k <span class="cf">in</span> n){</span>
+<span id="cb46-12"><a href="#cb46-12" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>loops){</span>
+<span id="cb46-13"><a href="#cb46-13" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb46-14"><a href="#cb46-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Create population: 1 = support, 0 = not support</span></span>
+<span id="cb46-15"><a href="#cb46-15" aria-hidden="true" tabindex="-1"></a>    support <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">1</span>, pop <span class="sc">*</span> p)           <span class="co"># 88% supporters</span></span>
+<span id="cb46-16"><a href="#cb46-16" aria-hidden="true" tabindex="-1"></a>    not <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, pop <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> p))         <span class="co"># 12% non-supporters</span></span>
+<span id="cb46-17"><a href="#cb46-17" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb46-18"><a href="#cb46-18" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Randomize order (so we can sample randomly)</span></span>
+<span id="cb46-19"><a href="#cb46-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">set.seed</span>(i)                          <span class="co"># seed for reproducibility</span></span>
+<span id="cb46-20"><a href="#cb46-20" aria-hidden="true" tabindex="-1"></a>    s <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb46-21"><a href="#cb46-21" aria-hidden="true" tabindex="-1"></a>      <span class="at">support =</span> <span class="fu">c</span>(support, not),         <span class="co"># combine 1s and 0s</span></span>
+<span id="cb46-22"><a href="#cb46-22" aria-hidden="true" tabindex="-1"></a>      <span class="at">order =</span> <span class="fu">rnorm</span>(pop, <span class="dv">0</span>, <span class="dv">1</span>)           <span class="co"># random normal "order" to shuffle</span></span>
+<span id="cb46-23"><a href="#cb46-23" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb46-24"><a href="#cb46-24" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb46-25"><a href="#cb46-25" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Shuffle rows by random order</span></span>
+<span id="cb46-26"><a href="#cb46-26" aria-hidden="true" tabindex="-1"></a>    s <span class="ot">&lt;-</span> s[<span class="fu">order</span>(s<span class="sc">$</span>order), ]</span>
+<span id="cb46-27"><a href="#cb46-27" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb46-28"><a href="#cb46-28" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Take the first n as the sample</span></span>
+<span id="cb46-29"><a href="#cb46-29" aria-hidden="true" tabindex="-1"></a>    z[[<span class="fu">length</span>(z) <span class="sc">+</span> <span class="dv">1</span>]] <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb46-30"><a href="#cb46-30" aria-hidden="true" tabindex="-1"></a>      <span class="at">point_est =</span> <span class="fu">mean</span>(s<span class="sc">$</span>support[<span class="dv">1</span><span class="sc">:</span>k]),  <span class="co"># sample proportion</span></span>
+<span id="cb46-31"><a href="#cb46-31" aria-hidden="true" tabindex="-1"></a>      <span class="at">sd =</span> <span class="fu">sd</span>(s<span class="sc">$</span>support[<span class="dv">1</span><span class="sc">:</span>k]), <span class="co"># sample standard deviation</span></span>
+<span id="cb46-32"><a href="#cb46-32" aria-hidden="true" tabindex="-1"></a>      <span class="at">n =</span> k </span>
+<span id="cb46-33"><a href="#cb46-33" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb46-34"><a href="#cb46-34" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb46-35"><a href="#cb46-35" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb46-36"><a href="#cb46-36" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb46-37"><a href="#cb46-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-38"><a href="#cb46-38" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine results into one data frame</span></span>
+<span id="cb46-39"><a href="#cb46-39" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">do.call</span>(rbind, z))</span>
+<span id="cb46-40"><a href="#cb46-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-41"><a href="#cb46-41" aria-hidden="true" tabindex="-1"></a>df_25 <span class="ot">&lt;-</span> df[df<span class="sc">$</span>n <span class="sc">==</span> <span class="dv">25</span>,]</span>
+<span id="cb46-42"><a href="#cb46-42" aria-hidden="true" tabindex="-1"></a>df_250 <span class="ot">&lt;-</span> df[df<span class="sc">$</span>n <span class="sc">==</span> <span class="dv">250</span>,]</span>
+<span id="cb46-43"><a href="#cb46-43" aria-hidden="true" tabindex="-1"></a>df_2500 <span class="ot">&lt;-</span> df[df<span class="sc">$</span>n <span class="sc">==</span> <span class="dv">2500</span>,]</span>
+<span id="cb46-44"><a href="#cb46-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-45"><a href="#cb46-45" aria-hidden="true" tabindex="-1"></a>d25 <span class="ot">&lt;-</span> <span class="fu">density</span>(df_25<span class="sc">$</span>point_est)</span>
+<span id="cb46-46"><a href="#cb46-46" aria-hidden="true" tabindex="-1"></a>d250 <span class="ot">&lt;-</span> <span class="fu">density</span>(df_250<span class="sc">$</span>point_est)</span>
+<span id="cb46-47"><a href="#cb46-47" aria-hidden="true" tabindex="-1"></a>d2500 <span class="ot">&lt;-</span> <span class="fu">density</span>(df_2500<span class="sc">$</span>point_est)</span>
+<span id="cb46-48"><a href="#cb46-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-49"><a href="#cb46-49" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb46-50"><a href="#cb46-50" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(d25<span class="sc">$</span>x, d25<span class="sc">$</span>y, <span class="at">type =</span> <span class="st">"l"</span>, <span class="at">lwd =</span> <span class="dv">4</span>,</span>
+<span id="cb46-51"><a href="#cb46-51" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Simulated Point Estimates"</span>, </span>
+<span id="cb46-52"><a href="#cb46-52" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Density"</span>, <span class="at">cex.lab =</span> <span class="fl">1.5</span>, <span class="at">cex.axis =</span> <span class="fl">1.25</span>,</span>
+<span id="cb46-53"><a href="#cb46-53" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fu">max</span>(d2500<span class="sc">$</span>y)))</span>
+<span id="cb46-54"><a href="#cb46-54" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(d250<span class="sc">$</span>x, d250<span class="sc">$</span>y, <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">lwd =</span> <span class="dv">4</span>)</span>
+<span id="cb46-55"><a href="#cb46-55" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(d2500<span class="sc">$</span>x, d2500<span class="sc">$</span>y, <span class="at">lty =</span> <span class="dv">3</span>, <span class="at">lwd =</span> <span class="dv">4</span>)</span>
+<span id="cb46-56"><a href="#cb46-56" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> p, <span class="at">col =</span> <span class="st">"plum"</span>, <span class="at">lwd =</span> <span class="dv">4</span>)</span>
+<span id="cb46-57"><a href="#cb46-57" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topleft"</span>,</span>
+<span id="cb46-58"><a href="#cb46-58" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"n = 25"</span>, <span class="st">"n = 250"</span>, <span class="st">"n = 2500"</span>, <span class="st">"p"</span>),</span>
+<span id="cb46-59"><a href="#cb46-59" aria-hidden="true" tabindex="-1"></a>       <span class="at">cex =</span> <span class="fl">1.5</span>, <span class="at">bty =</span> <span class="st">"n"</span>, <span class="at">lty =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="dv">1</span>), <span class="at">lwd =</span> <span class="dv">4</span>,</span>
+<span id="cb46-60"><a href="#cb46-60" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">"black"</span>, <span class="dv">3</span>), <span class="st">"plum"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="stats2_unit2_notes_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the standard error</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>se <span class="ot">&lt;-</span> <span class="fu">mean</span>(df_250<span class="sc">$</span>sd) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="dv">250</span>)</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Confidence interval using standard error</span></span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>lower_bound_se <span class="ot">&lt;-</span> <span class="fu">mean</span>(df_250<span class="sc">$</span>point_est) <span class="sc">-</span> <span class="fl">1.96</span> <span class="sc">*</span> se</span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>upper_bound_se <span class="ot">&lt;-</span> <span class="fu">mean</span>(df_250<span class="sc">$</span>point_est) <span class="sc">+</span> <span class="fl">1.96</span> <span class="sc">*</span> se</span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Confidence interval using standard deviation of point estimates</span></span>
+<span id="cb47-9"><a href="#cb47-9" aria-hidden="true" tabindex="-1"></a>lower_bound_sd <span class="ot">&lt;-</span> <span class="fu">mean</span>(df_250<span class="sc">$</span>point_est) <span class="sc">-</span> <span class="fl">1.96</span> <span class="sc">*</span> <span class="fu">sd</span>(df_250<span class="sc">$</span>point_est)</span>
+<span id="cb47-10"><a href="#cb47-10" aria-hidden="true" tabindex="-1"></a>upper_bound_sd <span class="ot">&lt;-</span> <span class="fu">mean</span>(df_250<span class="sc">$</span>point_est) <span class="sc">+</span> <span class="fl">1.96</span> <span class="sc">*</span> <span class="fu">sd</span>(df_250<span class="sc">$</span>point_est)</span>
+<span id="cb47-11"><a href="#cb47-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-12"><a href="#cb47-12" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb47-13"><a href="#cb47-13" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(df_250<span class="sc">$</span>point_est, </span>
+<span id="cb47-14"><a href="#cb47-14" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Simulated Point Estimates"</span>,</span>
+<span id="cb47-15"><a href="#cb47-15" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">""</span>, <span class="at">cex.axis =</span> <span class="fl">1.25</span>, <span class="at">cex.lab =</span> <span class="fl">1.5</span>,</span>
+<span id="cb47-16"><a href="#cb47-16" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlim =</span> <span class="fu">c</span>(<span class="fl">0.7</span>, <span class="dv">1</span>))</span>
+<span id="cb47-17"><a href="#cb47-17" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> <span class="fu">c</span>(lower_bound_se, upper_bound_se), <span class="at">lty =</span> <span class="dv">1</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb47-18"><a href="#cb47-18" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> <span class="fu">c</span>(lower_bound_sd, upper_bound_sd), <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb47-19"><a href="#cb47-19" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topleft"</span>,</span>
+<span id="cb47-20"><a href="#cb47-20" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"95% C.I. (SE)"</span>, <span class="st">"95% C.I. (SD)"</span>),</span>
+<span id="cb47-21"><a href="#cb47-21" aria-hidden="true" tabindex="-1"></a>       <span class="at">lty =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">cex =</span> <span class="fl">1.25</span>, <span class="at">bty =</span> <span class="st">"n"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="stats2_unit2_notes_files/figure-html/unnamed-chunk-16-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>se</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.02049286</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(p<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>p)<span class="sc">/</span><span class="dv">250</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.02055237</code></pre>
+</div>
+</div>
+<ul>
+<li>But what does “95% confident” really mean?
+<ul>
+<li>Imagine we repeatedly took many samples and built a 95% confidence interval from each one.<br>
+</li>
+<li>About 95% of those intervals would contain the true parameter <span class="math inline">\(p\)</span>.</li>
+</ul></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>se <span class="ot">&lt;-</span> <span class="fu">mean</span>(df_2500<span class="sc">$</span>sd) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="dv">2500</span>)</span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>lower_bound_se <span class="ot">&lt;-</span> <span class="fu">mean</span>(df_2500<span class="sc">$</span>point_est) <span class="sc">-</span> <span class="fl">1.96</span> <span class="sc">*</span> se</span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>upper_bound_se <span class="ot">&lt;-</span> <span class="fu">mean</span>(df_2500<span class="sc">$</span>point_est) <span class="sc">+</span> <span class="fl">1.96</span> <span class="sc">*</span> se</span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">ifelse</span>(df_2500<span class="sc">$</span>point_est <span class="sc">&lt;</span> lower_bound_se, <span class="dv">1</span>,</span>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a>       <span class="fu">ifelse</span>(df_2500<span class="sc">$</span>point_est <span class="sc">&gt;</span> upper_bound_se, <span class="dv">1</span>, <span class="dv">0</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.039</code></pre>
 </div>
 </div>
 </section>

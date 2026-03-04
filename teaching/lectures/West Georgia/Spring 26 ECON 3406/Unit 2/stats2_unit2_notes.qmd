@@ -103,6 +103,7 @@ $$
 P(A_1 \text{ or } A_2 \text{ or } \dots \text{ or } A_k)
 = P(A_1) + P(A_2) + \dots + P(A_k)
 $$
+
 ### Thinking in Terms of Events
 
 - In practice, we often work with **events**, which are sets (collections) of outcomes.
@@ -487,5 +488,210 @@ bp <- barplot(
 arrows(x0 = bp, y0 = y$min, x1 = bp, y1 = y$max,
        code = 3, angle = 90, length = 0.05, lwd = 4,
        col = "darkgrey")
+
+```
+
+## Point Estimates
+
+- Suppose a poll reports that the U.S. President’s approval rating is **45%**.
+  - The 45% is a **point estimate** — our best single-number guess of the true population value.
+  - The true population proportion is called the **parameter**.
+  - When the parameter is a proportion, we denote it by $p$.
+  - The sample proportion is denoted $\hat{p}$.
+
+- Unless we survey the entire population, $p$ is unknown.
+  - We use $\hat{p}$ to estimate $p$.
+
+## Statistical Error
+
+- The difference between a sample estimate and the true parameter is called **error**.
+
+- Error has two components:
+  - **Sampling error**: natural variation from one sample to another.
+  - **Bias**: systematic over- or under-estimation of the true value.
+
+- Sampling error depends heavily on the sample size $n$.
+- Bias reflects flaws in data collection or measurement.
+  - Example: a student poll about building a new stadium may overstate support relative to the full population.
+
+## Standard Deviation vs. Standard Error
+
+### Standard Deviation (SD)
+
+- Measures variability of individual observations around the mean.
+- Describes how spread out the data are.
+- Example: “Test scores vary by about ±10 points around the mean.”
+
+### Standard Error (SE)
+
+- Measures variability of a **sample statistic** across repeated samples.
+- Indicates how precisely we have estimated a population parameter.
+
+For proportions:
+
+$$
+SE_{\hat{p}} = \sqrt{\frac{p(1-p)}{n}}
+$$
+
+- As sample size increases, SE decreases (because of $\sqrt{n}$ in the denominator).
+- Example: “If we repeatedly sampled students, the sample mean would vary by about ±2 points.”
+
+### When to Use SD vs. SE
+
+- Use **SD** when:
+  - Describing the spread of raw data.
+  - Comparing variability across individuals.
+
+- Use **SE** when:
+  - Quantifying uncertainty in an estimate.
+  - Constructing confidence intervals.
+  - Conducting hypothesis tests.
+
+- **Rule of thumb:**
+  - SD describes data.
+  - SE describes precision.
+
+- Why standard errors?  
+  - In the real world, we don't observe the DGP or all possible events!
+  - Thus, the standard deviation is not knowable
+
+## Confidence Intervals
+
+- A point estimate $\hat{p}$ gives one plausible value for $p$.
+- But because of sampling error, $\hat{p}$ will not equal $p$ exactly.
+
+- Rather than reporting a single value, we report a **range of plausible values**.
+
+- A **confidence interval (CI)** provides this range.
+  - It is centered at the point estimate.
+  - Its width depends on the standard error.
+
+### Margin of Error
+
+- In a normal distribution, about 95% of values lie within **1.96 standard deviations** of the mean.
+
+- Similarly, a 95% confidence interval is:
+
+$$
+\hat{p} \pm 1.96 \times SE
+$$
+
+- **margin of error**: $1.96 \times SE$
+  - More generally: $\text{Margin of Error} = z \times SE$
+
+### Example: Variability of a Point Estimate
+
+- Suppose the true proportion supporting solar energy is $p = 0.88$.
+  - If we survey 1,000 adults, our sample proportion $\hat{p}$ will not equal 0.88 exactly.
+
+- Imagine 250 million slips of paper:
+  - 88% labeled “support”
+  - 12% labeled “not”
+    - Randomly draw 1,000 slips.
+    - Compute the proportion labeled “support.”
+    - If we repeated this process many times, the sample proportion would vary — but it would tend to cluster around 0.88.
+
+```{r}
+
+# Set population size and true proportion of support
+pop <- 25000      # total population size
+p <- 0.88           # true population proportion that support
+loops <- 1000       # number of simulations (how many times we "poll")
+
+# Create an empty list to store results
+z <- list()
+n <- c(25, 250, 2500)            # sample size for each poll
+
+# Run simulation "loops" times for each n
+for(k in n){
+  for(i in 1:loops){
+    
+    # Create population: 1 = support, 0 = not support
+    support <- rep(1, pop * p)           # 88% supporters
+    not <- rep(0, pop * (1 - p))         # 12% non-supporters
+    
+    # Randomize order (so we can sample randomly)
+    set.seed(i)                          # seed for reproducibility
+    s <- data.frame(
+      support = c(support, not),         # combine 1s and 0s
+      order = rnorm(pop, 0, 1)           # random normal "order" to shuffle
+    )
+    
+    # Shuffle rows by random order
+    s <- s[order(s$order), ]
+    
+    # Take the first n as the sample
+    z[[length(z) + 1]] <- data.frame(
+      point_est = mean(s$support[1:k]),  # sample proportion
+      sd = sd(s$support[1:k]), # sample standard deviation
+      n = k 
+    )
+    
+  }
+}
+
+# Combine results into one data frame
+df <- as.data.frame(do.call(rbind, z))
+
+df_25 <- df[df$n == 25,]
+df_250 <- df[df$n == 250,]
+df_2500 <- df[df$n == 2500,]
+
+d25 <- density(df_25$point_est)
+d250 <- density(df_250$point_est)
+d2500 <- density(df_2500$point_est)
+
+par(mar = c(5, 5, 1, 1))
+plot(d25$x, d25$y, type = "l", lwd = 4,
+     xlab = "Simulated Point Estimates", 
+     ylab = "Density", cex.lab = 1.5, cex.axis = 1.25,
+     ylim = c(0, max(d2500$y)))
+lines(d250$x, d250$y, lty = 2, lwd = 4)
+lines(d2500$x, d2500$y, lty = 3, lwd = 4)
+abline(v = p, col = "plum", lwd = 4)
+legend("topleft",
+       legend = c("n = 25", "n = 250", "n = 2500", "p"),
+       cex = 1.5, bty = "n", lty = c(1:3, 1), lwd = 4,
+       col = c(rep("black", 3), "plum"))
+
+# Calculate the standard error
+se <- mean(df_250$sd) / sqrt(250)
+
+# Confidence interval using standard error
+lower_bound_se <- mean(df_250$point_est) - 1.96 * se
+upper_bound_se <- mean(df_250$point_est) + 1.96 * se
+
+# Confidence interval using standard deviation of point estimates
+lower_bound_sd <- mean(df_250$point_est) - 1.96 * sd(df_250$point_est)
+upper_bound_sd <- mean(df_250$point_est) + 1.96 * sd(df_250$point_est)
+
+par(mar = c(5, 5, 1, 1))
+hist(df_250$point_est, 
+     xlab = "Simulated Point Estimates",
+     main = "", cex.axis = 1.25, cex.lab = 1.5,
+     xlim = c(0.7, 1))
+abline(v = c(lower_bound_se, upper_bound_se), lty = 1, lwd = 2)
+abline(v = c(lower_bound_sd, upper_bound_sd), lty = 2, lwd = 2)
+legend("topleft",
+       legend = c("95% C.I. (SE)", "95% C.I. (SD)"),
+       lty = 1:2, lwd = 2, cex = 1.25, bty = "n")
+
+se
+sqrt(p*(1-p)/250)
+
+```
+
+- But what does “95% confident” really mean?  
+  - Imagine we repeatedly took many samples and built a 95% confidence interval from each one.  
+  - About 95% of those intervals would contain the true parameter $p$. 
+
+```{r}
+
+se <- mean(df_2500$sd) / sqrt(2500)
+lower_bound_se <- mean(df_2500$point_est) - 1.96 * se
+upper_bound_se <- mean(df_2500$point_est) + 1.96 * se
+
+mean(ifelse(df_2500$point_est < lower_bound_se, 1,
+       ifelse(df_2500$point_est > upper_bound_se, 1, 0)))
 
 ```

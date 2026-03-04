@@ -695,3 +695,412 @@ mean(ifelse(df_2500$point_est < lower_bound_se, 1,
        ifelse(df_2500$point_est > upper_bound_se, 1, 0)))
 
 ```
+
+### Why 95% Confidence Intervals?
+
+- **95% is the conventional standard** in applied research.
+  - It balances **precision** (narrower intervals) and **certainty** (coverage probability).
+  
+- Interpretation: If we repeated sampling many times, about 95% of those confidence intervals would contain the true parameter.
+
+- Wider intervals (e.g., 99%) increase certainty but reduce precision.
+
+### 95% vs. 99%: Error Tradeoffs
+
+- **Type I Error (false positive):**
+  - Rejecting $H_0$ when it is actually true.
+  - More likely with a 95% interval than a 99% interval.
+  - Example: concluding a treatment works when it does not.
+
+- **Type II Error (false negative):**
+  - Failing to reject $H_0$ when $H_A$ is true.
+  - More likely with a 99% interval than a 95% interval.
+  - Example: missing a real effect because the interval is too wide.
+
+- **Core tradeoff:**
+  - 95% → more power, slightly higher false-positive risk.
+  - 99% → more caution, greater chance of missing true effects.
+
+## Hypothesis Testing
+
+- **Null hypothesis ($H_0$):** the default claim (e.g., “no effect”).
+- **Alternative hypothesis ($H_A$):** the competing claim (e.g., “there is an effect”).
+
+- The goal: determine whether the data provide **strong enough evidence** to reject $H_0$.
+
+### Analogy: Innocent Until Proven Guilty
+
+- Think of $H_0$ as “the defendant is innocent.”
+- $H_A$ as “the defendant is guilty.”
+- We require strong evidence before rejecting $H_0$.
+
+- Failing to reject $H_0$ does **not** prove it true.
+  - It means there was insufficient evidence to reject it.
+
+- “Lack of evidence is not evidence of absence.”
+
+- In statistics:
+  - We either **reject** $H_0$
+  - Or **fail to reject** $H_0$
+
+- Hypothesis tests do not “prove” claims — they evaluate evidence.
+
+## Statistical Power
+
+- **Statistical power** is the probability of detecting a true effect.
+
+$$
+\text{Power} = P(\text{Reject } H_0 \mid H_A \text{ is true}) = 1 - \beta
+$$
+
+- $\beta$ is the probability of a **Type II error** (a miss).
+
+- Power answers the question: *If an effect truly exists, how likely are we to detect it?*
+
+### Error Rates
+
+- **Significance level ($\alpha$):**
+  - Probability of a Type I error.
+  - Rejecting $H_0$ when it is true.
+
+- **Power ($1 - \beta$):**
+  - Probability of correctly rejecting $H_0$ when $H_A$ is true.
+
+|                      | Reject $H_0$        | Fail to Reject $H_0$ |
+|----------------------|---------------------|----------------------|
+| **$H_0$ True**       | $\alpha$ (Type I)   | $1 - \alpha$         |
+| **$H_A$ True**       | $1 - \beta$ (Power) | $\beta$ (Type II)    |
+
+### Trade-offs in Power
+
+- Lowering $\alpha$ (e.g., using 99% instead of 95%):
+  - Reduces Type I errors.
+  - Increases Type II errors (reduces power).
+
+- Study design requires balancing:
+  - Protection against false positives.
+  - Ability to detect real effects.
+
+### Why Power Matters
+
+- **Underpowered studies:**
+  - Often inconclusive.
+  - Fail to detect real effects.
+
+- **Overpowered studies:**
+  - Detect trivial differences.
+  - May waste resources.
+
+- Both extremes reduce research value.
+
+### Broader Implications
+
+- Too many underpowered studies:
+  - Increase unreliable findings.
+  - Contribute to replication problems.
+
+- Excessive demands for power:
+  - Increase costs.
+  - Raise ethical concerns (e.g., unnecessary experimentation).
+
+### What Determines Power?
+
+- Power depends on:
+  1. The significance level ($\alpha$).
+  2. The true effect size.
+  3. Sample size and variability.
+
+### Power Analysis: The Math
+
+- Recall: $\text{Margin of Error} = z \times SE$
+
+If we want a margin of error of 0.01 at the 95% level:
+
+$$
+0.01 = 1.96 \times \sqrt{\frac{p(1-p)}{n}}
+$$
+
+Solving for $n$:
+
+$$
+n = \frac{1.96^2 \, p(1-p)}{0.01^2}
+$$
+
+```{r}
+
+n_star <- (1.96^2 * p * (1 - p)) / 0.01^2
+n_star
+
+# Set population size and true proportion of support
+pop <- 250000       # total population size
+p <- 0.88           # true population proportion that support
+loops <- 1000       # number of simulations (how many times we "poll")
+
+# Create an empty list to store results
+z <- list()
+n <- round(n_star)           # sample size for each poll
+
+# Run simulation "loops" times
+for(i in 1:loops){
+  
+  # Create population: 1 = support, 0 = not support
+  support <- rep(1, pop * p)           # 88% supporters
+  not <- rep(0, pop * (1 - p))         # 12% non-supporters
+  
+  # Randomize order (so we can sample randomly)
+  set.seed(i)                          # seed for reproducibility
+  s <- data.frame(
+    support = c(support, not),         # combine 1s and 0s
+    order = rnorm(pop, 0, 1)           # random normal "order" to shuffle
+  )
+  
+  # Shuffle rows by random order
+  s <- s[order(s$order), ]
+  
+  # Take the first n = 250 as the sample
+  z[[length(z) + 1]] <- data.frame(
+    point_est = mean(s$support[1:n]),  # sample proportion
+    sd = sd(s$support[1:n])            # sample standard deviation
+  )
+  
+  # Print progress (overwrites same line)
+  # cat(paste("Loop", i), "\r")
+}
+
+# Combine results into one data frame
+df <- as.data.frame(do.call(rbind, z))
+
+# Calculate the standard error
+se <- mean(df$sd) / sqrt(n)
+
+# Confidence interval using standard error
+lower_bound_se <- mean(df$point_est) - 1.96 * se
+upper_bound_se <- mean(df$point_est) + 1.96 * se
+
+# Confidence interval using standard deviation of point estimates
+lower_bound_sd <- mean(df$point_est) - 1.96 * sd(df$point_est)
+upper_bound_sd <- mean(df$point_est) + 1.96 * sd(df$point_est)
+
+# The results
+se * 1.96
+sd(df$point_est) * 1.96
+
+```
+
+- Formula for minimum sample size to achieve 95% CI with ±1% margin of error:  
+$$
+n = \dfrac{1.96^2 \cdot p(1-p)}{0.01^2}
+$$
+
+- Variance is smallest when $p \approx 0$ or $p \approx 1$, and largest when $p = 0.5$.
+  - **Implication:** The number of observations needed changes depending on the assumed population proportion.
+
+```{r}
+
+x <- data.frame(
+  p = 1:99/100
+)
+x$n <- 1.96^2 * x$p * (1 - x$p) / 0.01^2
+x$n <- x$n / 1000
+
+par(mar = c(5, 5, 1, 1))
+plot(x$p, x$n,
+     xlab = "Hypothesized Population Proportion",
+     ylab = "Min. Number of Obs. (1k)",
+     cex.axis = 1.25, cex.lab = 1.25,
+     type = "l", lwd = 4)
+
+```
+
+### Practical Implications
+
+- Researchers often use $p = 0.5$ when planning studies:  
+  - This is the **most conservative assumption** (gives maximum $n$).  
+  - Guarantees margin of error $\leq$ 1% regardless of true $p$.  
+
+- If prior information suggests $p$ is far from 0.5, you may need fewer observations.  
+
+- **Takeaway:** Always tie sample size planning to both desired precision (margin of error) and the variability of the outcome.
+
+## p-values  
+
+- A **p-value** measures the strength of evidence against the null hypothesis ($H_0$).
+
+- It answers the question: *If the null hypothesis were true, how surprising would our data be?*
+
+- In practice, hypothesis testing is often conducted using p-values.
+  - Confidence intervals provide similar information but are frequently used for estimation and visualization.
+
+### What Is a p-value?
+
+- The p-value is the probability of observing data **at least as extreme as what we observed**, assuming $H_0$ is true.
+
+- It is typically calculated using a summary statistic (e.g., the sample proportion $\hat{p}$).
+
+- Interpretation:
+  - **Small p-value → strong evidence against $H_0$.**
+  - Large p-value → the data are consistent with $H_0$.
+
+### Hypothesis Testing Example
+
+- Pew Research surveyed 1,000 American adults about support for increased coal usage.
+  - We want to test whether a **majority** supports coal.
+
+Hypotheses:
+
+$$
+H_0: p = 0.5
+$$
+
+$$
+H_A: p \neq 0.5
+$$
+
+- The null states there is no majority.
+- The alternative states the true proportion differs from 50%.
+
+### Sampling Distribution Example
+
+- Pew finds that **37%** of respondents support increased coal use.
+  - Is 37% meaningfully different from 50%?
+
+-To answer this, we ask:
+  - *If $H_0$ were true (i.e., $p = 0.5$), what would the sampling distribution of $\hat{p}$ look like?*
+  - How likely would it be to observe a sample proportion as far from 0.5 as 0.37?
+
+```{r}
+
+# Sample size
+n <- 1000
+
+# Null hypothesis proportion
+p <- 0.5
+
+# Observed sample proportion
+est <- 0.37
+
+# Standard error under the null
+se <- sqrt(p*(1-p) / n)
+se
+
+# Simulate sampling distribution under H0
+set.seed(1)
+par(mar = c(4.5, 4.5, 1, 1))
+hist(rnorm(n, mean = p, sd = se),
+     main = "",
+     xlab = expression(hat(p) ~ "|" ~ H[0] ~ "is true"),
+     cex.axis = 1.25, cex.lab = 1.5)
+
+# Now let’s overlay our observed 0.37 onto the simulated sampling distribution 
+
+set.seed(1)
+par(mar = c(4.5, 4.5, 1, 1))
+hist(rnorm(n, mean = p, sd = se),
+     main = "",
+     xlab = expression(hat(p) ~ "|" ~ H[0] ~ "is true"),
+     cex.axis = 1.25, cex.lab = 1.5,
+     xlim = c(0.3, 0.7))
+
+# Mark observed estimate
+abline(v = 0.37, lwd = 4)
+
+# Add legend
+legend("topright",
+       legend = c("Sample Estimate"),
+       lwd = 4, bty = 'n', cex = 1.25)
+
+```
+
+### Converting to a Z-Score
+
+- To formally test, we standardize using a **z-score**:  
+
+$$
+z = \dfrac{\hat{p} - p}{SE}
+$$  
+
+```{r}
+
+z <- (df$point_est - mean(df$point_est)) / sd(df$point_est)
+z <- z[order(z)]
+z <- data.frame(z_score = z)
+
+# Empirical cumulative distribution
+z$pctl <- (1:nrow(z))/nrow(z)
+
+# Plot cumulative distribution of z-scores
+par(mar = c(4.5, 4.5, 1, 1))
+plot(z$z_score, z$pctl, type = "l", lwd = 4,
+     ylab = "Cumulative Prop. of Obs.",
+     xlab = "Z-Score", cex.axis = 1.25, cex.lab = 1.5)
+
+# Add 95% cutoff lines
+abline(v = c(-1.96, 1.96), lwd = 2, lty = 2)
+
+# Compute z-score for observed estimate
+z_est <- (est - p) / se
+z_est
+
+# Plot cumulative distribution of z-scores
+par(mar = c(4.5, 4.5, 1, 1))
+plot(z$z_score, z$pctl, type = "l", lwd = 4,
+     ylab = "Cumulative Prop. of Obs.",
+     xlab = "Z-Score", cex.axis = 1.25, cex.lab = 1.5,
+     xlim = c(-10, 10))
+
+# Mark critical values
+abline(v = c(-1.96, 1.96), lwd = 2, lty = 2)
+
+# Mark observed z-score
+abline(v = z_est, lwd = 2)
+
+# Legend
+legend("bottomright",
+        legend = c("Sample Estimate", "95% Conf. Int."),
+        lty = c(1, 2), lwd = 2, 
+        bty = "n", cex = 1.25)
+
+```
+
+### Two-Sided Test
+
+- The p-value is the probability of observing a sample proportion **this extreme or more extreme**, if $H_0$ were true.  
+- Compare p-value to significance level ($\alpha$):  
+  - If p-value > $\alpha$: not enough evidence to reject $H_0$.  
+  - If p-value < $\alpha$: reject $H_0$.  
+  
+```{r}
+
+# One-sided p-value
+p_val_one_side <- pnorm(z_est)
+
+# Two-sided p-value
+p_val_two_side <- 2 * p_val_one_side
+
+# Round to 3 decimals
+round(p_val_two_side, 3) > 0.05
+
+# Reject the null
+round(p_val_two_side, 3) < 0.05
+
+```
+
+![](figures/two_sided.png)
+
+### How to Interpret a Small p-value
+
+- If $H_0$ were true, the probability of observing $\hat{p}=0.37$ is **astronomically small**.  
+
+- That leaves us with two possibilities:  
+  1. $H_0$ is true, and we just happened to observe an outcome that occurs only once in trillions of samples.  
+  2. $H_A$ is true, and the true proportion differs from 0.5.  
+  
+- Given the evidence, option (2) is far more plausible.  
+
+### Choosing a Significance Level
+
+- Choosing $\alpha$ is a balancing act between Type I and Type II errors.  
+  - Traditional choice: $\alpha = 0.05$  
+  - If Type I errors are especially dangerous or costly → use smaller $\alpha$ (e.g., 0.01).
+    - If Type II errors are more serious → use larger $\alpha$ (e.g., 0.10).  
+    - If collecting more data is cheap relative to the cost of errors → reduce uncertainty by increasing $n$.  

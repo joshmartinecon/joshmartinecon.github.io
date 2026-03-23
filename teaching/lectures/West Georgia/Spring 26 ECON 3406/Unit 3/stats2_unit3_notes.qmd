@@ -94,3 +94,220 @@ mean(ifelse(diff >= ub_diff_1 | diff <= lb_diff_1, 1, 0))
 mean(ifelse(diff >= ub_diff_2 | diff <= lb_diff_2, 1, 0))
 
 ```
+
+### Differences of Two Proportions: Example 1
+
+- Study of **ICU patients admitted after a heart attack**
+- Randomly assigned:
+  - **Treatment:** blood thinner  
+  - **Control:** no blood thinner
+- Outcome measured: **24-hour survival**
+
+```{r}
+
+# read in data
+x <- read.csv("data/cpr.csv")
+
+# convert to matrix
+z <- as.data.frame.matrix(table(x))
+z$total <- rowSums(z)
+z <- rbind(z, total = colSums(z))
+z
+
+## calculate n for each group
+nt <- z$total[2]
+nc <- z$total[1]
+
+## calculate p(survive) for each group
+pt <- z$survived[2] / nt
+pc <- z$survived[1] / nc
+
+## calculate test statistics
+point_est <- pt - pc
+se <- sqrt((pt * (1 - pt) / nt) + (pc * (1 - pc) / nc))
+
+z <- data.frame(
+  sig_level = c(0.01, 0.05, 0.1),
+  z_score = c(2.576, 1.96, 1.645)
+)
+
+z$min <- point_est - z$z_score * se
+z$max <- point_est + z$z_score * se
+z
+
+par(mar = c(4.5, 4.5, 1, 1))
+plot(1:3, rep(point_est, 3), 
+     ylim = c(min(z$min), max(z$max)),
+     xlab = "Significance Level (α)",
+     ylab = "Est. with Conf. Int.",
+     cex.axis = 1.25,
+     cex.lab = 1.5,
+     xaxt = "n")
+axis(1, at = 1:3, labels = c(z$sig_level), cex.axis = 1.25)
+abline(h = 0, lty = 2, lwd = 2)
+arrows(1:3, z$min, 1:3, z$max, length = 0.05, angle = 90, code = 3)
+
+```
+
+- We are **90% confident** that blood thinners change the 24-hour survival rate by between -3 and 29 percentage points for patients similar to those in the study
+
+- Because **0% is within this range**, the evidence is inconclusive
+  - We cannot determine whether blood thinners help or harm heart attack patients who have undergone CPR
+
+### Differences of Two Proportions: Example 2
+
+- - **5-year clinical trial:** Do fish oil supplements reduce heart attack risk?
+- Participants randomly assigned:
+  - **Fish oil**
+  - **Placebo**
+- Compare **heart attack rates** across groups
+
+```{r}
+
+# read in data
+x <- read.csv("data/fish_oil.csv")
+
+# convert to matrix
+z <- as.data.frame.matrix(table(x))
+z$total <- rowSums(z)
+z <- rbind(z, total = colSums(z))
+z
+
+## calculate n for each group
+nt <- z$total[1]
+nc <- z$total[2]
+
+## calculate p(hospital) for each group
+pt <- z$hospital[1] / nt
+pc <- z$hospital[2] / nc
+
+## calculate test statistics
+point_est <- pt - pc
+se <- sqrt((pt * (1 - pt) / nt) + (pc * (1 - pc) / nc))
+
+z <- data.frame(
+  sig_level = c(0.01, 0.05, 0.1),
+  z_score = c(2.576, 1.96, 1.645)
+)
+
+z$min <- point_est - z$z_score * se
+z$max <- point_est + z$z_score * se
+
+# convert to percentage points
+point_est <- point_est * 100
+z[,3:4] <- z[,3:4] * 100
+
+par(mar = c(4.5, 4.5, 1, 1))
+plot(1:3, rep(point_est, 3), 
+     ylim = c(min(z$min), 0),
+     xlab = "Significance Level (α)",
+     ylab = "Est. with Conf. Int. (Pct. Points)",
+     cex.axis = 1.25,
+     cex.lab = 1.5,
+     xaxt = "n")
+axis(1, at = 1:3, labels = c(z$sig_level), cex.axis = 1.25)
+abline(h = 0, lty = 2, lwd = 2)
+arrows(1:3, z$min, 1:3, z$max, length = 0.05, angle = 90, code = 3)
+
+```
+
+- **Estimated effect:** –0.0043  
+  - Heart attacks were **0.43 percentage points lower** with fish oil
+
+- **90% confidence interval:** –0.66 to –0.19 percentage points
+  - Because **0 is not in the interval**, the reduction is **statistically significant**
+
+### Practical vs. Statistical Significance
+
+- The effect is **statistically significant**, but **very small**:  
+  - about **0.4 fewer heart attacks per 100 people**.
+
+- In large samples, even **tiny effects can be statistically significant**.
+
+- **Practical question:** Is such a small reduction worth the **costs, side effects, or effort of treatment?**
+
+```{r}
+
+# effect size relative to mean
+## a 27.5% reduction!
+point_est / pc
+
+```
+
+### Differences of Two Proportions: Example 3
+
+- A drone quadcopter company is considering a new manufacturer for rotor blades
+  - The new manufacturer is more expensive but claims that their higher-quality blades are **3% more reliable**
+
+- Set up the appropriate hypotheses for this test:
+  - $H_0: p_{\text{highQ}} - p_{\text{standard}} = 0.03$
+  - $H_A: p_{\text{highQ}} - p_{\text{standard}} \neq 0.03$ 
+
+- Using these data, evaluate the hypotheses above at a significance level of 5%.
+
+### Compute the Point Estimate and Standard Error
+
+```{r}
+#| echo: true
+#| warning: false
+#| message: false
+
+x <- read.csv("data/quad.csv")
+
+p_us <- sum(ifelse(x$prospective_supplier == "pass", 1, 0)) / 1000
+p_them <- sum(ifelse(x$current_supplier == "pass", 1, 0)) / 1000
+
+point_est <- p_us - p_them
+se <- sqrt( p_us * (1 - p_us) / 1000 +  p_them * (1 - p_them) / 1000 )
+
+z <- data.frame(
+  sig_level = c(0.01, 0.05, 0.10),
+  z_score = c(2.576, 1.96, 1.645)
+)
+
+z$min <- (point_est - z$z_score * se)
+z$max <- (point_est + z$z_score * se)
+
+# plot estimates with conf. intervals
+par(mar = c(4.5, 4.5, 1, 1))
+plot(1:3, rep(point_est, 3), 
+     ylim = c(min(z$min), max(z$max)),
+     xlab = "Significance Level (α)",
+     ylab = "Est. with Conf. Int.",
+     cex.axis = 1.25,
+     cex.lab = 1.5,
+     xaxt = "n")
+axis(1, at = 1:3, labels = c(z$sig_level), cex.axis = 1.25)
+abline(h = 0.03, lty = 2, lwd = 2)
+arrows(1:3, z$min, 1:3, z$max, length = 0.05, angle = 90, code = 3)
+
+## z-score
+z <- (point_est - 0.03) / se
+
+# simulate null hypothesis
+set.seed(1)
+sim <- rnorm(10000, mean = 0.03, sd = se)
+
+# Probability of observing a value this extreme or larger
+1 - mean(ifelse(point_est >= sim, 1, 0))
+
+# p-value (right-tailed)
+1 - pnorm(z)
+
+# visualize the result
+par(mar = c(4.5, 4.5, 1, 1))
+hist(sim, main = "", xlab = "Simulated Estimates",
+     cex.lab = 1.5, cex.axis = 1.25)
+abline(v = point_est, lty = 2)
+legend("topleft",
+       legend = c("Point Est."),
+       lty = 2, cex = 1.25, bty = "n")
+
+```
+
+- From the standard normal distribution:
+  - The right-tail area is approximately 0.005
+  - Doubling for a two-tailed test gives p = 0.01
+  - Since p = 0.01 < 0.05, we **reject the null hypothesis**
+
+- We find statistically significant evidence that the higher-quality blades have a pass rate greater than 3% higher than the standard blades — exceeding the company’s claims.

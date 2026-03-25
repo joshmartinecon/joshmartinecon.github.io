@@ -311,3 +311,218 @@ legend("topleft",
   - Since p = 0.01 < 0.05, we **reject the null hypothesis**
 
 - We find statistically significant evidence that the higher-quality blades have a pass rate greater than 3% higher than the standard blades — exceeding the company’s claims.
+
+## t-distributions
+
+- When the population standard deviation ($\sigma$) is unknown (which is most of the time), we rely on the $t$-distribution instead of the normal model.
+  - The $t$-test helps us quantify uncertainty and make inferences about population parameters using sample data
+
+- We use a **t-distribution with (df = n - 1)** to model the sample mean when the sample size is small.
+  - As the number of observations increases, the **degrees of freedom (df)** also increase.
+  - With larger df, the **t-distribution more closely resembles the standard normal distribution**.
+  
+```{r}
+
+# generate 200 observations between -4 and 4
+x <- seq(-4, 4, length = 200)
+
+## plot parameters
+dfs <- c(8, 4, 2, 1)
+cols <- colorRampPalette(c("darkblue", "skyblue"))(4)
+par(mar = c(2.5, 4.5, 1, 1))
+
+## plot loop
+for (j in seq_along(dfs)) {
+  
+  df <- dfs[j]
+  y <- dt(x, df = df)
+  
+  if (j == 1) {
+    plot(x, y, type = "l", ylab = "Density", xlab = "",
+         cex.axis = 1.25, cex.lab = 1.5, lwd = 2, col = cols[j])
+  }else {
+    lines(x, y, lwd = 2, col = cols[j])
+  }
+}
+
+## lines and legend on plot
+lines(x, dnorm(x), lwd = 2)
+legend("topright", legend = c("normal", paste0("df = ", dfs)),
+       col = c("black", cols), lwd = 2, bty = "n", cex = 1.25)
+
+# for degrees of freedom 5:100, calculate the critical value
+## cv = 2.5% of values fall to the right of this number
+## cv = 1.96 with a normal distribution
+
+x <- data.frame(
+  df = 5:100,
+  qt = qt(.975, df = 5:100)
+)
+
+# plot
+par(mar = c(4.5, 4.5, 1, 1))
+plot(x$df, x$qt,
+     type = "l",
+     lwd = 4,
+     xlab = "Degrees of Freedom",
+     ylab = "Critical Value from t-distribution",
+     cex.lab = 1.5,
+     cex.axis = 1.25,
+     ylim = c(1.95, max(x$qt)))
+abline(h = 1.96, lty = 2, lwd = 2)
+
+```
+
+### t-statistic equation
+
+$$
+t = \dfrac{x_i - \bar{x}}{ \sigma_x / \sqrt{n}}
+$$
+
+```{r}
+
+# few number of observations; many simulations
+n <- 5
+Nsim <- 10000
+
+# prep loop
+rejections_normal <- 0
+rejections_t <- 0
+t <- list()
+
+# loop
+for(i in 1:Nsim){
+  
+  # simulate data (n = 2)
+  set.seed(i)
+  x <- rnorm(n)
+  
+  # calc. t-stat
+  tstat <- mean(x) / (sd(x)/sqrt(n))
+  
+  # normal critical value
+  if(abs(tstat) > 1.96){
+    rejections_normal <- rejections_normal + 1
+  }
+  
+  # correct t critical value
+  if(abs(tstat) > qt(0.975, df = n-1)){
+    rejections_t <- rejections_t + 1
+  }
+  
+  # store t-stat
+  t[i] <- tstat
+  
+}
+
+# gather data from loop; convert to dist.
+t <- density(unlist(t))
+
+# generate a normal dist.
+set.seed(1)
+z <- rnorm(10000)
+
+# plot
+par(mar = c(4.5, 4.5, 1, 1))
+plot(density(z), 
+     xlim = c(-4, 4),
+     lwd = 2,
+     xlab = "Test Statistics", 
+     ylab = "Density",
+     main = "",
+     cex.lab = 1.5, 
+     cex.axis = 1.25)
+lines(t, lty = 2, lwd = 2)
+legend("topleft", 
+       legend = c("normal", "t (df = 4)"),
+       lwd = 2,
+       lty = c(1, 2),
+       bty = "n",
+       cex = 1.25)
+
+# p-value if we use cv = 1.96 (wrong)
+rejections_normal / Nsim
+
+# p-value if we use cv = t* (correct)
+rejections_t / Nsim
+
+```
+
+### t-distibutions: Example 1
+
+- Let’s apply the t-distribution in a real-world example involving mercury content in dolphin muscle
+  - $H_0: Hg = 2$
+  - $H_A: Hg > 2$
+
+```{r}
+
+# read in data
+y <- read.csv("data/dolphins.csv")
+
+# see data
+head(y)
+
+# n?
+n <- nrow(y)
+n
+
+# prep simulation
+Nsim <- 100000
+t <- list()
+
+# point est
+se_obs <- sd(y$mercury) / sqrt(n)
+t_stat_obs <- (mean(y$mercury) - 2) / se_obs
+t_stat_obs
+
+# 5% of value fall to the right of this value
+crit_value <- qt(0.95, df = n - 1)
+
+# simulate null hypothesis
+for(i in 1:Nsim){
+  
+  # generate data
+  set.seed(i)
+  x <- rnorm(n, mean = 2, sd = sd(y$mercury))
+  
+  # summary stats
+  point_est <- mean(x)
+  se <- sd(x) / sqrt(n)
+  
+  # t-stat
+  t[i] <- (point_est - 2) / se
+  
+}
+t <- unlist(t)
+
+# plot
+par(mar = c(4.5, 4.5, 1, 1))
+plot(density(t), 
+     lwd = 2,
+     cex.lab = 1.5, 
+     cex.axis = 1.25,
+     xlab = "t-stats | Null is true",
+     main = "",
+     xlim = c(-5, 5))
+abline(v = t_stat_obs, lty = 2, lwd = 2)
+abline(v = crit_value, lty = 3, lwd = 2, col = "darkgrey")
+legend("topleft",
+       legend = c("Crit. Value", 
+                  "Point Est."),
+       lty = c(3, 2),
+       col = c("darkgrey", "black"),
+       lwd = 2,
+       bty = "n",
+       cex = 1.25)
+
+# simuated p-value 4 / 100k
+table(ifelse(t_stat_obs < t, 1, 0))
+
+# t-score (exp = 0.5)
+mean(ifelse(crit_value < t, 1, 0))
+
+# lower bound of conf. int.
+se <- sd(y$mercury) / sqrt(n)
+mean(y$mercury) - crit_value * se
+
+```

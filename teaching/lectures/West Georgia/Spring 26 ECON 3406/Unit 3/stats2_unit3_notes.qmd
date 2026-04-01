@@ -526,3 +526,156 @@ se <- sd(y$mercury) / sqrt(n)
 mean(y$mercury) - crit_value * se
 
 ```
+
+### t-distibutions: Example 2
+
+- Data from Cherry Blossom 10-Mile Run, held each spring in Washington, D.C.
+  - In 2006, the average race time was **93.29 minutes**
+
+- Are runners getting faster or slower over time?  
+  - $H_0: H_t = 93.29$
+  - $H_A: H_t \neq 93.29$
+
+```{r}
+
+# read in data
+x <- read.csv("data/dc_race_2017.csv")
+
+# summary stats
+summary(x$race_time)
+sd(x$race_time)
+
+# test statistic
+t_stat <- (mean(x$race_time) - 93.29) / (sd(x$race_time) / sqrt(nrow(x)))
+
+# critical value
+crit_value <- qt(0.975, df = nrow(x) - 1)
+
+# generate n = 100; normal dist.
+set.seed(1)
+n <- 100
+df <- n - 1
+x <- rnorm(n, mean = 0, sd = 1)
+dx <- density(x)
+
+# plot null
+par(mar = c(2, 4.5, 1, 1))
+plot(dx$x, dx$y, type = "l", lwd = 2, 
+     ylab = "Density", cex.lab = 1.5, cex.axis = 1.25)
+abline(v = t_stat, lty = 2, lwd = 2)
+legend("topleft",
+       legend = c("t-statistic"),
+       lwd = 2, lty = 2, 
+       bty = "n", cex = 1.25)
+
+# plot p-value
+x_fill <- dx$x[dx$x >= t_stat]
+y_fill <- dx$y[dx$x >= t_stat]
+polygon(c(min(x_fill), x_fill, t_stat),
+        c(0, y_fill, 0),
+        col = rgb(0, 0, 1, 0.3), border = NA)
+
+# simulated p-value; reject the null
+1 - mean(ifelse(t_stat > x, 1, 0))
+
+# formula p-value; reject the null
+1 - pt(t_stat, df = df)
+
+```
+
+### t-distibutions: Example 3
+
+- Does treatment using embryonic stem cells (ESCs) help improve heart function after a heart attack?
+  - Each sheep was **randomly** assigned to either an **ESC treatment group** or a **control group**.  
+  - Researchers measured the **change in heart pumping capacity** after treatment.  
+  - Positive values indicates stronger recovery.  
+  
+```{r}
+
+# read in data
+y <- read.csv("data/stem_cell.csv")
+y
+
+# calculate differences
+y$diff <- y$after - y$before
+
+# calculate average differences (mean, sd, and n)
+x <- aggregate(diff ~ trmt, y, 
+               function(x) c(mean = mean(x),
+                             sd = sd(x),
+                             n = length(x)))
+x <- as.data.frame(do.call(cbind, x))
+x[,2:4] <- apply(x[,2:4], 2, as.numeric)
+x
+
+# point estimate
+mean_diff <- x$mean[2] - x$mean[1]
+mean_diff
+
+# standard error
+se_c <- x$sd[1]^2 / x$n[1]
+se_t <- x$sd[2]^2 / x$n[2]
+se <- sqrt(se_c + se_t)
+se
+
+# t-statistic
+t_stat <- mean_diff / se
+t_stat
+
+# p-value
+1 - pt(t_stat, df = 8)
+
+```
+
+### t-distibutions: Example 4
+
+- Data: random sample of **150** mothers and their newborns in North Carolina
+  - **weight** — the newborn’s birth weight
+  - **smoke** — whether the mother **smoked during pregnancy**  
+  - $H_0: H_S = H_{NS}$
+  - $H_A: H_S \neq H_{NS}$
+
+```{r}
+
+# read in data
+y <- read.csv("data/ncbirths.csv")
+
+# randomize
+set.seed(1)
+y$random_number <- rnorm(nrow(y), mean = 0, sd = 1)
+y <- y[order(y$random_number),]
+
+# split
+t <- y[y$habit == "smoker",]
+c <- y[y$habit == "nonsmoker",]
+
+# combine
+y <- rbind(t[1:50,],
+           c[1:100,])
+
+# calculate mean, sd and n for babies by mother's smoking
+x <- aggregate(weight ~ habit, y, 
+               function(x) c(mean = mean(x),
+                             sd = sd(x),
+                             n = length(x)))
+x <- as.data.frame(do.call(cbind, x))
+x[,2:4] <- apply(x[,2:4], 2, as.numeric)
+x
+
+# point esimtate
+mean_diff <- x$mean[x$habit == "smoker"] - x$mean[x$habit == "nonsmoker"]
+mean_diff
+
+# standard errors
+se_c <- x$sd[x$habit == "nonsmoker"]^2 / x$n[x$habit == "nonsmoker"]
+se_t <- x$sd[x$habit == "smoker"]^2 / x$n[x$habit == "smoker"]
+se <- sqrt(se_c + se_t)
+se
+
+# t-stat
+t_stat <- mean_diff / se
+t_stat
+
+# p-value
+pt(t_stat, df = min(x$n))
+```

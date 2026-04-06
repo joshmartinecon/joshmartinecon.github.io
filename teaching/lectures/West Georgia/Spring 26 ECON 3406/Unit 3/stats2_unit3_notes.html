@@ -1000,6 +1000,603 @@ t = \dfrac{x_i - \bar{x}}{ \sigma_x / \sqrt{n}}
 </div>
 </section>
 </section>
+<section id="chi-squared-distributions" class="level2">
+<h2 class="anchored" data-anchor-id="chi-squared-distributions">Chi-Squared Distributions</h2>
+<ul>
+<li><p><span class="math inline">\(\chi\)</span> = the Greek letter for “chi” (pronounced like “kai”)</p></li>
+<li><p>The <span class="math inline">\(\chi^2\)</span> distribution is a continuous probability distribution</p>
+<ul>
+<li>If a variable <span class="math inline">\(Z\)</span> has the standard normal distribution, then <span class="math inline">\(Z^2\)</span> has the <span class="math inline">\(\chi^2\)</span> distribution with one <strong>degree of freedom</strong></li>
+</ul></li>
+<li><p>If <span class="math inline">\(Z_1, Z_2,..., Z_k\)</span> are independent standard normal variables, then…</p>
+<ul>
+<li><span class="math inline">\(Z_1^2 + Z_2^2 +...+ Z_k^2\)</span></li>
+<li>…has a <span class="math inline">\(\chi^2\)</span> distribution with <span class="math inline">\(k\)</span> <strong>degrees of freedom</strong></li>
+</ul></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="co"># generate 10k random, standardized numbers</span></span>
+<span id="cb82-2"><a href="#cb82-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb82-3"><a href="#cb82-3" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">10000</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb82-4"><a href="#cb82-4" aria-hidden="true" tabindex="-1"></a>x2 <span class="ot">&lt;-</span> x<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb82-5"><a href="#cb82-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-6"><a href="#cb82-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Two plots side by side</span></span>
+<span id="cb82-7"><a href="#cb82-7" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="at">mar =</span> <span class="fu">c</span>(<span class="fl">4.5</span>, <span class="fl">4.5</span>, <span class="dv">2</span>, <span class="dv">1</span>))</span>
+<span id="cb82-8"><a href="#cb82-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-9"><a href="#cb82-9" aria-hidden="true" tabindex="-1"></a><span class="co"># plot 1</span></span>
+<span id="cb82-10"><a href="#cb82-10" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(x,</span>
+<span id="cb82-11"><a href="#cb82-11" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Standard Normal Distribution"</span>,</span>
+<span id="cb82-12"><a href="#cb82-12" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Z"</span>)</span>
+<span id="cb82-13"><a href="#cb82-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-14"><a href="#cb82-14" aria-hidden="true" tabindex="-1"></a><span class="co"># plot 2</span></span>
+<span id="cb82-15"><a href="#cb82-15" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="fl">4.5</span>, <span class="fl">4.5</span>, <span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb82-16"><a href="#cb82-16" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(x2,</span>
+<span id="cb82-17"><a href="#cb82-17" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Chi-Squared Distribution"</span>,</span>
+<span id="cb82-18"><a href="#cb82-18" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Z^2"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="stats2_unit3_notes_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Reset layout after plotting</span></span>
+<span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="degrees-of-freedom" class="level3">
+<h3 class="anchored" data-anchor-id="degrees-of-freedom">Degrees of Freedom</h3>
+<ul>
+<li><strong>Degrees of freedom (df):</strong> number of <strong>independent pieces of information</strong> used to estimate a statistic.
+<ul>
+<li><span class="math inline">\(df \neq n\)</span></li>
+<li>Imagine tossing a coin 100 times – if you get 55 heads, then you know you got 45 tails (1 df)</li>
+<li>Imagine a traffic light – if not yellow or red, then green (2 df)</li>
+</ul></li>
+<li>Calculate the standard deviation of three exam grades
+<ul>
+<li><span class="math inline">\(s = \sqrt{\frac{ \Sigma (x_i - \bar{x}) }{n - 1} }\)</span></li>
+<li>If the mean is already known, then you don’t <strong>need</strong> all of the other values in the sample</li>
+<li>If <span class="math inline">\(\bar{x} = 85\)</span> and <span class="math inline">\(x_1 = 80\)</span> and <span class="math inline">\(x_2 = 85\)</span>, then <span class="math inline">\(x_3 = 90\)</span> is no longer independent</li>
+</ul></li>
+<li><strong>Why it matters</strong>
+<ul>
+<li>Determines the shape of distributions like <strong><span class="math inline">\(t\)</span>, <span class="math inline">\(F\)</span>, and <span class="math inline">\(\chi^2\)</span></strong>.</li>
+<li><strong>More df - more information - distributions become narrower and more normal.</strong></li>
+</ul></li>
+</ul>
+</section>
+<section id="chi-squared-distributions-properties" class="level3">
+<h3 class="anchored" data-anchor-id="chi-squared-distributions-properties">Chi-Squared Distributions: Properties</h3>
+<ul>
+<li>mean: <span class="math inline">\(\mu = k\)</span></li>
+<li>variance: <span class="math inline">\(\sigma^2 = 2k\)</span></li>
+<li>mode occurs at <span class="math inline">\(\mu - 2\)</span></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="co"># expected = 1</span></span>
+<span id="cb84-2"><a href="#cb84-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(x2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.024806</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="co"># expected = 2</span></span>
+<span id="cb86-2"><a href="#cb86-2" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(x2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.063464</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="co"># estimate chi-squared</span></span>
+<span id="cb88-2"><a href="#cb88-2" aria-hidden="true" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="dv">4</span></span>
+<span id="cb88-3"><a href="#cb88-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>k){</span>
+<span id="cb88-4"><a href="#cb88-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb88-5"><a href="#cb88-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set.seed</span>(i)</span>
+<span id="cb88-6"><a href="#cb88-6" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">10000</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb88-7"><a href="#cb88-7" aria-hidden="true" tabindex="-1"></a>  x2 <span class="ot">&lt;-</span> x<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb88-8"><a href="#cb88-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb88-9"><a href="#cb88-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(i <span class="sc">==</span> <span class="dv">1</span>){</span>
+<span id="cb88-10"><a href="#cb88-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb88-11"><a href="#cb88-11" aria-hidden="true" tabindex="-1"></a>    z2 <span class="ot">&lt;-</span> x2</span>
+<span id="cb88-12"><a href="#cb88-12" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb88-13"><a href="#cb88-13" aria-hidden="true" tabindex="-1"></a>  }<span class="cf">else</span>{</span>
+<span id="cb88-14"><a href="#cb88-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb88-15"><a href="#cb88-15" aria-hidden="true" tabindex="-1"></a>    z2 <span class="ot">&lt;-</span> z2 <span class="sc">+</span> x2</span>
+<span id="cb88-16"><a href="#cb88-16" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb88-17"><a href="#cb88-17" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb88-18"><a href="#cb88-18" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb88-19"><a href="#cb88-19" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(z2); k</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4.023251</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(z2); <span class="dv">2</span><span class="sc">*</span>k</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 7.926623</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 8</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="co"># simulate data again</span></span>
+<span id="cb94-2"><a href="#cb94-2" aria-hidden="true" tabindex="-1"></a><span class="do">## increase variance for better data visualization</span></span>
+<span id="cb94-3"><a href="#cb94-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb94-4"><a href="#cb94-4" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">10000</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">2</span>)</span>
+<span id="cb94-5"><a href="#cb94-5" aria-hidden="true" tabindex="-1"></a>z2 <span class="ot">&lt;-</span> z<span class="sc">*</span>z</span>
+<span id="cb94-6"><a href="#cb94-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-7"><a href="#cb94-7" aria-hidden="true" tabindex="-1"></a><span class="co"># generate density plots</span></span>
+<span id="cb94-8"><a href="#cb94-8" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb94-9"><a href="#cb94-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">x2 =</span> z2,</span>
+<span id="cb94-10"><a href="#cb94-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">df3 =</span> <span class="fu">dchisq</span>(z2, <span class="at">df =</span> <span class="dv">3</span>),</span>
+<span id="cb94-11"><a href="#cb94-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">df6 =</span> <span class="fu">dchisq</span>(z2, <span class="at">df =</span> <span class="dv">6</span>),</span>
+<span id="cb94-12"><a href="#cb94-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">df12 =</span> <span class="fu">dchisq</span>(z2, <span class="at">df =</span> <span class="dv">12</span>)</span>
+<span id="cb94-13"><a href="#cb94-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb94-14"><a href="#cb94-14" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> y[<span class="fu">order</span>(y<span class="sc">$</span>x2),]</span>
+<span id="cb94-15"><a href="#cb94-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-16"><a href="#cb94-16" aria-hidden="true" tabindex="-1"></a><span class="co"># plot</span></span>
+<span id="cb94-17"><a href="#cb94-17" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="fl">4.5</span>, <span class="fl">4.5</span>, <span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb94-18"><a href="#cb94-18" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(y<span class="sc">$</span>x2, y<span class="sc">$</span>df3, <span class="at">type =</span> <span class="st">"l"</span>,</span>
+<span id="cb94-19"><a href="#cb94-19" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">""</span>,</span>
+<span id="cb94-20"><a href="#cb94-20" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Chi-Squared Values"</span>,</span>
+<span id="cb94-21"><a href="#cb94-21" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Density"</span>,</span>
+<span id="cb94-22"><a href="#cb94-22" aria-hidden="true" tabindex="-1"></a>     <span class="at">cex.axis =</span> <span class="fl">1.25</span>,</span>
+<span id="cb94-23"><a href="#cb94-23" aria-hidden="true" tabindex="-1"></a>     <span class="at">cex.lab =</span> <span class="fl">1.5</span>,</span>
+<span id="cb94-24"><a href="#cb94-24" aria-hidden="true" tabindex="-1"></a>     <span class="at">lwd =</span> <span class="dv">4</span>,</span>
+<span id="cb94-25"><a href="#cb94-25" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">25</span>))</span>
+<span id="cb94-26"><a href="#cb94-26" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(y<span class="sc">$</span>x2, y<span class="sc">$</span>df6, <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">"blue"</span>, <span class="at">lwd =</span> <span class="dv">4</span>)</span>
+<span id="cb94-27"><a href="#cb94-27" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(y<span class="sc">$</span>x2, y<span class="sc">$</span>df12, <span class="at">lty =</span> <span class="dv">3</span>, <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">lwd =</span> <span class="dv">4</span>)</span>
+<span id="cb94-28"><a href="#cb94-28" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>,</span>
+<span id="cb94-29"><a href="#cb94-29" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"df = 3"</span>,</span>
+<span id="cb94-30"><a href="#cb94-30" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"df = 6"</span>,</span>
+<span id="cb94-31"><a href="#cb94-31" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"df = 12"</span>),</span>
+<span id="cb94-32"><a href="#cb94-32" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"black"</span>, <span class="st">"blue"</span>, <span class="st">"red"</span>),</span>
+<span id="cb94-33"><a href="#cb94-33" aria-hidden="true" tabindex="-1"></a>       <span class="at">lty =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">lwd =</span> <span class="dv">4</span>,</span>
+<span id="cb94-34"><a href="#cb94-34" aria-hidden="true" tabindex="-1"></a>       <span class="at">bty =</span> <span class="st">"n"</span>, <span class="at">cex =</span> <span class="fl">1.5</span>)</span>
+<span id="cb94-35"><a href="#cb94-35" aria-hidden="true" tabindex="-1"></a><span class="fu">segments</span>(<span class="dv">3</span> <span class="sc">-</span> <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">3</span> <span class="sc">-</span> <span class="dv">2</span>, <span class="fu">max</span>(y<span class="sc">$</span>df3), <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">lwd =</span> <span class="dv">4</span>)</span>
+<span id="cb94-36"><a href="#cb94-36" aria-hidden="true" tabindex="-1"></a><span class="fu">segments</span>(<span class="dv">6</span> <span class="sc">-</span> <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">6</span> <span class="sc">-</span> <span class="dv">2</span>, <span class="fu">max</span>(y<span class="sc">$</span>df6), <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">lwd =</span> <span class="dv">4</span>, <span class="at">col =</span> <span class="st">"blue"</span>)</span>
+<span id="cb94-37"><a href="#cb94-37" aria-hidden="true" tabindex="-1"></a><span class="fu">segments</span>(<span class="dv">12</span> <span class="sc">-</span> <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">12</span> <span class="sc">-</span> <span class="dv">2</span>, <span class="fu">max</span>(y<span class="sc">$</span>df12), <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">lwd =</span> <span class="dv">4</span>, <span class="at">col =</span> <span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="stats2_unit3_notes_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="chi-squared-tests" class="level3">
+<h3 class="anchored" data-anchor-id="chi-squared-tests">Chi-Squared Tests</h3>
+<ul>
+<li>This technique is commonly used in two settings:
+<ul>
+<li>To determine whether a <strong>sample is representative</strong> of a larger population across several groups</li>
+<li>To evaluate whether observed data <strong>follow a specified theoretical distribution</strong> (e.g., normal, geometric, Poisson)</li>
+</ul></li>
+<li>Allows us to examine <strong>all bins simultaneously</strong>, rather than testing one or two categories in isolation</li>
+</ul>
+<p><span class="math display">\[
+\chi^2 = \sum_i \frac{(O_i - E_i)^2}{E_i}
+\]</span></p>
+<ul>
+<li>Where:
+<ul>
+<li><span class="math inline">\(O_i\)</span> = observed count in category <span class="math inline">\(i\)</span><br>
+</li>
+<li><span class="math inline">\(E_i\)</span> = expected count under the null hypothesis</li>
+</ul></li>
+<li>This statistic follows a <strong>chi-squared distribution</strong> with <span class="math inline">\((k - 1)\)</span> degrees of freedom, where <span class="math inline">\(k\)</span> is the number of categories</li>
+</ul>
+</section>
+<section id="chi-squared-tests-example-1" class="level3">
+<h3 class="anchored" data-anchor-id="chi-squared-tests-example-1">Chi-Squared Tests: Example 1</h3>
+<ul>
+<li>Consider data from a <strong>random sample of 275 jurors</strong> in a small county
+<ul>
+<li>We would like to test whether this sample is <strong>racially representative</strong> of the eligible population of jurors (i.e., registered voters)</li>
+<li><span class="math inline">\(H_0\)</span>: Jurors are randomly selected; differences reflect natural sampling variation</li>
+<li><span class="math inline">\(H_A\)</span>: Jurors are not randomly selected; differences are too large to attribute to chance alone</li>
+</ul></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb95"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="co"># data</span></span>
+<span id="cb95-2"><a href="#cb95-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/jurors.csv"</span>)</span>
+<span id="cb95-3"><a href="#cb95-3" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/county_voters.csv"</span>)</span>
+<span id="cb95-4"><a href="#cb95-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-5"><a href="#cb95-5" aria-hidden="true" tabindex="-1"></a><span class="co"># summary stats and parameters</span></span>
+<span id="cb95-6"><a href="#cb95-6" aria-hidden="true" tabindex="-1"></a>e <span class="ot">&lt;-</span> <span class="fu">table</span>(y<span class="sc">$</span>race) <span class="sc">/</span> <span class="fu">nrow</span>(y) <span class="sc">*</span> <span class="fu">nrow</span>(x)</span>
+<span id="cb95-7"><a href="#cb95-7" aria-hidden="true" tabindex="-1"></a>o <span class="ot">&lt;-</span> <span class="fu">table</span>(x<span class="sc">$</span>race)</span>
+<span id="cb95-8"><a href="#cb95-8" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">nrow</span>(x)</span>
+<span id="cb95-9"><a href="#cb95-9" aria-hidden="true" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="dv">4</span></span>
+<span id="cb95-10"><a href="#cb95-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-11"><a href="#cb95-11" aria-hidden="true" tabindex="-1"></a><span class="co"># test statistic</span></span>
+<span id="cb95-12"><a href="#cb95-12" aria-hidden="true" tabindex="-1"></a>X2_obs <span class="ot">&lt;-</span> <span class="fu">sum</span>( (o <span class="sc">-</span> e)<span class="sc">^</span><span class="dv">2</span>  <span class="sc">/</span> e )</span>
+<span id="cb95-13"><a href="#cb95-13" aria-hidden="true" tabindex="-1"></a>X2_obs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5.88961</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb97"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="co"># simulate the null</span></span>
+<span id="cb97-2"><a href="#cb97-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb97-3"><a href="#cb97-3" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
+<span id="cb97-4"><a href="#cb97-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-5"><a href="#cb97-5" aria-hidden="true" tabindex="-1"></a><span class="co"># random multinominal matrix</span></span>
+<span id="cb97-6"><a href="#cb97-6" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">&lt;-</span> <span class="fu">t</span>(<span class="fu">rmultinom</span>(B, <span class="at">size =</span> n, <span class="at">prob =</span> e))</span>
+<span id="cb97-7"><a href="#cb97-7" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">matrix</span>(e, B, k, <span class="at">byrow=</span><span class="cn">TRUE</span>)</span>
+<span id="cb97-8"><a href="#cb97-8" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(m) <span class="ot">&lt;-</span> <span class="fu">colnames</span>(Y) <span class="ot">&lt;-</span> <span class="fu">names</span>(e)</span>
+<span id="cb97-9"><a href="#cb97-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-10"><a href="#cb97-10" aria-hidden="true" tabindex="-1"></a><span class="co"># simulated</span></span>
+<span id="cb97-11"><a href="#cb97-11" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(Y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     black hispanic other white
+[1,]    17       26    32   200
+[2,]    16       41    26   192
+[3,]    21       32    20   202
+[4,]    21       31    19   204
+[5,]    17       26    24   208
+[6,]    24       35    25   191</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb99"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="co"># expected</span></span>
+<span id="cb99-2"><a href="#cb99-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(m)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     black hispanic other white
+[1,] 19.25       33 24.75   198
+[2,] 19.25       33 24.75   198
+[3,] 19.25       33 24.75   198
+[4,] 19.25       33 24.75   198
+[5,] 19.25       33 24.75   198
+[6,] 19.25       33 24.75   198</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb101"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="co"># simulated test statistic</span></span>
+<span id="cb101-2"><a href="#cb101-2" aria-hidden="true" tabindex="-1"></a>X2_sim <span class="ot">&lt;-</span> <span class="fu">rowSums</span>( (Y <span class="sc">-</span> m)<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> m )</span>
+<span id="cb101-3"><a href="#cb101-3" aria-hidden="true" tabindex="-1"></a>p_value1 <span class="ot">&lt;-</span> <span class="fu">mean</span>(X2_sim <span class="sc">&gt;=</span> X2_obs)</span>
+<span id="cb101-4"><a href="#cb101-4" aria-hidden="true" tabindex="-1"></a>p_value1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.1192</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb103"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb103-1"><a href="#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot test statistic on chi-squared dist.</span></span>
+<span id="cb103-2"><a href="#cb103-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="fl">4.5</span>, <span class="fl">4.5</span>, <span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb103-3"><a href="#cb103-3" aria-hidden="true" tabindex="-1"></a>d_X2_sim <span class="ot">&lt;-</span> <span class="fu">density</span>(X2_sim)</span>
+<span id="cb103-4"><a href="#cb103-4" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="fl">4.5</span>, <span class="fl">4.5</span>, <span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb103-5"><a href="#cb103-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(d_X2_sim<span class="sc">$</span>x, d_X2_sim<span class="sc">$</span>y, <span class="at">type =</span> <span class="st">"l"</span>,</span>
+<span id="cb103-6"><a href="#cb103-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Chi-Squared"</span>, <span class="at">ylab =</span> <span class="st">"Density"</span>,</span>
+<span id="cb103-7"><a href="#cb103-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">cex.lab =</span> <span class="fl">1.5</span>, <span class="at">cex.axis =</span> <span class="fl">1.25</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb103-8"><a href="#cb103-8" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> X2_obs, <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">lwd =</span> <span class="dv">4</span>)</span>
+<span id="cb103-9"><a href="#cb103-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb103-10"><a href="#cb103-10" aria-hidden="true" tabindex="-1"></a>x_tail <span class="ot">&lt;-</span> d_X2_sim<span class="sc">$</span>x[d_X2_sim<span class="sc">$</span>x <span class="sc">&gt;=</span> X2_obs]</span>
+<span id="cb103-11"><a href="#cb103-11" aria-hidden="true" tabindex="-1"></a>y_tail <span class="ot">&lt;-</span> d_X2_sim<span class="sc">$</span>y[d_X2_sim<span class="sc">$</span>x <span class="sc">&gt;=</span> X2_obs]</span>
+<span id="cb103-12"><a href="#cb103-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb103-13"><a href="#cb103-13" aria-hidden="true" tabindex="-1"></a><span class="fu">polygon</span>(<span class="fu">c</span>(X2_obs, x_tail, <span class="fu">max</span>(x_tail)),</span>
+<span id="cb103-14"><a href="#cb103-14" aria-hidden="true" tabindex="-1"></a>        <span class="fu">c</span>(<span class="dv">0</span>, y_tail, <span class="dv">0</span>),</span>
+<span id="cb103-15"><a href="#cb103-15" aria-hidden="true" tabindex="-1"></a>        <span class="at">col =</span> <span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">0.3</span>), <span class="at">border =</span> <span class="cn">NA</span>)</span>
+<span id="cb103-16"><a href="#cb103-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb103-17"><a href="#cb103-17" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(X2_obs <span class="sc">+</span> <span class="dv">1</span>, <span class="fu">max</span>(d_X2_sim<span class="sc">$</span>y) <span class="sc">*</span> <span class="fl">0.4</span>,</span>
+<span id="cb103-18"><a href="#cb103-18" aria-hidden="true" tabindex="-1"></a>     <span class="fu">paste0</span>(<span class="st">"p ≈ "</span>, <span class="fu">round</span>(p_value1, <span class="dv">3</span>)),</span>
+<span id="cb103-19"><a href="#cb103-19" aria-hidden="true" tabindex="-1"></a>     <span class="at">pos =</span> <span class="dv">4</span>, <span class="at">cex =</span> <span class="fl">1.2</span>)</span>
+<span id="cb103-20"><a href="#cb103-20" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>,</span>
+<span id="cb103-21"><a href="#cb103-21" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"Point Estimate"</span>),</span>
+<span id="cb103-22"><a href="#cb103-22" aria-hidden="true" tabindex="-1"></a>       <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">bty =</span> <span class="st">"n"</span>,</span>
+<span id="cb103-23"><a href="#cb103-23" aria-hidden="true" tabindex="-1"></a>       <span class="at">cex =</span> <span class="fl">1.25</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="stats2_unit3_notes_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="chi-squared-tests-example-2" class="level3">
+<h3 class="anchored" data-anchor-id="chi-squared-tests-example-2">Chi-Squared Tests: Example 2</h3>
+<ul>
+<li><p>Suppose we analyze <strong>daily stock returns from the S&amp;P 500</strong> over a 10-year period to test whether market movements are <strong>independent across days</strong></p>
+<ul>
+<li>“Does knowing whether the market went up or down yesterday help predict what happens today?”</li>
+</ul></li>
+<li><p>If daily market movements are truly <strong>independent</strong>, the waiting time between positive days should follow a <strong>geometric distribution</strong></p></li>
+<li><p>The geometric distribution gives the probability of waiting <span class="math inline">\(k\)</span> trials to observe the first success</p>
+<ul>
+<li><span class="math inline">\(p\)</span> = probability that a given day is an Up day<br>
+</li>
+<li><span class="math inline">\(X\)</span> = number of days until the next Up day</li>
+</ul></li>
+</ul>
+<p><span class="math display">\[P(X = k) = (1 - p)^{k - 1}p\]</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb104"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="co"># read in "data"</span></span>
+<span id="cb104-2"><a href="#cb104-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb104-3"><a href="#cb104-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">days =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>,</span>
+<span id="cb104-4"><a href="#cb104-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">observed =</span> <span class="fu">c</span>(<span class="dv">717</span>, <span class="dv">369</span>, <span class="dv">155</span>, <span class="dv">69</span>, <span class="dv">28</span>, <span class="dv">14</span>, <span class="dv">10</span>)</span>
+<span id="cb104-5"><a href="#cb104-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb104-6"><a href="#cb104-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb104-7"><a href="#cb104-7" aria-hidden="true" tabindex="-1"></a><span class="co"># "up" 54.5% of days</span></span>
+<span id="cb104-8"><a href="#cb104-8" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fl">0.545</span></span>
+<span id="cb104-9"><a href="#cb104-9" aria-hidden="true" tabindex="-1"></a>x<span class="sc">$</span>expected <span class="ot">&lt;-</span> <span class="fu">round</span>((<span class="dv">1</span><span class="sc">-</span>p)<span class="sc">^</span>((x<span class="sc">$</span>days)<span class="sc">-</span><span class="dv">1</span>)<span class="sc">*</span>p<span class="sc">*</span><span class="fu">sum</span>(x<span class="sc">$</span>observed)) <span class="co"># geo. distribution</span></span>
+<span id="cb104-10"><a href="#cb104-10" aria-hidden="true" tabindex="-1"></a>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  days observed expected
+1    1      717      742
+2    2      369      338
+3    3      155      154
+4    4       69       70
+5    5       28       32
+6    6       14       14
+7    7       10        7</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb106"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb106-1"><a href="#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot</span></span>
+<span id="cb106-2"><a href="#cb106-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="fl">4.5</span>, <span class="fl">4.5</span>, <span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb106-3"><a href="#cb106-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x<span class="sc">$</span>days, x<span class="sc">$</span>observed, <span class="at">type =</span> <span class="st">"l"</span>, <span class="at">lwd =</span> <span class="dv">4</span>,</span>
+<span id="cb106-4"><a href="#cb106-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Observed"</span>, <span class="at">xlab =</span> <span class="st">"Days"</span>,</span>
+<span id="cb106-5"><a href="#cb106-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">cex.axis =</span> <span class="fl">1.25</span>, <span class="at">cex.lab =</span> <span class="fl">1.5</span>)</span>
+<span id="cb106-6"><a href="#cb106-6" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(x<span class="sc">$</span>days, x<span class="sc">$</span>expected, <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">lwd =</span> <span class="dv">4</span>, <span class="at">col =</span> <span class="st">"blue"</span>)</span>
+<span id="cb106-7"><a href="#cb106-7" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>, </span>
+<span id="cb106-8"><a href="#cb106-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"Observed"</span>, <span class="st">"Expected"</span>),</span>
+<span id="cb106-9"><a href="#cb106-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">lty =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>),</span>
+<span id="cb106-10"><a href="#cb106-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"black"</span>, <span class="st">"blue"</span>),</span>
+<span id="cb106-11"><a href="#cb106-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">bty =</span> <span class="st">"n"</span>, <span class="at">cex =</span> <span class="fl">1.25</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="stats2_unit3_notes_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb107"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb107-1"><a href="#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="co"># test statistic</span></span>
+<span id="cb107-2"><a href="#cb107-2" aria-hidden="true" tabindex="-1"></a>x2 <span class="ot">&lt;-</span> <span class="fu">sum</span>( (x<span class="sc">$</span>observed <span class="sc">-</span> x<span class="sc">$</span>expected)<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> x<span class="sc">$</span>expected )</span>
+<span id="cb107-3"><a href="#cb107-3" aria-hidden="true" tabindex="-1"></a>x2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5.492007</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb109"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb109-1"><a href="#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="co"># simulate null</span></span>
+<span id="cb109-2"><a href="#cb109-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>){</span>
+<span id="cb109-3"><a href="#cb109-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set.seed</span>(i)</span>
+<span id="cb109-4"><a href="#cb109-4" aria-hidden="true" tabindex="-1"></a>  z <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="fu">sum</span>(x<span class="sc">$</span>observed), <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb109-5"><a href="#cb109-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(i <span class="sc">==</span> <span class="dv">1</span>){</span>
+<span id="cb109-6"><a href="#cb109-6" aria-hidden="true" tabindex="-1"></a>    y <span class="ot">&lt;-</span> z<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb109-7"><a href="#cb109-7" aria-hidden="true" tabindex="-1"></a>  }<span class="cf">else</span>{</span>
+<span id="cb109-8"><a href="#cb109-8" aria-hidden="true" tabindex="-1"></a>    y <span class="ot">&lt;-</span> y <span class="sc">+</span> z<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb109-9"><a href="#cb109-9" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb109-10"><a href="#cb109-10" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb109-11"><a href="#cb109-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb109-12"><a href="#cb109-12" aria-hidden="true" tabindex="-1"></a><span class="co"># simulated p-value</span></span>
+<span id="cb109-13"><a href="#cb109-13" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">ifelse</span>(x2 <span class="sc">&gt;</span> y, <span class="dv">1</span>, <span class="dv">0</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.5198238</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb111"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb111-1"><a href="#cb111-1" aria-hidden="true" tabindex="-1"></a><span class="co"># formula p-value</span></span>
+<span id="cb111-2"><a href="#cb111-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pchisq</span>(x2, <span class="at">df =</span> <span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.5175767</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb113"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb113-1"><a href="#cb113-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot null</span></span>
+<span id="cb113-2"><a href="#cb113-2" aria-hidden="true" tabindex="-1"></a>d_X2_sim <span class="ot">&lt;-</span> <span class="fu">density</span>(y)</span>
+<span id="cb113-3"><a href="#cb113-3" aria-hidden="true" tabindex="-1"></a>pvalue2 <span class="ot">&lt;-</span> <span class="fu">pchisq</span>(x2, <span class="at">df =</span> <span class="dv">6</span>)</span>
+<span id="cb113-4"><a href="#cb113-4" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="fl">4.5</span>, <span class="fl">4.5</span>, <span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb113-5"><a href="#cb113-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(d_X2_sim<span class="sc">$</span>x, d_X2_sim<span class="sc">$</span>y, <span class="at">type =</span> <span class="st">"l"</span>,</span>
+<span id="cb113-6"><a href="#cb113-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Chi-Squared"</span>, <span class="at">ylab =</span> <span class="st">"Density"</span>,</span>
+<span id="cb113-7"><a href="#cb113-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">cex.lab =</span> <span class="fl">1.5</span>, <span class="at">cex.axis =</span> <span class="fl">1.25</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb113-8"><a href="#cb113-8" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> x2, <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">lwd =</span> <span class="dv">4</span>)</span>
+<span id="cb113-9"><a href="#cb113-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb113-10"><a href="#cb113-10" aria-hidden="true" tabindex="-1"></a>x_tail <span class="ot">&lt;-</span> d_X2_sim<span class="sc">$</span>x[d_X2_sim<span class="sc">$</span>x <span class="sc">&gt;=</span> x2]</span>
+<span id="cb113-11"><a href="#cb113-11" aria-hidden="true" tabindex="-1"></a>y_tail <span class="ot">&lt;-</span> d_X2_sim<span class="sc">$</span>y[d_X2_sim<span class="sc">$</span>x <span class="sc">&gt;=</span> x2]</span>
+<span id="cb113-12"><a href="#cb113-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb113-13"><a href="#cb113-13" aria-hidden="true" tabindex="-1"></a><span class="fu">polygon</span>(<span class="fu">c</span>(X2_obs, x_tail, <span class="fu">max</span>(x_tail)),</span>
+<span id="cb113-14"><a href="#cb113-14" aria-hidden="true" tabindex="-1"></a>        <span class="fu">c</span>(<span class="dv">0</span>, y_tail, <span class="dv">0</span>),</span>
+<span id="cb113-15"><a href="#cb113-15" aria-hidden="true" tabindex="-1"></a>        <span class="at">col =</span> <span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">0.3</span>), <span class="at">border =</span> <span class="cn">NA</span>)</span>
+<span id="cb113-16"><a href="#cb113-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb113-17"><a href="#cb113-17" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(X2_obs <span class="sc">+</span> <span class="dv">1</span>, <span class="fu">max</span>(d_X2_sim<span class="sc">$</span>y) <span class="sc">*</span> <span class="fl">0.4</span>,</span>
+<span id="cb113-18"><a href="#cb113-18" aria-hidden="true" tabindex="-1"></a>     <span class="fu">paste0</span>(<span class="st">"p ≈ "</span>, <span class="fu">round</span>(pvalue2, <span class="dv">3</span>)),</span>
+<span id="cb113-19"><a href="#cb113-19" aria-hidden="true" tabindex="-1"></a>     <span class="at">pos =</span> <span class="dv">4</span>, <span class="at">cex =</span> <span class="fl">1.2</span>)</span>
+<span id="cb113-20"><a href="#cb113-20" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>,</span>
+<span id="cb113-21"><a href="#cb113-21" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"Point Estimate"</span>),</span>
+<span id="cb113-22"><a href="#cb113-22" aria-hidden="true" tabindex="-1"></a>       <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">bty =</span> <span class="st">"n"</span>,</span>
+<span id="cb113-23"><a href="#cb113-23" aria-hidden="true" tabindex="-1"></a>       <span class="at">cex =</span> <span class="fl">1.25</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="stats2_unit3_notes_files/figure-html/unnamed-chunk-15-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="anova-and-f-statistics" class="level2">
+<h2 class="anchored" data-anchor-id="anova-and-f-statistics">ANOVA and F-statistics</h2>
+<ul>
+<li>When comparing <strong>more than two groups</strong>, we might be tempted to run multiple pairwise tests:
+<ul>
+<li>Group 1 vs.&nbsp;2, Group 1 vs.&nbsp;3, Group 2 vs.&nbsp;3, etc.</li>
+</ul></li>
+<li><strong>Problem:</strong> Multiple tests increase the chance of <strong>false positives</strong></li>
+<li><strong>Solution</strong>: Use a <strong>single, holistic test</strong> to compare all group means at once</li>
+</ul>
+<p><span class="math display">\[
+H_0: \mu_1 = \mu_2 = \cdots = \mu_k
+\quad\quad
+H_A: \text{At least one mean differs}
+\]</span></p>
+<ul>
+<li>ANOVA: tests whether there is evidence that <strong>at least one mean differs</strong>
+<ul>
+<li><strong>Between-group variation</strong> (differences in group means)<br>
+</li>
+<li><strong>Within-group variation</strong> (random noise)</li>
+<li><strong>Intuition:</strong> If group differences are large <em>relative to</em> within-group variation, we reject the null.</li>
+</ul></li>
+<li>This produces the <strong>F-statistic</strong></li>
+</ul>
+<section id="anova-example-1" class="level3">
+<h3 class="anchored" data-anchor-id="anova-example-1">ANOVA: Example 1</h3>
+<ul>
+<li>Suppose a statistics department runs <strong>three sections</strong> (A, B, and C) of an introductory statistics course
+<ul>
+<li>We want to know whether there are <strong>statistically significant differences</strong> in the <strong>average final exam scores</strong></li>
+</ul></li>
+</ul>
+<section id="anova-ssg" class="level4">
+<h4 class="anchored" data-anchor-id="anova-ssg">ANOVA: SSG</h4>
+<ul>
+<li>The <strong>sum of squares for the groups</strong> (SSG) measures the differences between the group means <span class="math inline">\(\bar{x}_i\)</span> and the grand mean <span class="math inline">\(\bar{x}\)</span> like so:</li>
+</ul>
+<p><span class="math display">\[
+SSG = \sum_{i=1}^k n_i (\bar{x}_i - \bar{x})^2
+\]</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb114"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb114-1"><a href="#cb114-1" aria-hidden="true" tabindex="-1"></a><span class="co"># grades in each section</span></span>
+<span id="cb114-2"><a href="#cb114-2" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">90</span>, <span class="dv">87</span>, <span class="dv">88</span>, <span class="dv">78</span>)</span>
+<span id="cb114-3"><a href="#cb114-3" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">87</span>, <span class="dv">85</span>, <span class="dv">80</span>)</span>
+<span id="cb114-4"><a href="#cb114-4" aria-hidden="true" tabindex="-1"></a>c <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">95</span>, <span class="dv">93</span>, <span class="dv">90</span>, <span class="dv">88</span>, <span class="dv">85</span>)</span>
+<span id="cb114-5"><a href="#cb114-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb114-6"><a href="#cb114-6" aria-hidden="true" tabindex="-1"></a><span class="co"># number of grades in each section</span></span>
+<span id="cb114-7"><a href="#cb114-7" aria-hidden="true" tabindex="-1"></a>na <span class="ot">&lt;-</span> <span class="fu">length</span>(a)</span>
+<span id="cb114-8"><a href="#cb114-8" aria-hidden="true" tabindex="-1"></a>nb <span class="ot">&lt;-</span> <span class="fu">length</span>(b)</span>
+<span id="cb114-9"><a href="#cb114-9" aria-hidden="true" tabindex="-1"></a>nc <span class="ot">&lt;-</span> <span class="fu">length</span>(c)</span>
+<span id="cb114-10"><a href="#cb114-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb114-11"><a href="#cb114-11" aria-hidden="true" tabindex="-1"></a><span class="co"># average grades in each section</span></span>
+<span id="cb114-12"><a href="#cb114-12" aria-hidden="true" tabindex="-1"></a>ua <span class="ot">&lt;-</span> <span class="fu">mean</span>(a)</span>
+<span id="cb114-13"><a href="#cb114-13" aria-hidden="true" tabindex="-1"></a>ub <span class="ot">&lt;-</span> <span class="fu">mean</span>(b)</span>
+<span id="cb114-14"><a href="#cb114-14" aria-hidden="true" tabindex="-1"></a>uc <span class="ot">&lt;-</span> <span class="fu">mean</span>(c)</span>
+<span id="cb114-15"><a href="#cb114-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb114-16"><a href="#cb114-16" aria-hidden="true" tabindex="-1"></a><span class="co"># grand mean</span></span>
+<span id="cb114-17"><a href="#cb114-17" aria-hidden="true" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">c</span>(a, b, c))</span>
+<span id="cb114-18"><a href="#cb114-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb114-19"><a href="#cb114-19" aria-hidden="true" tabindex="-1"></a><span class="co"># SSG</span></span>
+<span id="cb114-20"><a href="#cb114-20" aria-hidden="true" tabindex="-1"></a>SSG <span class="ot">&lt;-</span> na<span class="sc">*</span>(ua <span class="sc">-</span> u)<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> nb<span class="sc">*</span>(ub <span class="sc">-</span> u)<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> nc<span class="sc">*</span>(uc <span class="sc">-</span> u)<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb114-21"><a href="#cb114-21" aria-hidden="true" tabindex="-1"></a>SSG</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 84.11667</code></pre>
+</div>
+</div>
+</section>
+<section id="anova-msg" class="level4">
+<h4 class="anchored" data-anchor-id="anova-msg">ANOVA: MSG</h4>
+<ul>
+<li>The <strong>mean square between groups</strong> (MSG) is calculated using both the groups’ degrees of freedom <span class="math inline">\(df_G\)</span> and the sum of squares between groups SSG:</li>
+</ul>
+<p><span class="math display">\[
+MSG = \dfrac{1}{k - 1} SSG
+\]</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb116"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb116-2"><a href="#cb116-2" aria-hidden="true" tabindex="-1"></a>df1 <span class="ot">&lt;-</span> k <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb116-3"><a href="#cb116-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb116-4"><a href="#cb116-4" aria-hidden="true" tabindex="-1"></a>MSG <span class="ot">&lt;-</span> SSG <span class="sc">/</span> df1</span>
+<span id="cb116-5"><a href="#cb116-5" aria-hidden="true" tabindex="-1"></a>MSG</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 42.05833</code></pre>
+</div>
+</div>
+</section>
+<section id="anova-sse" class="level4">
+<h4 class="anchored" data-anchor-id="anova-sse">ANOVA: SSE</h4>
+<ul>
+<li>The <strong>sum of squared errors</strong> (SSE) is the sum of the squares of the differences between each sample’s observations with each respective sample mean
+<ul>
+<li>The calculation is simplified by first finding the variance <span class="math inline">\(s_i^2\)</span> of each sample:</li>
+</ul></li>
+</ul>
+<p><span class="math display">\[
+SSE = \sum_{i = 1}^k (n_i - 1) s_i^2
+\]</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb118"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb118-1"><a href="#cb118-1" aria-hidden="true" tabindex="-1"></a><span class="co"># standard errors for each group</span></span>
+<span id="cb118-2"><a href="#cb118-2" aria-hidden="true" tabindex="-1"></a>sa <span class="ot">&lt;-</span> <span class="fu">sd</span>(a)</span>
+<span id="cb118-3"><a href="#cb118-3" aria-hidden="true" tabindex="-1"></a>sb <span class="ot">&lt;-</span> <span class="fu">sd</span>(b)</span>
+<span id="cb118-4"><a href="#cb118-4" aria-hidden="true" tabindex="-1"></a>sc <span class="ot">&lt;-</span> <span class="fu">sd</span>(c)</span>
+<span id="cb118-5"><a href="#cb118-5" aria-hidden="true" tabindex="-1"></a>sa; sb; sc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5.315073</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.605551</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.962323</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb122"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb122-1"><a href="#cb122-1" aria-hidden="true" tabindex="-1"></a><span class="co"># SSE</span></span>
+<span id="cb122-2"><a href="#cb122-2" aria-hidden="true" tabindex="-1"></a>SSE <span class="ot">&lt;-</span> (na <span class="sc">-</span> <span class="dv">1</span>)<span class="sc">*</span>sa<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> (nb <span class="sc">-</span> <span class="dv">1</span>)<span class="sc">*</span>sb<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> (nc <span class="sc">-</span> <span class="dv">1</span>)<span class="sc">*</span>sc<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb122-3"><a href="#cb122-3" aria-hidden="true" tabindex="-1"></a>SSE</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 173.55</code></pre>
+</div>
+</div>
+</section>
+<section id="anova-mse" class="level4">
+<h4 class="anchored" data-anchor-id="anova-mse">ANOVA: MSE</h4>
+<p><span class="math display">\[
+MSE = \dfrac{1}{n - k} SSE
+\]</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb124"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb124-1"><a href="#cb124-1" aria-hidden="true" tabindex="-1"></a><span class="co"># MSE</span></span>
+<span id="cb124-2"><a href="#cb124-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">c</span>(a, b, c))</span>
+<span id="cb124-3"><a href="#cb124-3" aria-hidden="true" tabindex="-1"></a>MSE <span class="ot">&lt;-</span> SSE <span class="sc">/</span> (n <span class="sc">-</span> k)</span>
+<span id="cb124-4"><a href="#cb124-4" aria-hidden="true" tabindex="-1"></a>MSE</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 19.28333</code></pre>
+</div>
+</div>
+</section>
+<section id="anova-f-stat" class="level4">
+<h4 class="anchored" data-anchor-id="anova-f-stat">ANOVA: F-stat</h4>
+<ul>
+<li>We now have comparable measures of variability both <strong>between</strong> the groups (MSG) and <strong>within</strong> the groups (MSE).
+<ul>
+<li>If variation among group means is simply random, F is typically close to 1</li>
+</ul></li>
+</ul>
+<p><span class="math display">\[
+F = \dfrac{MSG}{MSE}
+\]</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb126"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb126-1"><a href="#cb126-1" aria-hidden="true" tabindex="-1"></a><span class="co"># f-stat</span></span>
+<span id="cb126-2"><a href="#cb126-2" aria-hidden="true" tabindex="-1"></a>f_stat <span class="ot">&lt;-</span> MSG <span class="sc">/</span> MSE</span>
+<span id="cb126-3"><a href="#cb126-3" aria-hidden="true" tabindex="-1"></a>f_stat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.181072</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb128"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb128-1"><a href="#cb128-1" aria-hidden="true" tabindex="-1"></a><span class="co"># generate f-dist</span></span>
+<span id="cb128-2"><a href="#cb128-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb128-3"><a href="#cb128-3" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rf</span>(<span class="fl">1e6</span>, <span class="at">df1 =</span> k <span class="sc">-</span> <span class="dv">1</span>, <span class="at">df2 =</span> n <span class="sc">-</span> k)</span>
+<span id="cb128-4"><a href="#cb128-4" aria-hidden="true" tabindex="-1"></a>dx <span class="ot">&lt;-</span> <span class="fu">density</span>(x)</span>
+<span id="cb128-5"><a href="#cb128-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-6"><a href="#cb128-6" aria-hidden="true" tabindex="-1"></a><span class="co"># plot</span></span>
+<span id="cb128-7"><a href="#cb128-7" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="fl">4.5</span>, <span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb128-8"><a href="#cb128-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(dx<span class="sc">$</span>x, dx<span class="sc">$</span>y, <span class="at">type =</span> <span class="st">"l"</span>, <span class="at">lwd =</span> <span class="dv">2</span>,</span>
+<span id="cb128-9"><a href="#cb128-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Density"</span>, <span class="at">cex.lab =</span> <span class="fl">1.5</span>, <span class="at">cex.axis =</span> <span class="fl">1.25</span>,</span>
+<span id="cb128-10"><a href="#cb128-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">10</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.4</span>))</span>
+<span id="cb128-11"><a href="#cb128-11" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> f_stat, <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb128-12"><a href="#cb128-12" aria-hidden="true" tabindex="-1"></a>x_fill <span class="ot">&lt;-</span> dx<span class="sc">$</span>x[dx<span class="sc">$</span>x <span class="sc">&gt;=</span> f_stat]</span>
+<span id="cb128-13"><a href="#cb128-13" aria-hidden="true" tabindex="-1"></a>y_fill <span class="ot">&lt;-</span> dx<span class="sc">$</span>y[dx<span class="sc">$</span>x <span class="sc">&gt;=</span> f_stat]</span>
+<span id="cb128-14"><a href="#cb128-14" aria-hidden="true" tabindex="-1"></a><span class="fu">polygon</span>(<span class="fu">c</span>(<span class="fu">min</span>(x_fill), x_fill, f_stat),</span>
+<span id="cb128-15"><a href="#cb128-15" aria-hidden="true" tabindex="-1"></a>        <span class="fu">c</span>(<span class="dv">0</span>, y_fill, <span class="dv">0</span>),</span>
+<span id="cb128-16"><a href="#cb128-16" aria-hidden="true" tabindex="-1"></a>        <span class="at">col =</span> <span class="fu">rgb</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.3</span>), <span class="at">border =</span> <span class="cn">NA</span>)</span>
+<span id="cb128-17"><a href="#cb128-17" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>,</span>
+<span id="cb128-18"><a href="#cb128-18" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"f-stat"</span>),</span>
+<span id="cb128-19"><a href="#cb128-19" aria-hidden="true" tabindex="-1"></a>       <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">lty =</span> <span class="dv">2</span>, </span>
+<span id="cb128-20"><a href="#cb128-20" aria-hidden="true" tabindex="-1"></a>       <span class="at">cex =</span> <span class="fl">1.25</span>, <span class="at">bty =</span> <span class="st">'n'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="stats2_unit3_notes_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb129"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb129-1"><a href="#cb129-1" aria-hidden="true" tabindex="-1"></a><span class="co"># simulated p-value; FTR</span></span>
+<span id="cb129-2"><a href="#cb129-2" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">mean</span>(<span class="fu">ifelse</span>(f_stat <span class="sc">&gt;</span> x, <span class="dv">1</span>, <span class="dv">0</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.169123</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb131"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb131-1"><a href="#cb131-1" aria-hidden="true" tabindex="-1"></a><span class="co"># estimated p-value; FTR</span></span>
+<span id="cb131-2"><a href="#cb131-2" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb131-3"><a href="#cb131-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">score =</span> <span class="fu">c</span>(a, b, c),</span>
+<span id="cb131-4"><a href="#cb131-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">group =</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">'a'</span>, na), <span class="fu">rep</span>(<span class="st">'b'</span>, nb), <span class="fu">rep</span>(<span class="st">'c'</span>, nc))</span>
+<span id="cb131-5"><a href="#cb131-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb131-6"><a href="#cb131-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">aov</span>(score <span class="sc">~</span> group, z))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            Df Sum Sq Mean Sq F value Pr(&gt;F)
+group        2  84.12   42.06   2.181  0.169
+Residuals    9 173.55   19.28               </code></pre>
+</div>
+</div>
+</section>
+</section>
+</section>
 </section>
 
 </main>

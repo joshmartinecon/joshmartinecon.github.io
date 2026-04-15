@@ -1,0 +1,121 @@
+# Unit 4 Notes | Statistics for Business II
+
+## Linear Regression
+
+- Linear regression is the statistical method for fitting a line to data where the relationship between two variables, $x$ and $y$, can be modeled by a straight line with some error
+    - $\beta_0$ = y-intercept
+    - $\beta_1$ = slope
+    - $\epsilon$ = error term (a.k.a residual)
+
+$$
+y = \beta_0 + \beta_1 x + \epsilon
+$$
+
+- When we use $x$ to predict $y$, we usually call:
+    - $x$ the explanatory, predictor or independent variable, 
+    - $y$ the response or dependent variable
+
+![](images/intro_regressions_1.png)
+
+![](images/intro_regressions_2.png)
+
+### Example 1: Opposums...?
+
+```{r}
+
+## read in data
+x <- read.csv("data/opossum.csv")
+head(x)
+
+## linear regression
+lm1 <- lm(head_l ~ total_l, x)
+coefficients(lm1)
+
+```
+
+- The **slope** describes the estimated difference in the y variable if the explanatory variable x was **one** unit larger.
+    - 0.57 (cm?) larger opossum skull for every 1 (cm?) increase in height, on average
+  
+- The intercept describes the average outcome of y if **x = 0** and the linear model is valid all the way to x = 0 (which in many applications is not the case!)
+
+```{r}
+
+## range of outcomes
+summary(x$total_l)
+xs <- seq(70, 100, 1)
+
+## predicted values
+b0 <- coefficients(lm1)[1]
+b1 <- coefficients(lm1)[2]
+y_hat <- b0 + b1 * xs
+
+## combines Xs and predicted values
+z <- data.frame(
+  x = xs,
+  y_hat = round(y_hat, 1)
+  )
+head(z)
+
+## plot
+par(mar = c(4.5, 4.5, 1, 1))
+plot(x$total_l, x$head_l,
+     xlab = "Total Length of Opossum (cm)",
+     ylab = "Length of Opossum's Head (cm)",
+     cex.lab = 1.2, cex.axis = 1.1)
+lines(xs, y_hat, lwd = 2)
+legend("topleft",
+       legend = "Line of best fit",
+       lwd = 2, cex = 1.2, bty = 'n')
+
+```
+
+### Residuals
+
+$$
+Data = Fit + Residual
+$$
+
+- Residuals are the leftover variation after accounting fo the model fit
+
+$$
+\epsilon_i = y_i - \hat{y_i}
+$$
+
+![](images/residuals_regressions.png)
+
+```{r}
+
+## simplify data
+p <- data.frame(
+  x = x$total_l,
+  y = x$head_l,
+  y_hat = predict(lm1)
+)
+
+## calculate residual
+p$residual <- p$y - p$y_hat
+
+## peak at data
+head(p)
+
+## plot
+par(mar = c(4.5, 4.5, 1, 1))
+plot(x$total_l, x$head_l,
+     xlab = "Total Length of Opossum (cm)",
+     ylab = "Length of Opossum's Head (cm)",
+     cex.lab = 1.2, cex.axis = 1.1)
+lines(xs, y_hat, lwd = 2)
+segments(p$x, p$y, p$x, p$y_hat, lty = 2)
+legend("topleft",
+       legend = c("Line of best fit",
+                  "Residuals"),
+       lwd = 2, lty = c(1,2), cex = 1.2, bty = 'n')
+
+## plot
+par(mar = c(4.5, 4.5, 1, 1))
+plot(p$x, p$residual,
+     xlab = "Total Length of Opossum (cm)",
+     ylab = "Residuals",
+     cex.lab = 1.2, cex.axis = 1.1)
+abline(h = 0, lty = 2, lwd = 2)
+```

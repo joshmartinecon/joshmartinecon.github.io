@@ -280,6 +280,56 @@ Data = Fit + Residual
 </div>
 </div>
 </section>
+<section id="correlation" class="level3">
+<h3 class="anchored" data-anchor-id="correlation">Correlation</h3>
+<p><span class="math display">\[
+R = \dfrac{1}{n-1} \sum_{i=1}^n \dfrac{x_i - \bar{x}}{s_x} \dfrac{y_i - \bar{y}}{s_y}
+\]</span></p>
+<ul>
+<li>Correlation describes the strength of the linear relationship between two variables
+<ul>
+<li>We denote the correlation by <span class="math inline">\(R\)</span></li>
+<li>Always takes values between -1 and 1</li>
+</ul></li>
+</ul>
+<p><img src="images/correlations.png" class="img-fluid"></p>
+<p><img src="images/non_linear_correlations.png" class="img-fluid"></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="do">## calculate by hand</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>zx <span class="ot">&lt;-</span> (x<span class="sc">$</span>total_l <span class="sc">-</span> <span class="fu">mean</span>(x<span class="sc">$</span>total_l)) <span class="sc">/</span> <span class="fu">sd</span>(x<span class="sc">$</span>total_l)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>zy <span class="ot">&lt;-</span> (x<span class="sc">$</span>head_l <span class="sc">-</span> <span class="fu">mean</span>(x<span class="sc">$</span>head_l)) <span class="sc">/</span> <span class="fu">sd</span>(x<span class="sc">$</span>head_l)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(zx <span class="sc">*</span> zy)<span class="sc">/</span> (<span class="fu">nrow</span>(x) <span class="sc">-</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.6910937</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="do">## calculate using the function in R</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(x<span class="sc">$</span>head_l, x<span class="sc">$</span>total_l)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.6910937</code></pre>
+</div>
+</div>
+</section>
+<section id="conditions-for-the-least-squares-line" class="level3">
+<h3 class="anchored" data-anchor-id="conditions-for-the-least-squares-line">Conditions for the least squares line</h3>
+<ul>
+<li><p>OLS: “Line of best fit”</p></li>
+<li><p>We begin by thinking about what we mean by “best”</p>
+<ul>
+<li>Mathematically, we want a line that minimizes the magnitude of residuals</li>
+<li>Most commonly, this is done by <strong>minimizing the sum of the squared residuals</strong></li>
+</ul></li>
+</ul>
+<p><span class="math display">\[
+min_{\hat{\beta_0}, \hat{\beta_1}} \sum_{i=1}^n e_i^2 = min_{\hat{\beta_0}, \hat{\beta_1}} \sum_{i=1}^n (y_i - \hat{\beta_0} - \hat{\beta_1}x_i)^2
+\]</span></p>
+<ul>
+<li><p><strong>Linearity</strong>: The data should show a linear trend</p></li>
+<li><p><strong>Normal residuals</strong>: Generally, the residuals must be nearly normal. When this condition is found to be unreasonable, it is usually because of outliers or concerns about influential points</p></li>
+<li><p><strong>Constant variability</strong>: The variability of points around the least squares line remains roughly constant</p></li>
+<li><p><strong>Independent observations</strong>: Be cautious about applying regression to time series data, which are sequential observations in time such as a stock price each day</p></li>
+</ul>
+<p><img src="images/ols_issues.png" class="img-fluid"></p>
+</section>
 </section>
 </section>
 

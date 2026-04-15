@@ -119,3 +119,51 @@ plot(p$x, p$residual,
      cex.lab = 1.2, cex.axis = 1.1)
 abline(h = 0, lty = 2, lwd = 2)
 ```
+
+### Correlation
+
+$$
+R = \dfrac{1}{n-1} \sum_{i=1}^n \dfrac{x_i - \bar{x}}{s_x} \dfrac{y_i - \bar{y}}{s_y}
+$$
+
+- Correlation describes the strength of the linear relationship between two variables
+  - We denote the correlation by $R$
+  - Always takes values between -1 and 1
+  
+![](images/correlations.png)
+
+![](images/non_linear_correlations.png)
+
+```{r}
+
+## calculate by hand
+zx <- (x$total_l - mean(x$total_l)) / sd(x$total_l)
+zy <- (x$head_l - mean(x$head_l)) / sd(x$head_l)
+sum(zx * zy)/ (nrow(x) - 1)
+
+## calculate using the function in R
+cor(x$head_l, x$total_l)
+
+```
+
+### Conditions for the least squares line
+
+- OLS: "Line of best fit"
+
+- We begin by thinking about what we mean by “best”
+    - Mathematically, we want a line that minimizes the magnitude of residuals
+    - Most commonly, this is done by **minimizing the sum of the squared residuals**
+  
+$$
+min_{\hat{\beta_0}, \hat{\beta_1}} \sum_{i=1}^n e_i^2 = min_{\hat{\beta_0}, \hat{\beta_1}} \sum_{i=1}^n (y_i - \hat{\beta_0} - \hat{\beta_1}x_i)^2
+$$
+
+- **Linearity**: The data should show a linear trend
+
+- **Normal residuals**: Generally, the residuals must be nearly normal. When this condition is found to be unreasonable, it is usually because of outliers or concerns about influential points
+
+- **Constant variability**: The variability of points around the least squares line remains roughly constant
+
+- **Independent observations**: Be cautious about applying regression to time series data, which are sequential observations in time such as a stock price each day
+
+![](images/ols_issues.png)

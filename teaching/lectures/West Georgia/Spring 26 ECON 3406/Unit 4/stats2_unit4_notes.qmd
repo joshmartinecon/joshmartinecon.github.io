@@ -167,3 +167,105 @@ $$
 - **Independent observations**: Be cautious about applying regression to time series data, which are sequential observations in time such as a stock price each day
 
 ![](images/ols_issues.png)
+
+### Example 2: Elmhurst College
+
+```{r}
+
+## read in data
+x <- read.csv("data/elmhurst.csv")
+head(x)
+
+## OLS
+lm2 <- lm(gift_aid ~ family_income, x)
+coefficients(lm2)
+
+## beta1 and beta0
+b0 <- coefficients(lm2)[1]
+b1 <- coefficients(lm2)[2]
+
+# plot x and y
+plot(x$family_income, x$gift_aid,
+     xlab = "Family Income (per $1k)",
+     ylab = "Gift Aid (per $1k)",
+     cex.axis = 1.25, cex.lab = 1.5)
+abline(lm2, lwd = 2)
+legend("topright",
+       legend = "Line of Best Fit",
+       lwd = 2, cex = 1.25, bty = 'n')
+
+## simplify
+y <- data.frame(
+  x = x$family_income,
+  y = x$gift_aid,
+  y_hat = predict(lm2)
+)
+
+## calculate residuals
+y$residuals <- y$y - y$y_hat
+
+## peak at data
+head(y)
+
+## plot residuals distribution
+hist(y$residuals, main = "",
+     xlab = "Residuals", 
+     cex.axis = 1.25, cex.lab = 1.5)
+
+## plot residuals and x
+plot(y$x, y$residuals,
+     xlab = "Family Income (per $1k)",
+     ylab = "Residuals",
+     cex.axis = 1.25, cex.lab = 1.5)
+abline(h = 0, lty = 2)
+
+```
+
+### Slope
+
+$$b_1 = \dfrac{s_y}{s_x} R$$
+
+```{r}
+
+## correlation
+r <- cor(x$gift_aid, x$family_income)
+r
+
+# beta 1, by hand
+sd_y <- sd(x$gift_aid)
+sd_x <- sd(x$family_income)
+sd_y / sd_x * r
+
+## beta 1, by R
+coefficients(lm2)[2]
+```
+
+### Intercept
+
+$$
+y - y_0 = m \times (x - x_0)
+$$
+
+- You might recall the point-slope form of a line from math class, which we can use to find the model fit, including the estimate of $\beta_0$
+
+$$
+y - \bar{y} = \beta_1 \times (x - \bar{x})
+$$
+
+- To find the y-intercept, set $x = 0$
+
+$$
+b_0 = \bar{y} - \beta_1 \bar{x}
+$$
+
+```{r}
+
+## beta0, by hand
+mean_y <- mean(x$gift_aid)
+mean_x <- mean(x$family_income)
+(mean_y - b1*mean_x)
+
+# beta0, by R
+coefficients(lm2)[1]
+
+```

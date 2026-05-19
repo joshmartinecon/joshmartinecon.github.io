@@ -19,7 +19,9 @@ output:
 
 I am an Assistant Professor of Economics at the [University of West Georgia](https://www.westga.edu/academics/business/economics/index.php). My research leverages quasi-experimental methods to study how discrimination, information, and public policy shape labor market outcomes, health, and household investment decisions.
 
-Check out my updated [searchable web app of economics journal rankings](https://joshua-c-martin.shinyapps.io/EconJournalRankings/)! The methods and code are available on [my github](https://github.com/joshmartinecon/econ-journal-rankings).
+*May 2026*: Check out the new update of my paper with [Zach Rodriguez](https://sites.google.com/view/zacharyrodriguez) with a snazzy new title: [Parental Rights and Family Formation: Evidence from Same-Sex Marriage Legalization](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4307175#)
+
+*May 2026*: I've updated my [searchable web app of economics journal rankings](https://joshua-c-martin.shinyapps.io/EconJournalRankings/)! The methods and code are available on [my github](https://github.com/joshmartinecon/econ-journal-rankings).
 
 <p>
   Email: <a href="#" onclick="event.preventDefault(); copyToClipboard('joshua@westga.edu')">joshua@westga.edu</a>

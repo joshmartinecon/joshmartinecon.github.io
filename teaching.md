@@ -35,6 +35,8 @@ layout: post
     <strong>Statistics for Business II</strong> (ECON 3406)
     <ul>
       <li>
+        <a href="https://github.com/joshmartinecon/joshmartinecon.github.io/blob/main/teaching/syllabi/2026Summer_ECON3406_syllabus.pdf" target="_blank" rel="noopener noreferrer">Summer 2026</a>;
+        <a href="https://github.com/joshmartinecon/joshmartinecon.github.io/blob/main/teaching/syllabi/2026Spring_ECON3406_syllabus.pdf" target="_blank" rel="noopener noreferrer">Spring 2026</a>;
         <a href="https://github.com/joshmartinecon/joshmartinecon.github.io/blob/main/teaching/syllabi/2025Fall_ECON3406_syllabus.pdf" target="_blank" rel="noopener noreferrer">Fall 2025</a>
       </li>
     </ul>
@@ -51,7 +53,11 @@ layout: post
     <strong>Principles of Microeconomics</strong> (ECON 2106, 201)
     <ul>
       <li>
-        <a href="https://github.com/joshmartinecon/joshmartinecon.github.io/blob/main/teaching/syllabi/2025Fall_ECON2106_syllabus.pdf" target="_blank" rel="noopener noreferrer">Fall 2025</a>; <a href="https://github.com/joshmartinecon/joshmartinecon.github.io/blob/main/teaching/syllabi/2021Spring_ECON201_syllabus.pdf" target="_blank" rel="noopener noreferrer">Spring 2021</a>; <a href="https://github.com/joshmartinecon/joshmartinecon.github.io/blob/main/teaching/syllabi/2020Summer_ECON201_syllabus.pdf" target="_blank" rel="noopener noreferrer">Summer 2020</a>
+        <a href="https://github.com/joshmartinecon/joshmartinecon.github.io/blob/main/teaching/syllabi/2026Fall_ECON2106_syllabus.pdf" target="_blank" rel="noopener noreferrer">Fall 2026</a>;
+        <a href="https://github.com/joshmartinecon/joshmartinecon.github.io/blob/main/teaching/syllabi/2026Spring_ECON2106_syllabus.pdf" target="_blank" rel="noopener noreferrer">Spring 2026</a>;
+        <a href="https://github.com/joshmartinecon/joshmartinecon.github.io/blob/main/teaching/syllabi/2025Fall_ECON2106_syllabus.pdf" target="_blank" rel="noopener noreferrer">Fall 2025</a>; 
+        <a href="https://github.com/joshmartinecon/joshmartinecon.github.io/blob/main/teaching/syllabi/2021Spring_ECON201_syllabus.pdf" target="_blank" rel="noopener noreferrer">Spring 2021</a>; 
+        <a href="https://github.com/joshmartinecon/joshmartinecon.github.io/blob/main/teaching/syllabi/2020Summer_ECON201_syllabus.pdf" target="_blank" rel="noopener noreferrer">Summer 2020</a>
       </li>
     </ul>
   </li>

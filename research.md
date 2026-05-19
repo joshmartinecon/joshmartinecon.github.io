@@ -129,12 +129,12 @@ Daily hotel data are employed, along with information on prices, revenue, demand
 <div class="text-column" style="flex: 1;">
 <p style="margin:0;">
 <a style="font-size:125%; font-weight:bold" href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4307175" target="_blank" rel="noopener noreferrer">
-The Effect of Same-Sex Marriage Legalization on Adoptions and Family Formation
-</a> <br> with <a href="https://sites.google.com/view/zacharyrodriguez/home" target="_blank" rel="noopener noreferrer">Zachary Rodriguez</a>; Revisions requested at the *Journal of Human Resources* 
+Parental Rights and Family Formation: Evidence from Same-Sex Marriage Legalization
+</a> <br> with <a href="https://sites.google.com/view/zacharyrodriguez/home" target="_blank" rel="noopener noreferrer">Zachary Rodriguez</a>; Revisions submitted to the *Journal of Human Resources* 
 </p>
 <button class="accordion-button" onclick="toggleAccordion(this)">Abstract</button>
 <div style="display: none; background-color: #f9f9f9; padding: 10px;">
-The stability and availability of legal rights are crucial factors influencing investment decisions. This paper extends this framework to the family, estimating the impact of same-sex marriage (SSM) legalization on the demand for households' most significant investment -- children. Using an array of difference-in-differences estimators with detailed data on nearly 20 million children within the foster care system from 1995-2019, we document that SSM increased adoptions by 9%-18%. This effect reduced the number of children remaining in foster care. Furthermore, we document that SSM caused an 11% (55%) increase in the probability of same-sex couples having any (adopted) child within the household.
+We estimate the causal impact of same-sex partnership recognition laws on household formation. Using difference-in-differences designs leveraging staggered U.S. state policy timing, we find that same-sex marriage legalization significantly increased both same-sex households and their likelihood of including children. These effects are concentrated where marriage granted the first formal parental rights, suggesting legal security drives family formation. Administrative data shows legalization raised foster care adoptions by approximately 20\%, accounting for 11–16\% of the overall increase in children within these households. Discriminatory family law generates measurable costs for sexual minorities and foster children.
 </div>
 </div>
 </div>

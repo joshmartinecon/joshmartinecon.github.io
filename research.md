@@ -3,10 +3,13 @@ title: "**Research**"
 layout: post
 ---
 
-<a href="https://joshmartinecon.github.io/">Home</a> | 
-<a href="https://nbviewer.org/github/joshmartinecon/quarto-cv/blob/main/joshmartin_cv.pdf" target="_blank" rel="noopener noreferrer">CV</a> | 
-<a href="https://joshmartinecon.github.io/research.html">Research</a> | 
-<a href="https://joshmartinecon.github.io/teaching.html">Teaching</a>
+<nav>
+  <a href="https://joshmartinecon.github.io/">Home</a> | 
+  <a href="https://nbviewer.org/github/joshmartinecon/quarto-cv/blob/main/joshmartin_cv.pdf" target="_blank" rel="noopener noreferrer">CV</a> | 
+  <a href="https://joshmartinecon.github.io/research.html">Research</a> | 
+  <a href="https://joshmartinecon.github.io/teaching.html">Teaching</a>
+  <a href="https://joshmartinecon.github.io/webapps.html">WebApps</a>
+</nav>
 
 ---
 
@@ -72,7 +75,7 @@ Sexual Orientation, Sexual Attraction, and Income
 with <a href="https://sites.google.com/site/kittcarpenter/" target="_blank" rel="noopener noreferrer">Christopher S. Carpenter</a> and <a href="https://www.hasanshahidecon.com/" target="_blank" rel="noopener noreferrer">Hasan Shahid</a>; *Journal of Economics, Race & Policy* (2024)
 <button class="accordion-button" onclick="toggleAccordion(this)">Abstract</button>
 <div style="display: none; background-color: #f9f9f9; padding: 10px;">
-We provide new evidence on sexual orientation, sexual attraction, and income using data from the 2015-21 National Survey on Drug Use and Health (NSDUH). These data ask individuals about both orientation and attraction, allowing us to describe a sexual minority group that has been hidden in prior research: people who identify as heterosexual but who concurrently report some same-sex attraction. We show that this population is much larger than the sample of self-identified gay, lesbian, or bisexual people, and we show that relative to heterosexual people who report exclusively different-sex attraction, heterosexual people who report some same-sex attraction are younger, less likely to be married, and much more highly educated. We document that, controlling for observables, heterosexual men who report same-sex attraction experience robust and statistically significant employment and income penalties relative to heterosexual men who are exclusively different-sex attracted. These penalties are larger for non-Hispanic White men than for non-Hispanic Black men. We find no similar penalty for heterosexual women who report some same-sex attraction. Our results indicate that prior research has overlooked one of the largest groups of sexual minorities ??? heterosexual people who report some same-sex attraction ??? who experience systematically different economic outcomes than heterosexual individuals who are exclusively different-sex attracted.
+We provide new evidence on sexual orientation, sexual attraction, and income using data from the 2015–2021 National Survey on Drug Use and Health (NSDUH). These data ask individuals about both orientation and attraction, allowing us to describe a sexual minority group that has been hidden in prior research: people who identify as heterosexual but who concurrently report some same-sex attraction. We show that this population is much larger than the sample of self-identified gay, lesbian, or bisexual people, and we show that relative to heterosexual people who report exclusively different-sex attraction, heterosexual people who report some same-sex attraction are younger, less likely to be married, and much more highly educated. We document that, controlling for observables, heterosexual men who report same-sex attraction experience robust and statistically significant employment and income penalties relative to heterosexual men who are exclusively different-sex attracted. These penalties are larger for non-Hispanic White men than for non-Hispanic Black men. We find no similar penalty for heterosexual women who report same-sex attraction. Our results indicate that prior research has overlooked one of the largest groups of sexual minorities—heterosexual people who report some same-sex attraction—who experience systematically different economic outcomes than heterosexual individuals who are exclusively different-sex attracted.
 </div>
 </div>
 </div>
@@ -87,7 +90,7 @@ with <a href="https://alexcardazzi.github.io/" target="_blank" rel="noopener nor
 </p>
 <button class="accordion-button" onclick="toggleAccordion(this)">Abstract</button>
 <div style="display: none; background-color: #f9f9f9; padding: 10px;">
-We present evidence that Earvin ???Magic??? Johnson's announcement that he contracted HIV served as a public-health catalyst for rapidly correcting the public's understanding of who was at risk of infection. Using a novel identification strategy, we present evidence that there was a large but temporary increase in the number of AIDS diagnoses for heterosexual men following the announcement. This effect was concentrated in areas with greater prior exposure to Johnson. We show that these men were both more likely to have been diagnosed via a formal blood test and less likely to die within 1 decade of their initial diagnosis???suggesting that Johnson's announcement caused an intertemporal substitution in testing which prolonged patients' lifespans as a result of earlier access to medical care. We estimate that Johnson's announcement caused approximately 800 additional heterosexual males in the United States in metropolitan statistical areas with National Basketball Association franchises men to discover their underlying AIDS diagnosis and, of whom, were more likely to live at least 1 decade beyond their initial diagnosis date.
+We present evidence that Earvin Magic Johnson's announcement that he contracted HIV served as a public-health catalyst for rapidly correcting the public's understanding of who was at risk of infection. Using a novel identification strategy, we present evidence that there was a large but temporary increase in the number of AIDS diagnoses for heterosexual men following the announcement. This effect was concentrated in areas with greater prior exposure to Johnson. We show that these men were both more likely to have been diagnosed via a formal blood test and less likely to die within 1 decade of their initial diagnosis -- suggesting that Johnson's announcement caused an intertemporal substitution in testing which prolonged patients' lifespans as a result of earlier access to medical care. We estimate that Johnson's announcement caused approximately 800 additional heterosexual males in the United States in metropolitan statistical areas with National Basketball Association franchises men to discover their underlying AIDS diagnosis and, of whom, were more likely to live at least 1 decade beyond their initial diagnosis date.
 </div>
 </div>
 </div>
@@ -146,7 +149,7 @@ Peer Health Shocks and Labor Supply
 </a>
 <button class="accordion-button" onclick="toggleAccordion(this)">Abstract</button>
 <div style="display: none; background-color: #f9f9f9; padding: 10px;">
-I provide novel evidence on how workers respond to peer health shocks within high-risk occupations by leveraging two nested natural experiments within professional hockey and American football. First, I compare differences in labor supply between characteristically similar athletes who differ only in their exposure to a colleague who died of chronic traumatic encephalopathy (CTE)??? a deadly neurological disease causally linked to continued workplace participation. Though the information about these deaths is widely publicized, I find that their occurrence differentially increases the probability for former teammates to retire. This effect is greater for those with longer periods spent as teammates and diminishes with time since they were last on the same team. Second, I leverage quasi-random differences in the monetary compensation that workers would forgo upon retiring at the time of this peer health shock. I show these retirements are highly responsive to opportunity costs??? estimating that teams would have to increase worker compensation \$6 million to prevent their exit. Remaining treated workers display a heightened sensitivity to health risks by exchanging salary for larger signing bonuses and shorter contracts in their subsequent employment negotiations. The finding that labor supply decisions are highly responsive to the health status of peers suggests that workers substantially underestimate utility loss from work-related health damages even in environments where such risks are highly publicized.
+I provide novel evidence on how workers respond to peer health shocks within high-risk occupations by leveraging two nested natural experiments within professional hockey and American football. First, I compare differences in labor supply between characteristically similar athletes who differ only in their exposure to a colleague who died of chronic traumatic encephalopathy (CTE) -- a deadly neurological disease causally linked to continued workplace participation. Though the information about these deaths is widely publicized, I find that their occurrence differentially increases the probability for former teammates to retire. This effect is greater for those with longer periods spent as teammates and diminishes with time since they were last on the same team. Second, I leverage quasi-random differences in the monetary compensation that workers would forgo upon retiring at the time of this peer health shock. I show these retirements are highly responsive to opportunity costs -- estimating that teams would have to increase worker compensation \$6 million to prevent their exit. Remaining treated workers display a heightened sensitivity to health risks by exchanging salary for larger signing bonuses and shorter contracts in their subsequent employment negotiations. The finding that labor supply decisions are highly responsive to the health status of peers suggests that workers substantially underestimate utility loss from work-related health damages even in environments where such risks are highly publicized.
 </div>
 </div>
 </div>
@@ -169,20 +172,6 @@ This paper provides an empirical test of how life events, in this case, marriage
 
 ### <ins>**Works in Progress**<ins> 
 
-<!-- <div class="column-container" style="display: flex; width: 100%; margin-bottom: 20px;">
-<div class="text-column" style="flex: 1;">
-<p style="margin:0;">
-<p style="font-size:125%; font-weight:bold">
-Same-Sex Partnership Protections, Prohibitions and Child Adoptions: Examining Intermediate Steps Toward Marriage Equality
-</p> with <a href="https://sites.google.com/view/zacharyrodriguez/home" target="_blank" rel="noopener noreferrer">Zachary Rodriguez</a>
-</p>
-<button class="accordion-button" onclick="toggleAccordion(this)">Abstract</button>
-<div style="display: none; background-color: #f9f9f9; padding: 10px;">
-Recent research has documented the positive social and economic consequences of legalizing same-sex marriage. We extend this literature by analyzing how intermediate legal steps -- namely, the introduction of domestic partnerships and civil unions, and the enactment of state constitutional bans -- shaped child adoption rates across U.S. states. Leveraging administrative adoption data and a difference-in-differences design that exploits staggered policy roll-outs, we find that domestic partnerships and civil unions substantially increased adoptions, whereas constitutional bans had no detectable short-term effect. Adoptions rose further once same-sex marriage was legalized, with gains significantly larger in states that had previously implemented partnership protections. We reconcile these patterns by showing that earlier partnership protections (bans) increased (decreased) same-sex household formation and in-migration, thereby amplifying (dampening) the benefits of marriage equality.
-</div>
-</div>
-</div> -->
-
 <!-- <div class="column-container" style="width: 100%; margin-bottom: 20px;">
 <div class="text-column" style="flex: 1;">
 <p style="font-size:125%; font-weight:bold">
@@ -204,7 +193,7 @@ Chasing Rainbows: Same-Sex Marriage, Migration, and Housing Prices in American G
 with <a href="https://www.joaotampellini.com/" target="_blank" rel="noopener noreferrer">Jo&atilde;o Tampellini</a>
 <button class="accordion-button" onclick="toggleAccordion(this)">Abstract</button>
 <div style="display: none; background-color: #f9f9f9; padding: 10px;">
-This paper examines changes in estimated amenity values within American gayborhoods using geographically localized data over 60 years. We use a difference-in-differences design comparing gayborhoods to adjacent neighborhoods within the same city and document that the rent-to-income ratio for these neighborhoods is v-shaped over time ??? declining largely during the peak of the AIDS crisis in the 1990s before sharply rebounding in the 2010s. To better understand the factors impacting this increase, we exploit the staggered treatment timing of same-sex marriage laws across states. We find that marriage equality laws increase both the number and share of different-sex households residing within the gayborhood which drives up the price of housing. This increase in the price of housing displaces renters in cities with inelastic housing supply.
+This paper examines changes in estimated amenity values within American gayborhoods using geographically localized data over 60 years. We use a difference-in-differences design comparing gayborhoods to adjacent neighborhoods within the same city and document that the rent-to-income ratio for these neighborhoods is v-shaped over time -- declining largely during the peak of the AIDS crisis in the 1990s before sharply rebounding in the 2010s. To better understand the factors impacting this increase, we exploit the staggered treatment timing of same-sex marriage laws across states. We find that marriage equality laws increase both the number and share of different-sex households residing within the gayborhood which drives up the price of housing. This increase in the price of housing displaces renters in cities with inelastic housing supply.
 </div>
 </div>
 </div>

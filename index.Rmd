@@ -10,6 +10,8 @@ links:
     url: "https://joshmartinecon.github.io/teaching.html"
   - label: Github
     url: "https://github.com/joshmartinecon?tab=repositories"
+  - label: WebApps
+    url: "https://joshmartinecon.github.io/webapps.html"
     
 output:
   postcards::trestles
@@ -30,8 +32,8 @@ I am an Assistant Professor of Economics at the [University of West Georgia](htt
 ## Fields
 
 * Applied Microeconomics
-    * *Primary*: Labor, Health
-    * *Secondary*: Urban, Household, Sports
+    * *Primary*: Labor, Health, Sports
+    * *Secondary*: Urban & Regional, Household
 
 ## Previous Employment
 

@@ -8,6 +8,7 @@ layout: post
   <a href="https://nbviewer.org/github/joshmartinecon/quarto-cv/blob/main/joshmartin_cv.pdf" target="_blank" rel="noopener noreferrer">CV</a> | 
   <a href="https://joshmartinecon.github.io/research.html">Research</a> | 
   <a href="https://joshmartinecon.github.io/teaching.html">Teaching</a>
+  <a href="https://joshmartinecon.github.io/webapps.html">WebApps</a>
 </nav>
 
 ---

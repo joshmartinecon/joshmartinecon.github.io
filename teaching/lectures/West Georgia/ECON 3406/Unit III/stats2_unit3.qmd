@@ -1,0 +1,1168 @@
+---
+title: "Unit 3 Notes"
+format:
+  html:
+    embed-resources: true
+---
+
+# Statistics for Business II | Summer 2026
+
+## Differences of Two Proportions
+
+- Variances of independent variables **add**
+
+$$SE_{\hat{p}_1 - \hat{p}_2} = \sqrt{SE_{\hat{p}_1}^2 + SE_{\hat{p}_2}^2} = \sqrt{\dfrac{p_1 (1-p_1)}{n_1} + \dfrac{p_2 (1-p_2)}{n_2}}$$
+
+- Even if you're subtracting two noisy measurements, the **uncertainty** from both still adds up
+  - Think of it like using two shaky rulers: subtracting doesn’t cancel the shakiness — it just combines it
+
+```{r}
+B <- 1000          # number of simulations
+n <- 500           # sample size per group
+p1 <- 0.5          # true proportion in group 1
+p2 <- 0.4          # true proportion in group 2
+
+# Create empty vectors to store simulated means and SDs
+mean_x1 <- mean_x2 <- numeric(B)
+sd_x1 <- sd_x2 <- numeric(B)
+
+# Loop to simulate samples for both groups
+for(i in 1:B){
+  
+  # ensures reproducibility
+  set.seed(i)
+  
+  # Generate random binary (success = 1, failure = 0) outcomes for group 1
+  x1 <- rbinom(n, size = 1, prob = p1)
+  mean_x1[i] <- mean(x1)  # sample proportion for group 1
+  sd_x1[i]   <- sd(x1)    # sample SD for group 1
+  
+  # ensures reproducibility
+  set.seed(B+i)
+  
+  # Repeat for group 2
+  x2 <- rbinom(n, size = 1, prob = p2)
+  mean_x2[i] <- mean(x2)
+  sd_x2[i]   <- sd(x2)
+  
+}
+
+# Theoretical (from our equation) standard error for a sample proportion
+se <- sqrt(p1*(1-p1)/n)
+se
+
+# Empirical (from our simulations) standard error from simulated data
+mean(sd_x1) / sqrt(n)
+
+# Compute 95% confidence bounds around the sampling mean
+ub_x1 <- mean(mean_x1) + 1.96 * se
+lb_x1 <- mean(mean_x1) - 1.96 * se
+
+# Plot histogram of simulated sample proportions
+par(mar = c(4.5, 4.5, 1, 1))
+hist(mean_x1, breaks = 12, 
+     main = "",
+     xlab = "Sample Proportion (Group 1)",
+     cex.axis = 1.25, cex.lab = 1.5)
+abline(v = c(lb_x1, ub_x1), lty = 2, lwd = 2)  # add CI bounds
+
+# pct. of observations to the right of the "upper" C.I. +
+# pct. of observations to the left of the "lower" C.I.
+# this should be very close to 5%
+mean(ifelse(mean_x1 >= ub_x1, 1, 0)) + mean(ifelse(mean_x1 <= lb_x1, 1, 0))
+
+# Compute simulated differences
+diff <- mean_x1 - mean_x2
+
+# Theoretical (from our equation) SE for the difference in proportions
+se <- sqrt(p1*(1-p1)/n + p2*(1-p2)/n)
+se
+
+# Empirical (from our simulations) SE estimate
+mean(sd_x1 + sd_x2) / sqrt(n + n)
+
+# Compute 95% CIs
+ub_diff_1 <- mean(diff) + 1.96 * se
+lb_diff_1 <- mean(diff) - 1.96 * se
+
+# Visualize sampling distribution of the difference
+hist(diff, breaks = 12, 
+     main = "",
+     xlab = "Difference in Sample Proportions (p1 - p2)",
+     cex.axis = 1.25, cex.lab = 1.5)
+
+# Add CI bounds
+abline(v = c(lb_diff_1, ub_diff_1), lty = 2, lwd = 2)
+
+# pct. of observations to the right of the "upper" C.I. or...
+# pct. of observations to the left of the "lower" C.I.
+# this should be very close to 5%
+mean(ifelse(diff >= ub_diff_1 | diff <= lb_diff_1, 1, 0))
+
+```
+
+### Differences of Two Proportions: Example 1
+
+- Study of **ICU patients admitted after a heart attack**
+- Randomly assigned:
+  - **Treatment:** blood thinner  
+  - **Control:** no blood thinner
+- Outcome measured: **24-hour survival**
+
+```{r}
+
+# read in data
+x <- read.csv("data/cpr.csv")
+
+# convert to matrix
+z <- as.data.frame.matrix(table(x))
+z$total <- rowSums(z)
+z <- rbind(z, total = colSums(z))
+z
+
+## calculate n for each group
+nt <- z$total[2]
+nc <- z$total[1]
+
+## calculate p(survive) for each group
+pt <- z$survived[2] / nt
+pc <- z$survived[1] / nc
+
+## 35 (22) percent of treated (control) group survive
+pt; pc
+
+## calculate test statistics
+## 0.13 p.p. difference
+point_est <- pt - pc
+se <- sqrt((pt * (1 - pt) / nt) + (pc * (1 - pc) / nc))
+
+## these are the critical values for different sig. levels (two-tailed)
+z <- data.frame(
+  sig_level = c(0.01, 0.05, 0.1),
+  z_score = c(2.576, 1.96, 1.645)
+)
+
+## confidence intervals
+## note how the confidence intervals get more wide the sig. level decreases
+z$min <- point_est - z$z_score * se
+z$max <- point_est + z$z_score * se
+z
+
+# plot
+par(mar = c(4.5, 4.5, 1, 1))
+plot(1:3, rep(point_est, 3), 
+     ylim = c(min(z$min), max(z$max)),
+     xlab = "Significance Level (α)",
+     ylab = "Est. with Conf. Int.",
+     cex.axis = 1.25,
+     cex.lab = 1.5,
+     xaxt = "n")
+axis(1, at = 1:3, labels = c(z$sig_level), cex.axis = 1.25)
+abline(h = 0, lty = 2, lwd = 2)
+arrows(1:3, z$min, 1:3, z$max, length = 0.05, angle = 90, code = 3)
+
+```
+
+- We are **90% confident** that blood thinners change the 24-hour survival rate by between -3 and 29 percentage points for patients similar to those in the study
+
+- Because **0% is within this range**, the evidence is inconclusive
+  - We cannot determine whether blood thinners help or harm heart attack patients who have undergone CPR
+
+### Differences of Two Proportions: Example 2
+
+- **5-year clinical trial:** Do fish oil supplements reduce heart attack risk?
+- Participants randomly assigned:
+  - **Fish oil** (treatment)
+  - **Placebo**
+- Compare **heart attack rates** across groups
+
+```{r}
+
+# read in data
+x <- read.csv("data/fish_oil.csv")
+
+# convert to matrix
+z <- as.data.frame.matrix(table(x))
+z$total <- rowSums(z)
+z <- rbind(z, total = colSums(z))
+z
+
+## calculate n for each group
+nt <- z$total[1]
+nc <- z$total[2]
+
+## calculate p(hospital) for each group
+pt <- z$hospital[1] / nt
+pc <- z$hospital[2] / nc
+
+## calculate test statistics
+point_est <- pt - pc
+se <- sqrt((pt * (1 - pt) / nt) + (pc * (1 - pc) / nc))
+
+z <- data.frame(
+  sig_level = c(0.01, 0.05, 0.1),
+  z_score = c(2.576, 1.96, 1.645)
+)
+
+z$min <- point_est - z$z_score * se
+z$max <- point_est + z$z_score * se
+
+# convert to percentage points
+point_est <- point_est * 100
+z[,3:4] <- z[,3:4] * 100
+
+par(mar = c(4.5, 4.5, 1, 1))
+plot(1:3, rep(point_est, 3), 
+     ylim = c(min(z$min), 0),
+     xlab = "Significance Level (α)",
+     ylab = "Est. with Conf. Int. (Pct. Points)",
+     cex.axis = 1.25,
+     cex.lab = 1.5,
+     xaxt = "n")
+axis(1, at = 1:3, labels = c(z$sig_level), cex.axis = 1.25)
+abline(h = 0, lty = 2, lwd = 2)
+arrows(1:3, z$min, 1:3, z$max, length = 0.05, angle = 90, code = 3)
+
+```
+
+- **Estimated effect:** –0.0043  
+  - Heart attacks were **0.43 percentage points lower** with fish oil
+
+- **90% confidence interval:** –0.66 to –0.19 percentage points
+  - Because **0 is not in the interval**, the reduction is **statistically significant**
+
+### Practical vs. Statistical Significance
+
+- The effect is **statistically significant**, but **very small**:  
+  - about **0.4 fewer heart attacks per 100 people**.
+
+- In large samples, even **tiny effects can be statistically significant**.
+
+- **Practical question:** Is such a small reduction worth the **costs, side effects, or effort of treatment?**
+
+```{r}
+
+# effect size relative to mean
+## a 27.5% reduction!
+point_est / pc
+
+```
+
+### Differences of Two Proportions: Example 3
+
+- A drone quadcopter company is considering a new manufacturer for rotor blades
+  - The new manufacturer is more expensive but claims that their higher-quality blades are **3% more reliable**
+
+- Set up the appropriate hypotheses for this test:
+  - $H_0: p_{\text{highQ}} - p_{\text{standard}} = 0.03$
+  - $H_A: p_{\text{highQ}} - p_{\text{standard}} \neq 0.03$ 
+
+- Using these data, evaluate the hypotheses above at a significance level of 5%.
+
+### Compute the Point Estimate and Standard Error
+
+```{r}
+#| echo: true
+#| warning: false
+#| message: false
+
+# read in the data
+x <- read.csv("data/quad.csv")
+
+# share of ours and theirs which pass inspection
+p_us <- sum(ifelse(x$prospective_supplier == "pass", 1, 0)) / 1000
+p_them <- sum(ifelse(x$current_supplier == "pass", 1, 0)) / 1000
+
+# 95.8% of ours are good vs. 89.9% of theirs
+p_us; p_them
+
+# 5.9 p.p difference
+point_est <- p_us - p_them
+se <- sqrt( p_us * (1 - p_us) / 1000 +  p_them * (1 - p_them) / 1000 )
+
+z <- data.frame(
+  sig_level = c(0.01, 0.05, 0.10),
+  z_score = c(2.576, 1.96, 1.645)
+)
+z$min <- (point_est - z$z_score * se)
+z$max <- (point_est + z$z_score * se)
+
+# plot estimates with conf. intervals
+## We say that there are stat. sign. differences at the 90 and 95% levels, but not 99%
+par(mar = c(4.5, 4.5, 1, 1))
+plot(1:3, rep(point_est, 3), 
+     ylim = c(min(z$min), max(z$max)),
+     xlab = "Significance Level (α)",
+     ylab = "Est. with Conf. Int.",
+     cex.axis = 1.25,
+     cex.lab = 1.5,
+     xaxt = "n")
+axis(1, at = 1:3, labels = c(z$sig_level), cex.axis = 1.25)
+abline(h = 0.03, lty = 2, lwd = 2)
+arrows(1:3, z$min, 1:3, z$max, length = 0.05, angle = 90, code = 3)
+
+## Note that we can evaluate this another way as well!
+## Remember good ole standardization? Where would our point estimate fall in there?
+## Recall the null hypothesis? Our blades need to be 3% more reliable
+## Thus subtract 3% from our point estimate (5.9%). Standardize by dividing by the SE
+## z-score
+z <- (point_est - 0.03) / se
+
+# 2.53 standard deviations away from the mean! > 1.96
+z
+
+# simulate null hypothesis (note the mean = 0.03, sd = se)
+set.seed(1)
+sim <- rnorm(10000, mean = 0.03, sd = se)
+
+# visualize the result
+par(mar = c(4.5, 4.5, 1, 1))
+hist(sim, main = "", xlab = "Simulated Estimates",
+     cex.lab = 1.5, cex.axis = 1.25)
+abline(v = point_est, lty = 2)
+legend("topleft",
+       legend = c("Point Est."),
+       lty = 2, cex = 1.25, bty = "n")
+
+# Prob. of observing a value this extreme or larger (from simulation) if null is true
+1 - mean(ifelse(point_est >= sim, 1, 0))
+
+# Prob. of observing a value this extreme or larger (from computer) if null is true
+1 - pnorm(z)
+
+```
+
+- From the standard normal distribution:
+  - The right-tail area is approximately 0.005
+  - Doubling for a two-tailed test gives p = 0.01
+  - Since p = 0.01 < 0.05, we **reject the null hypothesis**
+
+- We find statistically significant evidence that the higher-quality blades have a pass rate greater than 3% higher than the standard blades — exceeding the company’s claims.
+
+## t-distributions
+
+- When the population standard deviation ($\sigma$) is unknown (which is most of the time), we rely on the $t$-distribution instead of the normal model.
+  - The $t$-test helps us quantify uncertainty and make inferences about population parameters using sample data
+
+- We use a **t-distribution with (df = n - 1)** to model the sample mean when the sample size is small.
+  - As the number of observations increases, the **degrees of freedom (df)** also increase.
+  - With larger df, the **t-distribution more closely resembles the standard normal distribution**.
+
+- The primary intuition of t-stats is that we require a **greater burden of proof** when we have few observations
+  - Larger critical values used constructing confidence intervals are **more conservative**
+
+### Degrees of Freedom
+
+- **Degrees of freedom (df):** number of **independent pieces of information** used to estimate a statistic.
+  - $df \neq n$
+  - Imagine tossing a coin 100 times -- if you get 55 heads, then you know you got 45 tails (1 df)
+  - Imagine a traffic light -- if not yellow or red, then green (2 df)
+  
+- Calculate the standard deviation of three exam grades
+  - $s = \sqrt{\frac{ \Sigma (x_i - \bar{x}) }{n - 1} }$
+  - If the mean is already known, then you don't **need** all of the other values in the sample
+  - If $\bar{x} = 85$ and $x_1 = 80$ and $x_2 = 85$, then $x_3 = 90$ is no longer independent
+  
+- **Why it matters**
+  - Determines the shape of distributions like **$t$, $F$, and $\chi^2$**.
+  - **More df - more information - distributions become narrower and more normal.**
+
+```{r}
+
+# generate 200 observations between -4 and 4
+x <- seq(-4, 4, length = 200)
+
+## plot parameters
+dfs <- c(8, 4, 2, 1)
+cols <- colorRampPalette(c("darkblue", "skyblue"))(4)
+par(mar = c(2.5, 4.5, 1, 1))
+
+## plot loop
+for (j in seq_along(dfs)) {
+  
+  df <- dfs[j]
+  y <- dt(x, df = df)
+  
+  if (j == 1) {
+    plot(x, y, type = "l", ylab = "Density", xlab = "",
+         cex.axis = 1.25, cex.lab = 1.5, lwd = 2, col = cols[j])
+  }else {
+    lines(x, y, lwd = 2, col = cols[j])
+  }
+}
+
+## lines and legend on plot
+lines(x, dnorm(x), lwd = 2)
+legend("topright", legend = c("normal", paste0("df = ", dfs)),
+       col = c("black", cols), lwd = 2, bty = "n", cex = 1.25)
+
+# for degrees of freedom 5:100, calculate the critical value
+## cv means that 2.5% of values fall to the right of this number
+## cv = 1.96 with a normal distribution!
+
+x <- data.frame(
+  df = 5:100,
+  qt = qt(.975, df = 5:100)
+)
+
+# plot
+par(mar = c(4.5, 4.5, 1, 1))
+plot(x$df, x$qt,
+     type = "l",
+     lwd = 4,
+     xlab = "Degrees of Freedom",
+     ylab = "Critical Value from t-distribution",
+     cex.lab = 1.5,
+     cex.axis = 1.25,
+     ylim = c(1.95, max(x$qt)))
+abline(h = 1.96, lty = 2, lwd = 2)
+
+```
+
+### t-statistic equation
+
+$$
+t = \dfrac{x_i - \bar{x}}{ \sigma_x / \sqrt{n}}
+$$
+
+```{r}
+
+# few number of observations; many simulations
+n <- 5
+Nsim <- 10000
+
+# reject the null if n is large
+rejections_normal <- 0
+
+# reject the null if n is small
+rejections_t <- 0
+
+# store t-stats (this is an empty list)
+t <- list()
+
+# loop
+for(i in 1:Nsim){
+  
+  # simulate data (n = 5)
+  set.seed(i)
+  x <- rnorm(n)
+  
+  # calc. t-stat
+  tstat <- (mean(x) - 0) / (sd(x)/sqrt(n))
+  
+  # normal critical value
+  if(abs(tstat) > 1.96){
+    rejections_normal <- rejections_normal + 1
+  }
+  
+  # correct t critical value
+  if(abs(tstat) > qt(0.975, df = n-1)){
+    rejections_t <- rejections_t + 1
+  }
+  
+  # store t-stat in our list
+  t[i] <- tstat
+  
+}
+
+# gather data from loop; convert to distribtuion
+t <- density(unlist(t))
+
+# generate a normal dist.
+set.seed(1)
+z <- rnorm(10000)
+
+# plot
+## Note that the tails of the distribution are larger for the t-stat!
+par(mar = c(4.5, 4.5, 1, 1))
+plot(density(z), 
+     xlim = c(-4, 4),
+     lwd = 2,
+     xlab = "Test Statistics", 
+     ylab = "Density",
+     main = "",
+     cex.lab = 1.5, 
+     cex.axis = 1.25)
+lines(t, lty = 2, lwd = 2)
+legend("topleft", 
+       legend = c("normal", "t (df = 4)"),
+       lwd = 2,
+       lty = c(1, 2),
+       bty = "n",
+       cex = 1.25)
+
+# p-value if we use cv = 1.96 (wrong)
+## this is not conservative enough!
+rejections_normal / Nsim
+
+# p-value if we use cv = t* (correct)
+## this should be close to 5%
+rejections_t / Nsim
+
+```
+
+### t-distibutions: Example 1
+
+- Let’s apply the t-distribution in a real-world example involving mercury content in dolphin muscle
+  - $H_0: Hg = 2$
+  - $H_A: Hg > 2$
+  - Note: is don't make sense to do a two-tailed (heh, get it? dolphins...) test here since mercury content cannot be negative.
+
+- It isn't ethical to test 1000s of dolphins if you don't need to!
+  - We can adjust statistically for the fact that we have very few observations (which is good!)
+
+```{r}
+
+# read in data
+y <- read.csv("data/dolphins.csv")
+
+# see data
+head(y)
+
+# number of observations
+n <- nrow(y)
+n
+
+# prep simulation
+Nsim <- 100000
+t <- list()
+
+# point est
+se_obs <- sd(y$mercury) / sqrt(n)
+t_stat_obs <- (mean(y$mercury) - 2) / se_obs
+
+# 5.13 standard deviations greater than the mean is large!
+# however there are very few observations
+t_stat_obs
+
+# to evluate this, lets simulate null hypothesis
+for(i in 1:Nsim){
+  
+  # generate data, null = 2
+  set.seed(i)
+  x <- rnorm(n, mean = 2, sd = sd(y$mercury))
+  
+  # summary stats
+  point_est <- mean(x)
+  se <- sd(x) / sqrt(n)
+  
+  # t-stat
+  t[i] <- (point_est - 2) / se
+  
+}
+t <- unlist(t)
+
+# plot our simulated t-stats
+par(mar = c(4.5, 4.5, 1, 1))
+plot(density(t), 
+     lwd = 2,
+     cex.lab = 1.5, 
+     cex.axis = 1.25,
+     xlab = "t-stats | Null is true",
+     main = "",
+     xlim = c(-5, 5))
+abline(v = t_stat_obs, lty = 2, lwd = 2)
+legend("topleft",
+       legend = c("Point Est."),
+       lty = 2,
+       lwd = 2,
+       bty = "n",
+       cex = 1.25)
+
+# simulated p-value
+# chance that we would observe an event this great if Hg = 2 = 4 / 100k
+table(ifelse(t_stat_obs < t, 1, 0))
+
+# alternatively, you can use 't.test' in R
+t.test(y$mercury,
+       alternative = "greater",
+       mu = 2)
+
+```
+
+### t-distibutions: Example 2
+
+- Does treatment using embryonic stem cells (ESCs) help improve heart function after a heart attack?
+  - Each sheep was **randomly** assigned to either an **ESC treatment group** or a **control group**.  
+  - Researchers measured the **change in heart pumping capacity** after treatment.  
+  - Positive values indicates stronger recovery.
+  
+- Hypothesis testing: Is there evidence that that there were differences in recovery time between groups?
+  - $H_O: H_{esc} = H_{ctrl}$
+  - $H_O: H_{esc} \neq H_{ctrl}$
+  
+```{r}
+
+# read in data
+y <- read.csv("data/stem_cell.csv")
+
+# calculate differences
+y$diff <- y$after - y$before
+y
+
+# subset each group
+t <- subset(y, y$trmt == "esc")
+c <- subset(y, y$trmt == "ctrl")
+
+# point estimate (mean treated - mean control)
+point_est <- mean(t$diff) - mean(c$diff)
+point_est
+
+# standard error (difference in groups equation)
+se_t <- sd(t$diff)^2 / 9
+se_c <- sd(c$diff)^2 / 9
+se <- sqrt(se_t + se_c)
+
+# t-statistic
+t_stat_esc <- point_est / se
+
+## is a t-stat of 4 large enough to offset having very few observations? Let's simulate!
+# few number of observations; many simulations
+n <- 9
+Nsim <- 10000
+
+# store t-stats (this is an empty list)
+t <- list()
+
+# loop
+for(i in 1:Nsim){
+  
+  # simulate data (n = 9) for group 1
+  set.seed(i)
+  x <- rnorm(n)
+  
+  # simulate data (n = 9) for group 1
+  set.seed(Nsim + i)
+  z <- rnorm(n)
+  
+  # difference in means between the groups
+  point_est <- mean(x) - mean(z)
+  
+  # standard error
+  se1 <- sd(x)^2 / n
+  se2 <- sd(z)^2 / n
+  se <- sqrt(se1 + se2)
+  
+  # calc. t-stat
+  tstat <- point_est / se
+  
+  # store t-stat in our list
+  t[i] <- tstat
+  
+}
+
+# gather data from loop
+t <- unlist(t)
+
+# plot
+## Note that the tails of the distribution are larger for the t-stat!
+par(mar = c(4.5, 4.5, 1, 1))
+plot(density(t), 
+     lwd = 2,
+     xlab = "Test Statistics", 
+     ylab = "Density",
+     main = "",
+     cex.lab = 1.5, 
+     cex.axis = 1.25)
+abline(v = t_stat_esc, lty = 2, lwd = 2)
+legend("topleft", 
+       legend = c("t-stat (ESC)"),
+       lwd = 2,
+       lty = 2,
+       bty = "n",
+       cex = 1.25)
+
+# if there is no difference between groups...
+# what proportion of times we would find an effect as extreme as seen IRL?
+# 4/10k is our p-value!
+table(ifelse(abs(t) >= t_stat_esc, 1, 0))
+
+# alternatively, you can use this
+t.test(y$diff[y$trmt == "esc"], y$diff[y$trmt == "ctrl"])
+
+```
+
+## Chi-Squared Distributions
+
+- $\chi$ = the Greek letter for "chi" (pronounced like "kai")
+
+- The $\chi^2$ distribution is a continuous probability distribution
+  - If a variable $Z$ has the standard normal distribution, then $Z^2$ has the $\chi^2$ distribution with one **degree of freedom**
+  
+- If $Z_1, Z_2,..., Z_k$ are independent standard normal variables, then...
+  - $Z_1^2 + Z_2^2 +...+ Z_k^2$
+  - ...has a $\chi^2$ distribution with $k$ **degrees of freedom**
+  
+```{r}
+
+# generate 10k random, standardized numbers
+set.seed(1)
+x <- rnorm(10000, mean = 0, sd = 1)
+
+## square it
+x2 <- x^2
+
+# Two plots side by side
+par(mfrow = c(1, 2), mar = c(4.5, 4.5, 2, 1))
+
+# plot 1
+hist(x,
+     main = "Standard Normal Distribution",
+     xlab = "Z")
+
+# plot 2
+par(mar = c(4.5, 4.5, 1, 1))
+hist(x2,
+     main = "Chi-Squared Distribution",
+     xlab = "Z^2")
+
+# Reset layout after plotting
+par(mfrow = c(1, 1))
+
+```
+  
+### Chi-Squared Distributions: Properties
+
+- mean: $\mu = k$
+- variance: $\sigma^2 = 2k$
+- mode occurs at $\mu - 2$
+
+```{r}
+
+# expected = 1
+mean(x2)
+
+# expected = 2
+var(x2)
+
+# estimate chi-squared (df = 4)
+k <- 4
+for(i in 1:k){
+  
+  # generate data
+  set.seed(i)
+  x <- rnorm(10000, mean = 0, sd = 1)
+  
+  # square it
+  x2 <- x^2
+  
+  # add it to what came before
+  if(i == 1){
+    
+    z2 <- x2
+    
+  }else{
+    
+    z2 <- z2 + x2
+    
+  }
+}
+
+# expected: k = 4
+mean(z2)
+
+# expected: 2k = 2*4 = 8
+var(z2)
+
+# simulate data again. This is all just for visualizing the distributions as k grows.
+# No need to follow along here with the code.
+## increase variance for better data visualization
+set.seed(1)
+z <- rnorm(10000, mean = 0, sd = 2)
+z2 <- z*z
+
+# generate density plots
+y <- data.frame(
+  x2 = z2,
+  df3 = dchisq(z2, df = 3),
+  df6 = dchisq(z2, df = 6),
+  df12 = dchisq(z2, df = 12)
+)
+y <- y[order(y$x2),]
+
+# plot
+par(mar = c(4.5, 4.5, 1, 1))
+plot(y$x2, y$df3, type = "l",
+     main = "",
+     xlab = "Chi-Squared Values",
+     ylab = "Density",
+     cex.axis = 1.25,
+     cex.lab = 1.5,
+     lwd = 4,
+     xlim = c(0, 25))
+lines(y$x2, y$df6, lty = 2, col = "blue", lwd = 4)
+lines(y$x2, y$df12, lty = 3, col = "red", lwd = 4)
+legend("topright",
+       legend = c("df = 3",
+                  "df = 6",
+                  "df = 12"),
+       col = c("black", "blue", "red"),
+       lty = 1:3, lwd = 4,
+       bty = "n", cex = 1.5)
+segments(3 - 2, 0, 3 - 2, max(y$df3), lty = 2, lwd = 4)
+segments(6 - 2, 0, 6 - 2, max(y$df6), lty = 2, lwd = 4, col = "blue")
+segments(12 - 2, 0, 12 - 2, max(y$df12), lty = 2, lwd = 4, col = "red")
+
+```
+
+### Chi-Squared Tests
+
+- This technique is commonly used in two settings:
+  - To determine whether a **sample is representative** of a larger population across several groups
+  - To evaluate whether observed data **follow a specified theoretical distribution** (e.g., normal, geometric, Poisson)
+
+- Allows us to examine **all bins simultaneously**, rather than testing one or two categories in isolation
+
+$$
+\chi^2 = \sum_i \frac{(O_i - E_i)^2}{E_i}
+$$
+
+- Where:
+  - $O_i$ = observed count in category $i$  
+  - $E_i$ = expected count (null hypothesis)
+
+- This statistic follows a **chi-squared distribution** with $(k - 1)$ degrees of freedom, where $k$ is the number of categories
+
+### Chi-Squared Tests: Example 1
+
+- Consider data from a **random sample of 275 jurors** in a small county
+  - We would like to test whether this sample is **racially representative** of the eligible population of jurors (i.e., registered voters)
+  - $H_0$: Jurors are randomly selected; differences reflect natural sampling variation
+  - $H_A$: Jurors are not randomly selected; differences are too large to attribute to chance alone
+
+```{r}
+
+# data
+x <- read.csv("data/jurors.csv")
+y <- read.csv("data/county_voters.csv")
+
+# number of jurors
+n <- nrow(x)
+n
+
+# expected racial composition (as %)
+e <- table(y$race) / nrow(y)
+e
+
+# expected number of jurors by race/ethnicity
+e <- e * n
+
+# what did we observe IRL?
+o <- table(x$race)
+o
+
+# how many groups?
+k <- 4
+
+# test statistic
+X2_obs <- sum( (o - e)^2  / e )
+X2_obs
+
+
+# # simulate the null; random multinominal matrix
+B <- 10000
+set.seed(1)
+Y <- t(rmultinom(B, size = n, prob = e))
+m <- matrix(e, B, k, byrow=TRUE)
+colnames(m) <- colnames(Y) <- names(e)
+
+# simulated
+head(Y)
+
+# expected
+head(m)
+
+# simulated test statistic
+X2_sim <- rowSums( (Y - m)^2 / m )
+
+# what % of the time would observe something as unrepresentative as IRL?
+p_value1 <- mean(X2_sim >= X2_obs)
+p_value1
+
+# plot test statistic on chi-squared dist.
+# this gets complicated. You can just see the figure.
+par(mar = c(4.5, 4.5, 1, 1))
+d_X2_sim <- density(X2_sim)
+par(mar = c(4.5, 4.5, 1, 1))
+plot(d_X2_sim$x, d_X2_sim$y, type = "l",
+     xlab = "Chi-Squared", ylab = "Density",
+     cex.lab = 1.5, cex.axis = 1.25, lwd = 2)
+abline(v = X2_obs, lty = 2, lwd = 4)
+
+# add color
+x_tail <- d_X2_sim$x[d_X2_sim$x >= X2_obs]
+y_tail <- d_X2_sim$y[d_X2_sim$x >= X2_obs]
+polygon(c(X2_obs, x_tail, max(x_tail)),
+        c(0, y_tail, 0),
+        col = rgb(0,0,1,0.3), border = NA)
+
+# add text
+text(X2_obs + 1, max(d_X2_sim$y) * 0.4,
+     paste0("p ≈ ", round(p_value1, 3)),
+     pos = 4, cex = 1.2)
+legend("topright",
+       legend = c("Point Estimate"),
+       lty = 2, lwd = 2, bty = "n",
+       cex = 1.25)
+
+```
+
+### Chi-Squared Tests: Example 2
+
+- Suppose we analyze **daily stock returns from the S&P 500** over a 10-year period to test whether market movements are **independent across days**  
+  - "Does knowing whether the market went up or down yesterday help predict what happens today?"
+
+- If daily market movements are truly **independent**, the waiting time between positive days should follow a **geometric distribution**
+
+- The geometric distribution gives the probability of waiting $k$ trials to observe the first success
+  - $p$ = probability that a given day is an Up day  
+  - $X$ = number of days until the next Up day
+
+$$P(X = k) = (1 - p)^{k - 1}p$$
+
+```{r}
+
+# read in "data"
+x <- data.frame(
+  days = 1:7,
+  observed = c(717, 369, 155, 69, 28, 14, 10)
+)
+
+# "up" 54.5% of days
+p <- 0.545
+x$expected <- round((1-p)^((x$days)-1)*p*sum(x$observed)) # geo. distribution
+x
+
+# plot
+par(mar = c(4.5, 4.5, 1, 1))
+plot(x$days, x$observed, type = "l", lwd = 4,
+     ylab = "Observed", xlab = "Days",
+     cex.axis = 1.25, cex.lab = 1.5)
+lines(x$days, x$expected, lty = 2, lwd = 4, col = "blue")
+legend("topright", 
+       legend = c("Observed", "Expected"),
+       lwd = 2, lty = c(1, 2),
+       col = c("black", "blue"),
+       bty = "n", cex = 1.25)
+
+# test statistic
+x2 <- sum( (x$observed - x$expected)^2 / x$expected )
+x2
+
+# simulate null
+for(i in 1:6){
+  set.seed(i)
+  z <- rnorm(sum(x$observed), mean = 0, sd = 1)
+  if(i == 1){
+    y <- z^2
+  }else{
+    y <- y + z^2
+  }
+}
+
+# simulated p-value
+mean(ifelse(x2 > y, 1, 0))
+
+# formula p-value
+pchisq(x2, df = 6)
+
+# plot null
+d_X2_sim <- density(y)
+pvalue2 <- pchisq(x2, df = 6)
+par(mar = c(4.5, 4.5, 1, 1))
+plot(d_X2_sim$x, d_X2_sim$y, type = "l",
+     xlab = "Chi-Squared", ylab = "Density",
+     cex.lab = 1.5, cex.axis = 1.25, lwd = 2)
+abline(v = x2, lty = 2, lwd = 4)
+
+x_tail <- d_X2_sim$x[d_X2_sim$x >= x2]
+y_tail <- d_X2_sim$y[d_X2_sim$x >= x2]
+
+polygon(c(X2_obs, x_tail, max(x_tail)),
+        c(0, y_tail, 0),
+        col = rgb(0,0,1,0.3), border = NA)
+
+text(X2_obs + 1, max(d_X2_sim$y) * 0.4,
+     paste0("p ≈ ", round(pvalue2, 3)),
+     pos = 4, cex = 1.2)
+legend("topright",
+       legend = c("Point Estimate"),
+       lty = 2, lwd = 2, bty = "n",
+       cex = 1.25)
+
+```
+
+## ANOVA and F-statistics
+
+- When comparing **more than two groups**, we might be tempted to run multiple pairwise tests:
+  - Group 1 vs. 2, Group 1 vs. 3, Group 2 vs. 3, etc.
+  
+- **Problem:** Multiple tests increase the chance of **false positives**
+- **Solution**: Use a **single, holistic test** to compare all group means at once  
+  
+$$
+H_0: \mu_1 = \mu_2 = \cdots = \mu_k
+\quad\quad
+H_A: \text{At least one mean differs}
+$$
+
+- ANOVA: tests whether there is evidence that **at least one mean differs**
+  - **Between-group variation** (differences in group means)  
+  - **Within-group variation** (random noise)
+  - **Intuition:** If group differences are large *relative to* within-group variation, we reject the null.
+
+- This produces the **F-statistic**
+
+### ANOVA: Example 1
+
+- Suppose a statistics department runs **three sections** (A, B, and C) of an introductory statistics course
+  - We want to know whether there are **statistically significant differences** in the **average final exam scores**  
+
+#### ANOVA: SSG
+
+- The **sum of squares for the groups** (SSG) measures the differences between the group means $\bar{x}_i$ and the grand mean $\bar{x}$ like so:
+
+$$
+SSG = \sum_{i=1}^k n_i (\bar{x}_i - \bar{x})^2
+$$
+
+```{r}
+
+# grades in each section
+a <- c(90, 87, 88, 78)
+b <- c(87, 85, 80)
+c <- c(95, 93, 90, 88, 85)
+
+# number of grades in each section
+na <- length(a)
+nb <- length(b)
+nc <- length(c)
+
+# average grades in each section
+ua <- mean(a)
+ub <- mean(b)
+uc <- mean(c)
+
+# grand mean
+u <- mean(c(a, b, c))
+
+# SSG
+SSG <- na*(ua - u)^2 + nb*(ub - u)^2 + nc*(uc - u)^2
+SSG
+
+```
+
+#### ANOVA: MSG
+
+- The **mean square between groups** (MSG) is calculated using both the groups’ degrees of freedom $df_G$ and the sum of squares between groups SSG:
+
+$$
+MSG = \dfrac{1}{k - 1} SSG
+$$
+
+```{r}
+
+k <- 3
+df1 <- k - 1
+
+MSG <- SSG / df1
+MSG
+
+```
+
+#### ANOVA: SSE
+
+- The **sum of squared errors** (SSE) is the sum of the squares of the differences between each sample’s observations with each respective sample mean
+  - The calculation is simplified by first finding the variance $s_i^2$ of each sample:
+
+$$
+SSE = \sum_{i = 1}^k (n_i - 1) s_i^2
+$$
+
+```{r}
+
+# standard errors for each group
+sa <- sd(a)
+sb <- sd(b)
+sc <- sd(c)
+sa; sb; sc
+
+# SSE
+SSE <- (na - 1)*sa^2 + (nb - 1)*sb^2 + (nc - 1)*sc^2
+SSE
+
+```
+
+#### ANOVA: MSE
+
+$$
+MSE = \dfrac{1}{n - k} SSE
+$$
+
+```{r}
+
+# MSE
+n <- length(c(a, b, c))
+MSE <- SSE / (n - k)
+MSE
+
+```
+
+#### ANOVA: F-stat
+
+- We now have comparable measures of variability both **between** the groups (MSG) and **within** the groups (MSE).
+  - If variation among group means is simply random, F is typically close to 1
+
+$$
+F = \dfrac{MSG}{MSE}
+$$
+  
+```{r}
+
+# f-stat
+f_stat <- MSG / MSE
+f_stat
+
+# generate f-dist
+set.seed(1)
+x <- rf(1e6, df1 = k - 1, df2 = n - k)
+dx <- density(x)
+
+# plot
+par(mar = c(2, 4.5, 1, 1))
+plot(dx$x, dx$y, type = "l", lwd = 2,
+     ylab = "Density", cex.lab = 1.5, cex.axis = 1.25,
+     xlim = c(1, 10), ylim = c(0, 0.4))
+abline(v = f_stat, lty = 2, lwd = 2)
+x_fill <- dx$x[dx$x >= f_stat]
+y_fill <- dx$y[dx$x >= f_stat]
+polygon(c(min(x_fill), x_fill, f_stat),
+        c(0, y_fill, 0),
+        col = rgb(0, 0, 1, 0.3), border = NA)
+legend("topright",
+       legend = c("f-stat"),
+       lwd = 2, lty = 2, 
+       cex = 1.25, bty = 'n')
+
+# simulated p-value; FTR
+1 - mean(ifelse(f_stat > x, 1, 0))
+
+# estimated p-value; FTR
+z <- data.frame(
+  score = c(a, b, c),
+  group = c(rep('a', na), rep('b', nb), rep('c', nc))
+)
+summary(aov(score ~ group, z))
+
+```
+
+## Cheat Sheet: When to Use Which Test?
+
+- Comparing means?
+  - Is the population $\sigma$ known? $\rightarrow$ z-test; otherwise t-test
+    - (Rule of thumb: with $n \geq 30$ the two are nearly identical anyway)
+  - What's the statistic? $\ t = \dfrac{\bar{x} - \mu}{s/\sqrt{n}}$  (one sample)
+  - Two independent groups? $\ t = \dfrac{\bar{x}_1 - \bar{x}_2}{\sqrt{s_1^2/n_1 + s_2^2/n_2}}$
+- 3+ groups?
+  - Comparing means? $\rightarrow$ ANOVA
+  - Categorical / frequency data? $\rightarrow \chi^2$

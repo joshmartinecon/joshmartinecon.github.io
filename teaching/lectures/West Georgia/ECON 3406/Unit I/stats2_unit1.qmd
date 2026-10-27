@@ -1,0 +1,430 @@
+---
+title: "Unit 1 Notes"
+format:
+  html:
+    embed-resources: true
+---
+
+# Statistics for Business II | Summer 2026
+
+## Intro to Statistics
+
+- Applied statistics uses data to evaluate **competing claims about reality**
+  - Focused on the question of "compared to what?"
+
+## Variable Types & Distributions Review
+
+- **Numerical**: measured or counted
+  - **Discrete**: countable (jumps)
+  - **Continuous**: measurable
+
+- **Categorical**: labels or groups
+  - **Nominal**: no order
+  - **Ordinal**: ordered
+
+- **Histogram**: binned counts of a numerical variable
+  - **Shape**:
+    - Right / left skewed
+    - Symmetric (“bell-shaped”)
+    - Uniform
+  - **Skewness**: direction of the long tail
+  - **Mode(s)**: Unimodal, bimodal, multimodal
+    
+![](figures/distributions.png)
+
+## Equations Review
+
+- **Mean**: average value  
+  - “What is typical?”
+
+$$
+\bar{x} = \frac{1}{n}\sum_{i=1}^n x_i
+$$
+
+- **Variance**: spread around the mean  
+  - “How far is the data from average?”
+
+$$
+\sigma^2 = \frac{1}{n-1}\sum_{i=1}^n (x_i - \bar{x})^2
+$$
+- **Standard deviation**: $\sigma$
+
+## Case Study: Stents and Stroke Risk
+
+- Goal: Test whether **stents reduce stroke risk**
+  - **Stroke**: Brain cell death caused by reduced blood flow  
+  - **Stent**: Small mesh tube used to keep arteries open  
+
+- Study design: **Randomized Controlled Trial (RCT)**
+  - Random assignment -> comparable groups
+  - **Treatment**: Stents + medical management (MM)
+  - **Control**: Medical management only
+      - MM = medication + risk-factor control + lifestyle changes
+
+## Case Study: Visualizing the Data
+
+```{r}
+#| echo: true
+
+# read in data
+df30 <- read.csv("data/stent30.csv")
+df365 <- read.csv("data/stent365.csv")
+```
+
+## Descriptive Statistics
+
+- **Descriptive statistics** summarize data at a glance
+  - In R: `table()`, `summary()`
+
+- A **summary statistic**: A single number that captures key features of the data
+
+```{r}
+
+# create summary statistics
+table(df30)
+table(df365)
+
+# merge data frames into one
+x <- data.frame(
+  patient = 1:nrow(df30),
+  group = df30$group,
+  event_30 = ifelse(df30$outcome == "no event", 0, 1),
+  event_365 = ifelse(df365$outcome == "no event", 0, 1)
+)
+head(x)
+summary(x)
+
+# mean
+sum(x$event_30) / nrow(x)
+mean(x$event_30)
+
+# variance
+deviation <- x$event_30 - mean(x$event_30)
+variance <- sum(deviation^2) / (nrow(x)-1)
+variance
+var(x$event_30)
+
+# standard deviation
+std_dev <- sqrt(variance)
+std_dev
+sd(x$event_30)
+
+# aggregate data
+y <- aggregate(event_30 ~ group, x, mean)
+z <- aggregate(event_365 ~ group, x, mean)
+y$event_365 <- z$event_365
+y
+
+# difference between treatment and control
+effect_30 <- y$event_30[2] - y$event_30[1]
+effect_365 <- y$event_365[2] - y$event_365[1]
+effect_30
+effect_365
+
+# convert percentage point differences into percent differences
+pct_diff_30 <- effect_30 / mean(x$event_30)
+pct_diff_365 <- effect_365 / mean(x$event_365)
+pct_diff_30
+pct_diff_365
+
+# transpose; convert to matrix
+m <- t(y[,2:3])
+m <- as.matrix(m)
+colnames(m) <- y$group
+m
+
+# plot bar chart
+par(mar = c(2.5, 4.5, 1, 1))
+barplot(
+  m,
+  beside = TRUE,
+  ylab = "Experienced a Stroke",
+  xlab = "",
+  cex.lab = 1.5, cex.axis = 1.25, cex.names = 1.25,
+  names.arg = c("Control", "Treatment"),
+  col = c("plum", "blue"),
+  legend.text = c("0-30 Days", "0-365 Days"),
+  args.legend = list(x = "topleft", bty = "n", cex = 1.25)
+)
+
+```
+  
+## Random Chance or Real Effect?
+
+- Observed difference: Rates differ by **9 percentage points** between groups
+
+- Why this likely reflects a real effect:
+  - Larger samples reduce random fluctuation
+  - Larger differences are less likely due to chance
+
+- Context matters:
+  - 9 (7.8) p.p. difference vs. mean of 10.2% (16.2%)
+  - ≈ **88% (48%) increase** relative to the mean
+
+## Outliers
+
+- **Standardization (z-scores)**
+  - $z_i = \frac{x_i - \bar{x}}{sd(x)}$
+  - Common cutoff: $|z| \geq 2$
+  - Upside: Simple
+  - Downside: Sensitive to distribution shape
+  
+```{r}
+
+# generate data
+set.seed(1)
+z <- rnorm(n = 1000000, mean = 0, sd = 1)
+
+# percent of observations greater than 1.96
+mean(ifelse(abs(z) >= 1.96, 1, 0))
+
+# density
+dz <- density(z)
+
+# plot
+par(mar = c(4.5, 4.5, 1, 1))
+plot(dz$x, dz$y, type = "l", lwd = 4,
+     xlab = "Z", ylab = "Density",
+      cex.lab = 1.5, cex.axis = 1.25,
+     xlim = c(-4, 4))
+
+# draw vertical lines
+abline(v = c(-1.96, 1.96), lwd = 2, lty = 2)
+
+# indices for the shaded regions
+iL <- dz$x <= -1.96
+iR <- dz$x >=  1.96
+
+# left tail polygon
+polygon(
+  x = c(dz$x[iL], rev(dz$x[iL])),
+  y = c(dz$y[iL], rep(0, sum(iL))),
+  border = NA, col = "blue"
+)
+
+# right tail polygon
+polygon(
+  x = c(dz$x[iR], rev(dz$x[iR])),
+  y = c(dz$y[iR], rep(0, sum(iR))),
+  border = NA, col = "blue"
+)
+
+# legend
+legend("topleft",
+       legend = c("5%"),
+       col = "blue", lwd = 4,
+       cex = 1.25, bty = "n")
+
+```
+    
+- **Interquartile Range (IQR)**
+  - $Q_1$: 25th percentile, $Q_3$: 75th percentile  
+  - $IQR = Q_3 - Q_1$
+  - Outliers:
+    - $< Q_1 - 1.5 \times IQR$
+    - $> Q_3 + 1.5 \times IQR$
+  - Upside: Robust to skewness
+  - Downside: More complex
+    
+```{r}
+
+# read in data
+nfl <- read.csv("data/2024 NFL Attendance Data.csv")
+
+# clean data to average weekly attendance
+n <- data.frame(
+  team = nfl$Tm,
+  attend = rowMeans(nfl[,5:22], na.rm = T) / 1000
+)
+
+# plot distribution
+par(mar = c(4.5, 4.5, 1, 1))
+hist(n$attend, breaks = 12,
+     main = "", xlab = "Attendance (per 1k)",
+     cex.axis = 1.25, cex.lab = 1.5)
+
+# standardize and plot
+n$z <- (n$attend - mean(n$attend)) / sd(n$attend)
+hist(n$z, breaks = 12,
+     main = "", xlab = "Z-Score of Attendance",
+     cex.axis = 1.25, cex.lab = 1.5)
+
+# sort by largest attendance
+n <- n[order(-n$attend),]
+n$rank <- 1:nrow(n)
+n$pctl <- n$rank / nrow(n)
+n$pctl <- rev(n$pctl)
+
+## IQR
+q1 <- n$attend[n$pctl == 0.25]
+q3 <- n$attend[n$pctl == 0.75]
+iqr <- q3 - q1
+out_l <- q1 - 1.5 * iqr
+out_r <- q3 + 1.5 * iqr
+
+## identify outliers with a 1 or 0
+n$outlier <- ifelse(n$attend <= out_l, 1, 0)
+n$outlier <- ifelse(n$attend >= out_r, 1, n$outlier)
+
+##  plot
+plot(n$attend, n$pctl, pch = 19, cex = 1.25,
+     cex.axis = 1.25, cex.lab = 1.5,
+     xlab = "Attendance (per 1k)", ylab = "Percentile")
+abline(v = c(q1, q3), lty = 2, lwd = 2)
+abline(v = c(out_l, out_r), lty = 2, lwd = 2)
+
+## add colors
+i <- 0.25
+cols <- c(adjustcolor("darkred", alpha.f = 0.5),
+          adjustcolor("red", alpha.f = 0.25),
+          adjustcolor("blue", alpha.f = 0.25))
+rect(out_r, 0-i, max(n$attend)+10, 1+i, col = cols[1])
+rect(q3, 0-i, out_r, 1+i, col = cols[2])
+rect(out_l-i, 0-i, q1, 1+i, col = cols[3])
+
+## add legend
+legend("bottomright",
+       legend = c("Outlier", "≥ 75th pctl.", "≤ 25th pctl."),
+       fill = cols, border = NA, inset = 0.02, bg = "white")
+
+```
+
+## Simulation Analysis
+
+- **Simulation analysis**:
+  - Uses repeated random sampling to approximate results
+  - Useful when analytic solutions are impractical
+
+- Key idea:
+  - Randomness helps us understand variability and uncertainty
+
+- Data Generating Process (DGP):
+  - Example: flipping a fair coin
+  - Random fluctuation is inherent
+  - The true DGP is unobservable
+  - Samples are random draws from the underlying process
+  
+## Simulation Analysis: Case Study
+
+```{r}
+
+table(x$group)
+
+# number of control vs treatment observations
+n_ctrl <- 227
+n_trtd <- 224
+
+## number of loops
+loops <- 1000
+
+## 30 days
+sims <- list()
+for(i in 1:loops){
+  
+  ## random 1s and 0s for control group
+  set.seed(i)
+  sim_30_ctrl <- rbinom(n_ctrl, size = 1, prob = mean(x$event_30))
+  
+  ## random 1s and 0s for treated group
+  set.seed(i+loops)
+  sim_30_trtd <- rbinom(n_trtd, size = 1, prob = mean(x$event_30))
+  
+  ## take the difference in means across groups
+  sims[[length(sims)+1]] <- mean(sim_30_trtd) - mean(sim_30_ctrl)
+  
+}
+## unpack our results across the simulations
+sims <- unlist(sims)
+
+## plot the results of the simulation
+par(mar = c(4.5, 4.5, 1, 1))
+hist(sims, 
+     main = "", xlab = "Simulated Effects (30 Days)",
+     cex.lab = 1.5, cex.axis = 1.25)
+## add the actually observed effect
+abline(v = effect_30, lty = 2, lwd = 2)
+## add a legend
+legend("topleft", legend = "Est. Effect",
+       lwd = 2, lty = 2, bty = "n", cex = 1.25)
+```
+
+- "If there were **no differences** between the groups, how likely is it that we would observe an effect so large?"
+
+```{r}
+
+## very unlikely
+mean(ifelse(sims >= effect_30, 1, 0))
+
+```
+
+## Why Experimental Design Matters
+
+- **RCTs = gold standard** for causal inference
+
+- Two key pillars:
+  - **Random assignment**
+    - Reduces selection bias and confounding  
+    - Improves internal validity
+  - **Comparison (control) group**
+    - Provides a baseline
+    - Separates treatment effects from outside trends
+
+- Example:
+  - If incomes are rising and income affects longevity:
+    - Randomization -> similar income changes across groups
+    - Control group -> nets out income effects
+    - Remaining difference = treatment effect
+
+- Key terms:
+  - **Internal validity**: credible cause-and-effect
+  - **External validity**: generalizability
+  - **Confounder**: affects both treatment *and* outcome
+
+## Sources of Bias
+
+- **Selection bias**: Groups differ for reasons *other than* treatment
+  - Caused by self-selection / contamination
+    - “People die in hospitals” ≠ hospitals cause death
+  - Example:
+    - Health-conscious patients are more likely to: receive a stent and change lifestyle habits
+    - Estimated effect mixes **treatment + lifestyle**, not treatment alone
+
+![](figures/conference_selection.png){width=50% fig-align="center"}
+
+- **Sampling bias**: Sample is not representative of the population
+  - Classic example (1936):
+    - *Literary Digest* surveyed 10M people (2.4M responses)
+    - Predicted **Landon landslide**
+    - Actual result: **FDR won decisively**
+    - Why it failed:
+      - Sampled wealthy groups (magazine readers, car & phone owners)
+      - Missed lower-income voters
+    - Key lesson: **More data cannot fix a biased sample**
+
+![](figures/sampling_bias.png){width=50% fig-align="center"}
+
+- **Survivorship bias**: Only observing units that “survive” to be measured
+  - When measurement depends on the outcome:
+    - Suppose stents increase mobility
+    - Treated patients are more likely to show up for follow-ups
+    - Control group is under-observed
+    - Estimated effect partly reflects **who is observed**, not just treatment
+  - Common fallacies:
+    - “People lived longer back then”
+    - “My uncle smokes three packs a day and he’s fine”
+
+![](figures/plane_survive.png){width=50% fig-align="center"}
+    
+## Blinding and Placebos
+
+- Goal: Reduce psychological effects
+
+- Key terms:
+  - **Blinding**: Patients don’t know their group
+  - **Placebo**: Fake treatment
+  - **Placebo effect**: Control group shows real changes
+
+- Why it matters:
+  - Beliefs can affect outcomes
+  - Placebo effects contaminate comparisons
+  - Reduce the chance that you find a real effect (statistical power)

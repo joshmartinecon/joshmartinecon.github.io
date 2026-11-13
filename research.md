@@ -203,9 +203,12 @@ This paper examines changes in estimated amenity values within American gayborho
 <p style="font-size:125%; font-weight:bold">
 Do Childcare Costs Reduce Adoptions? Evidence from Marriage Equality
 </p>
+<!-- Abstract temporarily hidden at author request.
 <button class="accordion-button" onclick="toggleAccordion(this)">Abstract</button>
 <div style="display: none; padding: 10px;">
 Empirical work has demonstrated that fertility is sensitive to the cost of childcare. In this paper, I contribute to our understanding of this relationship by demonstrating that childcare costs reduce adoptions at the extensive margin but not the intensive margin. Employing data from the American Community Survey, I combine county-level estimates on changes in the number of adopted children within same-sex households due to marriage equality laws with local measures of the share of income that goes towards childcare. The results indicate that childcare costs reduce the number of adopted children, not households' decision to adopt. This finding suggests that the cost of raising children is significantly more binding for the fertility decisions for subsequent children than for first-borns.
 </div>
+-->
+
 </div>
 </div>

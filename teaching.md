@@ -71,7 +71,7 @@ layout: post
     </ul>
     <ul>
       <li>
-        <a href="https://github.com/joshmartinecon/joshmartinecon.github.io/tree/main/teaching/lectures/West%20Georgia/ECON%203406" target="_blank" rel="noopener noreferrer">Github</a>
+        <a href="https://github.com/joshmartinecon/joshmartinecon.github.io/tree/main/teaching/lectures/West%20Georgia/ECON%202106" target="_blank" rel="noopener noreferrer">Github</a>
       </li>
     </ul>
   </li>
